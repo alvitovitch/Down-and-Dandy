@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch --mode=development",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "start": "webpack --watch --mode=development"
   },
   "browserslist": [
     "defaults"
@@ -24,8 +25,8 @@
     "regenerator-runtime": "^0.13.9",
     "sass": "^1.44.0",
     "sass-loader": "^12.3.0",
+    "three": "^0.135.0",
     "webpack": "^5.64.4",
     "webpack-cli": "^4.9.1"
   }
-  
 }
