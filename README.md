@@ -64,7 +64,15 @@ When interacting with a person a close up of them will be in the foreground whil
 There will be the option to have the player make responses. Arrow keys/ mouse clicks should work for that.
 </div>
 <br>
-
+<br>
+<h1>Technologies, Libraries, APIs</h1>
+'Down and Dandy' will be implemented with the following technologies:
+<ul>
+    <li> 3js to render the scenes</li>
+    <li>Webpack and Babel to bundle/transpile the JavaScript source code</li>
+    <li>npm to manage the dependencies</li>
+</ul>
+<br><br>
 <h1>Implementation Timeline</h1>
 
 <ul>
