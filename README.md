@@ -4,4 +4,7 @@ In 'Down and Dandy', users will be able to:
 
 In addition, this project will include:
 
-Intructions Exciting point and click action Music and sound effects And (possibly) much MUCH more (or less)
+Intructions
+Exciting point and click action
+Music and sound effects
+And (possibly) much MUCH more (or less)
