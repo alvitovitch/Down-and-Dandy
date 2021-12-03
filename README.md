@@ -1,6 +1,6 @@
 In 'Down and Dandy', users will be able to:
 
- /n-Go to various locations around the city.
+ -Go to various locations around the city.
  -Talk to locals and find out about their rivals.
  -Collect clues and items to confirm their rival's guilt.
  -Confront their rival.
