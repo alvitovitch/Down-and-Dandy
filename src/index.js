@@ -13,7 +13,7 @@ const loader = new GLTFLoader();
 //loading tree
 loader.load("./src/Assets/tree/scene.gltf", function(gltf) {
     const tree = gltf.scene;
-    tree.scale.set(10, 10, 10)
+    tree.scale.set(.05, .05, .05)
     
     scene.add(tree);
     }, undefined,
@@ -22,23 +22,21 @@ loader.load("./src/Assets/tree/scene.gltf", function(gltf) {
 })
 
 // light
-const light = new THREE.AmbientLight(255,255,255);
+const light = new THREE.AmbientLight(0x404040);
 scene.add(light)
+
+const dirLight = new THREE.DirectionalLight( 0xffffff, 1);
+scene.add(dirLight);
 
 // camera
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set( 5, 5, 5 );
+camera.position.set( 50, 50, 100 );
 camera.lookAt( 0, 0, 0 );
 
 // renderer
 const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize( window.innerWidth, window.innerHeight);
 document.body.appendChild( renderer.domElement );
-
-console.log(scene)
-console.log(camera)
-console.log(light)
-console.log(renderer)
 
 // cube
 
@@ -56,6 +54,7 @@ const animate = function () {
     requestAnimationFrame(animate);
     cube.rotation.x += .01
     cube2.rotation.y -=.01
+    camera.position.x += .1
     renderer.render(scene, camera)
 };
 animate();
