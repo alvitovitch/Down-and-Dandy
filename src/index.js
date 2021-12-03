@@ -11,7 +11,7 @@ scene.background = new THREE.Color(255,255,255)
 const loader = new GLTFLoader();
 
 //loading tree
-loader.load("./src/Assets/tree/scene.gltf", function(gltf) {
+loader.load("./src/assets/tree/scene.gltf", function(gltf) {
     const tree = gltf.scene;
     tree.scale.set(.05, .05, .05)
     
