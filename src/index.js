@@ -11,9 +11,11 @@ scene.background = new THREE.Color(255,255,255)
 const loader = new GLTFLoader();
 
 //loading tree
-loader.load("./src/Assets/tree/scene.glb", function(gltf) {
+loader.load("./src/Assets/tree/scene.gltf", function(gltf) {
     const tree = gltf.scene;
-    scene.add(tree.children[0]);
+    tree.scale.set(10, 10, 10)
+    
+    scene.add(tree);
     }, undefined,
     function(error){
         console.log("An error occured")
@@ -26,7 +28,7 @@ scene.add(light)
 // camera
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set( 5, 5, 5 );
-//camera.lookAt( 0, 0, 0 );
+camera.lookAt( 0, 0, 0 );
 
 // renderer
 const renderer = new THREE.WebGLRenderer({ alpha: true });
