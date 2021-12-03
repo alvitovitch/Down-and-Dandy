@@ -44,7 +44,7 @@ console.log(renderer)
 
 const box = new THREE.BoxGeometry(1,1,1)
 const material = new THREE.
-    MeshBasicMaterial({ color: (255,0,0)})
+    MeshBasicMaterial({ color: (255,255,255)})
 
 const cube = new THREE.Mesh(box, material)
 const cube2 = new THREE.Mesh(box, material)
