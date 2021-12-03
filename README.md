@@ -3,17 +3,18 @@
 'Down and Dandy' is a JavaScript mystery game where you play as Archibald, the owner of a struggling haberdashery in the downtown metro area.
 You are sure that your rival business across the street is sabatoging you and you have to do some good old gumshoeing before you confront them.
 
-Phase I: Discovery
+<h2>Phase I: Discovery </h2>
 
 During the 'Discovery' phase Archibald follows rumors, collects evidence, and talks to locals to get the scoop on the underhand dealings of his rivals.
 This is achieved through a point/click mechanic for investigating clues shown on your screen and following dialogue trees.
 
-Phase II: Confrontation
+<h2>Phase II: Confrontation</h2>
 
 During the Confrontation phase Archibald confronts his rivals across the street. This may be done at any time, however depending on the information and 
 evidence you uncover differnt moves/options will be available to you.
 This section is more of a JRPG turn based strategy sectiona and will end... with DRAMA!
 
+<h1>Functionality</h1>
 
 In 'Down and Dandy', users will be able to:
 
