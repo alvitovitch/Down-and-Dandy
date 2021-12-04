@@ -3,7 +3,6 @@ import { testScene } from './assets/classes/Location';
 import { loadCharacter } from './assets/classes/character';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { ThirdPersonCamera } from './assets/classes/thirdPersonCamera';
 
 
 // renderer - what will make everything show up on the screen
@@ -12,10 +11,9 @@ renderer.setSize( window.innerWidth, window.innerHeight);
 
 // camera
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set( 25, 25, 0 );
+camera.position.set( 10, 10, 2 );
 camera.lookAt( 0, 0, 0 );
 
-const thirdCamera = new ThirdPersonCamera(camera)
 
 // raycaster - a laserpointer from your mouse to the 3d space
 
@@ -35,9 +33,9 @@ const mouse = {
 function cameraFollow(camera, character) {
     
     camera.lookAt(character.position);
-    camera.position.x = character.position.x + 10;
-    camera.position.y = character.position.y + 10;
-    camera.position.z = character.position.z + 10;
+    camera.position.x = character.position.x + 1;
+    camera.position.y = character.position.y + 1;
+    camera.position.z = character.position.z + 1;
 }
 
 let currentScene = testScene 
@@ -78,27 +76,31 @@ testScene.add(ground)
 
 
 
-const controls = new OrbitControls(
-    camera, renderer.domElement);
-  controls.target.set(0, 20, 0);
+// const controls = new OrbitControls(
+//     camera, renderer.domElement);
+//   controls.target.set(0, 20, 0);
 
 // player movement
 let targetX = undefined;
 let targetZ = undefined;
 
-function characterMovement(char) {
+function characterMovement(char, camera) {
   if (char !== undefined) {
     if (targetX > char.position.x) {
       char.position.x += 0.1
+      camera.position.x += 0.1
     }
     if (targetX < char.position.x) {
       char.position.x -= 0.1
+      camera.position.x -= 0.1
     }
     if (targetZ > char.position.z) {
       char.position.z += 0.1
+      camera.position.z += 0.1
     }
     if (targetZ < char.position.z) {
       char.position.z -= 0.1
+      camera.position.z -= 0.1
     }
   }
 }
@@ -116,24 +118,23 @@ document.body.appendChild( renderer.domElement );
 
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
-  camera.aspect = window.innerWidth / window.innerHeight
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
 })
 
 const animate = function () {
     requestAnimationFrame(animate);
     renderer.render(currentScene, camera)
-    controls.update();
+    //controls.update();
     raycaster.setFromCamera(mouse, camera)
     const player = testScene.getObjectByName('Archibald')
-    characterMovement(player);
-    //thirdCamera.Update()    
-    //cameraFollow(camera, player)
+    characterMovement(player, camera);
+    //cameraTracking(camera, player)
   
 };
 animate();
 
 // add player constant
-
 
 addEventListener('mousemove', (event) => {
   // 3js uses coordinates with the (0,0) being the center of the screen, 
