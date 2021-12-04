@@ -45,5 +45,6 @@ scene.add(dirLight);
 //     scene.add(city)
 // })
 
-
+scene.name = "test"
+scene.clues = ['testClue']
 export const testScene = scene;

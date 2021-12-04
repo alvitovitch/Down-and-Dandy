@@ -54,25 +54,37 @@ const ground = new THREE.Mesh(plane, material)
 ground.castShadow = false;
 ground.receiveShadow = true;
 ground.rotation.x =-Math.PI/2;
+ground.name = "ground"
 testScene.add(ground)
 
-// //loader
-// const loader = new GLTFLoader();
-// // // //loading tree
-// loader.load("./src/assets/tree/scene.gltf", function(gltf) {
-//     const tree = gltf.scene;
-//     tree.scale.set(.01, .01, .01)
-//     tree.position.y = 15
-//     tree.children[0].layers.enable(1)
+const cube = new THREE.BoxGeometry(1,1,1)
+const cubeSkin = new THREE.MeshPhysicalMaterial()
+const clue = new THREE.Mesh(cube, cubeSkin);
 
-//     testScene.add(tree)
-// })
-// loader.load("./src/assets/low_poly_city/scene.gltf", function(gltf) {
-//     const city = gltf.scene;
-//     // city.position.y = 15
-//     // city.position.x = 15
-//     testScene.add(city)
-// })
+clue.position.x = 5
+clue.position.z = 5
+
+clue.name = "testClue"
+
+testScene.add(clue)
+
+//loader
+const loader = new GLTFLoader();
+// // //loading tree
+loader.load("./src/assets/tree/scene.gltf", function(gltf) {
+    const tree = gltf.scene;
+    tree.scale.set(.01, .01, .01)
+    tree.position.y = 15
+    tree.children[0].layers.enable(1)
+
+    testScene.add(tree)
+})
+loader.load("./src/assets/low_poly_city/scene.gltf", function(gltf) {
+    const city = gltf.scene;
+    // city.position.y = 15
+    // city.position.x = 15
+    testScene.add(city)
+})
 
 
 
@@ -105,13 +117,7 @@ function characterMovement(char, camera) {
   }
 }
 
-function cameraTracking(camera, target){
-  const x = target.position.x
-  const y = target.position.y
-  const z = target.position.z
-  camera.position.x = (x + 10)
-  camera.lookAt(x,y,z)
-}
+
 
 /// testing out scene change
 document.body.appendChild( renderer.domElement );
@@ -146,7 +152,10 @@ addEventListener('click', () => {
   const intersects = raycaster.intersectObjects(testScene.children)
   //find the player model
   const selectedPoint = intersects[ 0 ].point
-  targetX = Math.round((selectedPoint.x * 10) / 10)
-  targetZ = Math.round((selectedPoint.z * 10) / 10)
-  console.log(selectedPoint)
+  if (intersects[0]["object"].name === "ground"){
+    targetX = Math.round((selectedPoint.x * 10) / 10)
+    targetZ = Math.round((selectedPoint.z * 10) / 10)
+} else if (currentScene.clues.includes((intersects[0]["object"].name))){
+  console.log('you clicked a clue')
+}
 })
