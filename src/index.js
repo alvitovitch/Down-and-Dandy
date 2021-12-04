@@ -4,13 +4,14 @@ import { loadCharacter } from './assets/classes/character';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
+import { sampleText } from './assets/classes/textbox';
 
 // renderer - what will make everything show up on the screen
 const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize( window.innerWidth, window.innerHeight);
 
 // camera
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, .1, 1000);
 camera.position.set( 10, 10, 2 );
 camera.lookAt( 0, 0, 0 );
 
@@ -57,9 +58,15 @@ ground.rotation.x =-Math.PI/2;
 ground.name = "ground"
 testScene.add(ground)
 
+// clue
+
 const cube = new THREE.BoxGeometry(1,1,1)
 const cubeSkin = new THREE.MeshPhysicalMaterial()
 const clue = new THREE.Mesh(cube, cubeSkin);
+
+const testing = sampleText
+console.log(testing)
+clue.add(sampleText)
 
 clue.position.x = 5
 clue.position.z = 5
@@ -86,6 +93,7 @@ loader.load("./src/assets/low_poly_city/scene.gltf", function(gltf) {
     testScene.add(city)
 })
 
+// popup box
 
 
 // const controls = new OrbitControls(
@@ -117,7 +125,13 @@ function characterMovement(char, camera) {
   }
 }
 
-
+// raycaster is always active so I just need it to show/hide the ! for clues if it's intesecting it
+function isClue(){
+  const intersects = raycaster.intersectObjects(testScene.children)
+  if (intersects.length > 0 && currentScene.clues.includes((intersects[0]["object"].name))){
+    console.log('you are hoving over a clue')
+  }
+}
 
 /// testing out scene change
 document.body.appendChild( renderer.domElement );
@@ -135,12 +149,14 @@ const animate = function () {
     raycaster.setFromCamera(mouse, camera)
     const player = testScene.getObjectByName('Archibald')
     characterMovement(player, camera);
+    isClue()    
     //cameraTracking(camera, player)
   
 };
 animate();
 
-// add player constant
+
+
 
 addEventListener('mousemove', (event) => {
   // 3js uses coordinates with the (0,0) being the center of the screen, 
@@ -148,6 +164,8 @@ addEventListener('mousemove', (event) => {
   mouse.x = (event.clientX / innerWidth) * 2 - 1
   mouse.y = -(event.clientY / innerHeight) * 2 + 1
 })
+
+// movement
 addEventListener('click', () => {
   const intersects = raycaster.intersectObjects(testScene.children)
   //find the player model
@@ -155,7 +173,14 @@ addEventListener('click', () => {
   if (intersects[0]["object"].name === "ground"){
     targetX = Math.round((selectedPoint.x * 10) / 10)
     targetZ = Math.round((selectedPoint.z * 10) / 10)
-} else if (currentScene.clues.includes((intersects[0]["object"].name))){
-  console.log('you clicked a clue')
-}
-})
+}})
+
+// clicking a clue
+addEventListener('click', () => {
+  const intersects = raycaster.intersectObjects(testScene.children)
+  //find the player model
+  const selectedPoint = intersects[ 0 ].point
+  if (currentScene.clues.includes((intersects[0]["object"].name))){
+    console.log('you clicked a clue')
+  }
+  })
