@@ -3,17 +3,19 @@ import { testScene } from './assets/classes/Location';
 import { loadCharacter } from './assets/classes/character';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { ThirdPersonCamera } from './assets/classes/thirdPersonCamera';
 
 
 // renderer - what will make everything show up on the screen
 const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize( window.innerWidth, window.innerHeight);
-document.body.appendChild( renderer.domElement );
 
 // camera
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set( 25, 25, 0 );
 camera.lookAt( 0, 0, 0 );
+
+const thirdCamera = new ThirdPersonCamera(camera)
 
 // raycaster - a laserpointer from your mouse to the 3d space
 
@@ -30,13 +32,13 @@ const mouse = {
 
 // camera follow loop
 
-// function cameraFollow(camera, character) {
-//     debugger
-//     camera.lookAt(character.position);
-//     camera.position.x = character.position.x + 1;
-//     camera.position.y = character.position.y + 1;
-//     camera.position.z = character.position.z + 1;
-// }
+function cameraFollow(camera, character) {
+    
+    camera.lookAt(character.position);
+    camera.position.x = character.position.x + 10;
+    camera.position.y = character.position.y + 10;
+    camera.position.z = character.position.z + 10;
+}
 
 let currentScene = testScene 
 
@@ -57,22 +59,22 @@ ground.rotation.x =-Math.PI/2;
 testScene.add(ground)
 
 // //loader
-const loader = new GLTFLoader();
-// // //loading tree
-loader.load("./src/assets/tree/scene.gltf", function(gltf) {
-    const tree = gltf.scene;
-    tree.scale.set(.01, .01, .01)
-    tree.position.y = 15
-    tree.children[0].layers.enable(1)
+// const loader = new GLTFLoader();
+// // // //loading tree
+// loader.load("./src/assets/tree/scene.gltf", function(gltf) {
+//     const tree = gltf.scene;
+//     tree.scale.set(.01, .01, .01)
+//     tree.position.y = 15
+//     tree.children[0].layers.enable(1)
 
-    testScene.add(tree)
-})
-loader.load("./src/assets/low_poly_city/scene.gltf", function(gltf) {
-    const city = gltf.scene;
-    // city.position.y = 15
-    // city.position.x = 15
-    testScene.add(city)
-})
+//     testScene.add(tree)
+// })
+// loader.load("./src/assets/low_poly_city/scene.gltf", function(gltf) {
+//     const city = gltf.scene;
+//     // city.position.y = 15
+//     // city.position.x = 15
+//     testScene.add(city)
+// })
 
 
 
@@ -101,9 +103,21 @@ function characterMovement(char) {
   }
 }
 
-
+function cameraTracking(camera, target){
+  const x = target.position.x
+  const y = target.position.y
+  const z = target.position.z
+  camera.position.x = (x + 10)
+  camera.lookAt(x,y,z)
+}
 
 /// testing out scene change
+document.body.appendChild( renderer.domElement );
+
+window.addEventListener('resize', () => {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight
+})
 
 const animate = function () {
     requestAnimationFrame(animate);
@@ -111,7 +125,9 @@ const animate = function () {
     controls.update();
     raycaster.setFromCamera(mouse, camera)
     const player = testScene.getObjectByName('Archibald')
-    characterMovement(player)
+    characterMovement(player);
+    //thirdCamera.Update()    
+    //cameraFollow(camera, player)
   
 };
 animate();
@@ -129,7 +145,7 @@ addEventListener('click', () => {
   const intersects = raycaster.intersectObjects(testScene.children)
   //find the player model
   const selectedPoint = intersects[ 0 ].point
-  const player = testScene.getObjectByName('Archibald')
   targetX = Math.round((selectedPoint.x * 10) / 10)
   targetZ = Math.round((selectedPoint.z * 10) / 10)
+  console.log(selectedPoint)
 })
