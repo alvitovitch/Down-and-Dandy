@@ -40,7 +40,9 @@ const mouse = {
 
 let currentScene = testScene 
 
+// load player
 loadCharacter(currentScene)
+console.log(testScene)
 
 // ground
 
@@ -61,7 +63,6 @@ loader.load("./src/assets/tree/scene.gltf", function(gltf) {
     const tree = gltf.scene;
     tree.scale.set(.01, .01, .01)
     tree.position.y = 15
-    console.log(tree.children[0])
     tree.children[0].layers.enable(1)
 
     testScene.add(tree)
@@ -79,7 +80,26 @@ const controls = new OrbitControls(
     camera, renderer.domElement);
   controls.target.set(0, 20, 0);
 
-// mouse - lets you see where the mouse is using Event Listeners
+// player movement
+let targetX = undefined;
+let targetZ = undefined;
+
+function characterMovement(char) {
+  if (char !== undefined) {
+    if (targetX > char.position.x) {
+      char.position.x += 0.1
+    }
+    if (targetX < char.position.x) {
+      char.position.x -= 0.1
+    }
+    if (targetZ > char.position.z) {
+      char.position.z += 0.1
+    }
+    if (targetZ < char.position.z) {
+      char.position.z -= 0.1
+    }
+  }
+}
 
 
 
@@ -90,25 +110,26 @@ const animate = function () {
     renderer.render(currentScene, camera)
     controls.update();
     raycaster.setFromCamera(mouse, camera)
-    
+    const player = testScene.getObjectByName('Archibald')
+    characterMovement(player)
   
 };
 animate();
 
+// add player constant
+
+
 addEventListener('mousemove', (event) => {
   // 3js uses coordinates with the (0,0) being the center of the screen, 
   // as such you need to map everything out via the following math
-   mouse.x = (event.clientX / innerWidth) * 2 - 1
-   mouse.y = -(event.clientY / innerHeight) * 2 + 1
+  mouse.x = (event.clientX / innerWidth) * 2 - 1
+  mouse.y = -(event.clientY / innerHeight) * 2 + 1
 })
 addEventListener('click', () => {
   const intersects = raycaster.intersectObjects(testScene.children)
   //find the player model
-  const player = testScene.getObjectByName('Archibald')
   const selectedPoint = intersects[ 0 ].point
-  player.position.x = selectedPoint.x
-  player.position.z = selectedPoint.z
-  console.log(player)
-  
-  
+  const player = testScene.getObjectByName('Archibald')
+  targetX = Math.round((selectedPoint.x * 10) / 10)
+  targetZ = Math.round((selectedPoint.z * 10) / 10)
 })
