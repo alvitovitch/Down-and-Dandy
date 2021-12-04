@@ -3,6 +3,7 @@ import { testScene } from './assets/classes/Location';
 import { loadCharacter } from './assets/classes/character';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { Clue } from './assets/classes/clue';
 
 import { sampleText } from './assets/classes/textbox';
 
@@ -60,18 +61,18 @@ testScene.add(ground)
 
 // clue
 
+const testSceneClues = []
+
 const cube = new THREE.BoxGeometry(1,1,1)
 const cubeSkin = new THREE.MeshPhysicalMaterial()
 const clue = new THREE.Mesh(cube, cubeSkin);
 
-const testing = sampleText
-console.log(testing)
-clue.add(sampleText)
-
 clue.position.x = 5
 clue.position.z = 5
-
 clue.name = "testClue"
+
+const testClue = new Clue(clue, ['this is a clue'])
+testSceneClues.push(testClue)
 
 testScene.add(clue)
 
@@ -127,9 +128,10 @@ function characterMovement(char, camera) {
 
 // raycaster is always active so I just need it to show/hide the ! for clues if it's intesecting it
 function isClue(){
-  const intersects = raycaster.intersectObjects(testScene.children)
-  if (intersects.length > 0 && currentScene.clues.includes((intersects[0]["object"].name))){
-    console.log('you are hoving over a clue')
+  if (raycaster.intersectObjects(currentScene.children).length > 0){ 
+      testSceneClues.forEach( (ele) => {
+        ele.hover(raycaster, currentScene)
+    })
   }
 }
 
@@ -149,9 +151,9 @@ const animate = function () {
     raycaster.setFromCamera(mouse, camera)
     const player = testScene.getObjectByName('Archibald')
     characterMovement(player, camera);
-    isClue()    
     //cameraTracking(camera, player)
-  
+    isClue()
+
 };
 animate();
 
@@ -182,5 +184,6 @@ addEventListener('click', () => {
   const selectedPoint = intersects[ 0 ].point
   if (currentScene.clues.includes((intersects[0]["object"].name))){
     console.log('you clicked a clue')
+
   }
   })

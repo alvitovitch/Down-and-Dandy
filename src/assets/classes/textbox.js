@@ -25,4 +25,4 @@ const extrudeSettings = { depth: 8, bevelEnabled: true, bevelSegments: 2, steps:
 const geometry = new THREE.ExtrudeGeometry( text, extrudeSettings)
 const mesh = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial())
 
-export const SampleText = mesh
+export const sampleText = mesh
