@@ -157,10 +157,11 @@ function characterMovement(char, camera) {
 
 // raycaster is always active so I just need it to show/hide the ! for clues if it's intesecting it
 function isClue(){
-  if (raycaster.intersectObjects(currentScene.children).length > 0){ 
+  if (raycaster.intersectObjects(currentScene.children).length > 0 ){ 
       selectedLocation.clueArr.forEach( (ele) => {
-        ele.hover(raycaster, currentScene)
-    })
+          ele.hover(raycaster, currentScene)
+        }
+      )
   }
 }
 
@@ -212,15 +213,14 @@ addEventListener('click', () => {
 addEventListener('click', () => {
   //debugger
   const intersects = raycaster.intersectObjects(currentScene.children)
-  //find the player model
-  const selectedPoint = intersects[ 0 ].point
-  console.log(selectedPoint)
-  console.log(selectedLocation)
-  if (selectedLocation.clueArr.includes((intersects[0]["object"]))){
-    console.log('you clicked a clue')
+  selectedLocation.clueArr.forEach((clue) => {
+    if (clue.clueObject === (intersects[0]["object"])){
+      console.log('you clicked a clue')
+
+  }})
 
   }
-  })
+  )
 //const walk = archibald.characterMixer(player.animations[0])
 addEventListener('click', () => {
   if (playerMovement === true) {
