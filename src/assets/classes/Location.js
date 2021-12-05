@@ -17,7 +17,6 @@ class Location {
         this.npcArr = npcArr;
 
         this.scene.add(this.floor)
-        this.scene.add(this.light)
 
         // add lights
         this.lights.forEach((light) => {

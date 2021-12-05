@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { Location } from '../classes/Location';
+import { Clue } from '../classes/clue';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 
@@ -30,13 +31,30 @@ lightArr.push(pLight)
 const propArr = [];
 
 const clueArr = []
+
+// test clue
+
+const cube = new THREE.BoxGeometry(1,1,1)
+const cubeSkin = new THREE.MeshPhysicalMaterial()
+const clue = new THREE.Mesh(cube, cubeSkin);
+
+clue.position.x = 5
+clue.position.z = 5
+clue.name = "testClue"
+
+const testClue = new Clue(clue, ['this is a clue'])
+clueArr.push(testClue)
+
+
 const npcArr = []
 
 // make a test City
+
 const testCity = new Location(floor, buildingArr, lightArr, propArr, clueArr, npcArr)
+
 // add a tree to the propArr
 const loader = new GLTFLoader();
-    loader.load("./src/assets/tree/scene.gltf", function(gltf) {
+const treeLoad = loader.load("./src/assets/tree/scene.gltf", function(gltf) {
     const tree = gltf.scene;
     tree.scale.set(.01, .01, .01)
     tree.position.y = 15
@@ -44,9 +62,8 @@ const loader = new GLTFLoader();
         c.castShadow = true
     })
     tree.children[0].layers.enable(1)
+    testCity.clueArr.push(tree)
     testCity.scene.add(tree)
-    propArr.push(tree)
-
     
       
 })
@@ -54,4 +71,4 @@ const loader = new GLTFLoader();
 
 
 
-export const city = testCity
+export {testCity}

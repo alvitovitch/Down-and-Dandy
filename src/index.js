@@ -6,7 +6,11 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Clue } from './assets/classes/clue';
 import { Location } from './assets/classes/Location';
 
-import { city } from './assets/locations/city';
+import { testCity } from './assets/locations/city';
+
+const pleaseCity = testCity
+
+debugger
 
 
 // renderer - what will make everything show up on the screen
@@ -51,17 +55,17 @@ const ambLight = new THREE.AmbientLight(0x404040)
 const pLight =  new THREE.DirectionalLight( 0xffffff, 1)
 const lights =  [ambLight, pLight]
 
-const newLocation = new Location(ground, [], lights, [], [], [] )
+//const newLocation = new Location(ground, [], lights, [], [], [] )
 //debugger
 
 const locations = []
-locations.push(newLocation)
+locations.push(pleaseCity)
 let selectedLocation = locations[0]
 let currentScene = locations[0].scene
 
-currentScene = city.scene
+currentScene = testCity.scene
 debugger
-console.log(city)
+console.log(testCity)
 
 const archibald = new Character('./src/assets/characters/malcolm.fbx', 'Archibald')
 // load player
@@ -74,20 +78,20 @@ currentScene.add(archibald.characterObject)
 
 // clue
 
-const testSceneClues = []
+// const testSceneClues = []
 
-const cube = new THREE.BoxGeometry(1,1,1)
-const cubeSkin = new THREE.MeshPhysicalMaterial()
-const clue = new THREE.Mesh(cube, cubeSkin);
+// const cube = new THREE.BoxGeometry(1,1,1)
+// const cubeSkin = new THREE.MeshPhysicalMaterial()
+// const clue = new THREE.Mesh(cube, cubeSkin);
 
-clue.position.x = 5
-clue.position.z = 5
-clue.name = "testClue"
+// clue.position.x = 5
+// clue.position.z = 5
+// clue.name = "testClue"
 
-const testClue = new Clue(clue, ['this is a clue'])
-testSceneClues.push(testClue)
+// const testClue = new Clue(clue, ['this is a clue'])
+// testSceneClues.push(testClue)
 
-currentScene.add(clue)
+// currentScene.add(clue)
 //loader
   const testArray = []
   
@@ -116,7 +120,6 @@ loader.load("./src/assets/low_poly_city/scene.gltf", function(gltf) {
 
 // popup box
 
-
 // const controls = new OrbitControls(
 //     camera, renderer.domElement);
 //   controls.target.set(0, 20, 0);
@@ -128,6 +131,8 @@ let targetZ = undefined;
 let playerMovement = false;
 function characterMovement(char, camera) {
   if (char !== undefined) {
+    char.position.x = Math.round(char.position.x * 10)/10 
+    char.position.z = Math.round(char.position.z * 10)/10 
     if (targetX > char.position.x) {
       char.position.x += 0.1
       camera.position.x += 0.1
@@ -145,16 +150,15 @@ function characterMovement(char, camera) {
       camera.position.z -= 0.1
     }
   }
-  if (char.position.x === targetX && char.position.y === targetZ) {
+  if (char.position.x === targetX && char.position.z === targetZ) {
     playerMovement = false
-    debugger
   }
 }
 
 // raycaster is always active so I just need it to show/hide the ! for clues if it's intesecting it
 function isClue(){
   if (raycaster.intersectObjects(currentScene.children).length > 0){ 
-      testSceneClues.forEach( (ele) => {
+      selectedLocation.clueArr.forEach( (ele) => {
         ele.hover(raycaster, currentScene)
     })
   }

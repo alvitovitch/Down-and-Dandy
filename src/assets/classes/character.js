@@ -28,9 +28,9 @@ Character.prototype.addModel = function(scene, size, animations) {
         scene.add(char)
         animations.forEach((animation) =>{
             this.loader.load(animation, (animate) => {
-                const walk = mixer.clipAction(animate.animations[0])
+                //const walk = mixer.clipAction(animate.animations[0])
                 //const walk = this.characterMixer(player.animations[0])
-                walk.play()
+                //walk.play()
             })
         })
         
