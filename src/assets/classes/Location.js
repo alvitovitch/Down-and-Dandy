@@ -6,7 +6,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 // class location
 // has npcs, clues, buildings/props, floor, player 
 
-class location {
+class Location {
     constructor(buildingsArr, propsArr, floor, clueArr, npcArr){
         this.scene = new THREE.Scene()
         this.light = new THREE.AmbientLight(0x404040) // kinda grey light
@@ -15,6 +15,21 @@ class location {
         this.propsArr = propsArr;
         this.clueArr = clueArr;
         this.npcArr = npcArr;
+
+        this.scene.add(this.floor)
+        this.scene.add(this.light)
+        this.buildingsArr.forEach((building) => {
+            this.scene.add(building)
+        })
+        this.propsArr.forEach((prop) => {
+            this.scene.add(prop)
+        })
+        this.clueArr.forEach((clue) => {
+            this.scene.add(clue.clueObject)
+        })
+        this.npcArr.forEach((npc) => {
+            this.scene.add(npc.characterObject)
+        })
     }
 }
 
@@ -62,3 +77,4 @@ scene.add(dirLight);
 scene.name = "test"
 scene.clues = ['testClue']
 export const testScene = scene;
+export { Location }

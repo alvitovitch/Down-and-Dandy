@@ -1,12 +1,11 @@
 import * as THREE from 'three';
 import { testScene } from './assets/classes/Location';
 import { Character } from './assets/classes/character';
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
+//import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Clue } from './assets/classes/clue';
+import { Location } from './assets/classes/Location';
 
-import { sampleText } from './assets/classes/textbox';
-import { ArcCurve } from 'three';
 
 // renderer - what will make everything show up on the screen
 const renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -45,15 +44,6 @@ function cameraFollow(camera, character) {
     camera.position.z = character.position.z + 1;
 }
 
-let currentScene = testScene 
-
-const archibald = new Character('./src/assets/characters/malcolm.fbx', 'Archibald')
-// load player
-archibald.addModel(testScene, .01, ['src/assets/characters/animations/Walking.fbx'])
-//archibald.addAnimation('src/assets/characters/animations/Walking.fbx')
-console.log(archibald)
-currentScene.add(archibald.characterObject)
-// ground
 
 const plane = new THREE.PlaneGeometry(100,100,10,10);
 const material = new THREE.MeshBasicMaterial({ color: (0x404040)});
@@ -66,6 +56,19 @@ ground.rotation.x =-Math.PI/2;
 ground.name = "ground"
 ground.layers.enable(1)
 testScene.add(ground)
+
+const newLocation = new Location([], [], ground, [], [] )
+debugger
+let currentScene = newLocation.scene
+
+const archibald = new Character('./src/assets/characters/malcolm.fbx', 'Archibald')
+// load player
+archibald.addModel(testScene, .01, ['src/assets/characters/animations/Walking.fbx'])
+//archibald.addAnimation('src/assets/characters/animations/Walking.fbx')
+console.log(archibald)
+currentScene.add(archibald.characterObject)
+// ground
+
 
 // clue
 
@@ -82,7 +85,7 @@ clue.name = "testClue"
 const testClue = new Clue(clue, ['this is a clue'])
 testSceneClues.push(testClue)
 
-testScene.add(clue)
+currentScene.add(clue)
 //loader
 const loader = new GLTFLoader();
 // // //loading tree
@@ -95,13 +98,13 @@ loader.load("./src/assets/tree/scene.gltf", function(gltf) {
     })
     tree.children[0].layers.enable(1)
     console.log(tree)
-    testScene.add(tree)
+    currentScene.add(tree)
 })
 loader.load("./src/assets/low_poly_city/scene.gltf", function(gltf) {
     const city = gltf.scene;
     // city.position.y = 15
     // city.position.x = 15
-    testScene.add(city)
+    currentScene.add(city)
 })
 
 // popup box
@@ -164,7 +167,7 @@ const animate = function () {
     renderer.render(currentScene, camera)
     //controls.update();
     raycaster.setFromCamera(mouse, camera)
-    const player = testScene.getObjectByName('Archibald')
+    const player = currentScene.getObjectByName('Archibald')
     if (player !== undefined && playerMovement === true){
       characterMovement(player, camera);
       archibald.characterMixer.update(.01)
@@ -185,7 +188,7 @@ addEventListener('mousemove', (event) => {
 
 // movement
 addEventListener('click', () => {
-  const intersects = raycaster.intersectObjects(testScene.children)
+  const intersects = raycaster.intersectObjects(currentScene.children)
   //find the player model
   const selectedPoint = intersects[ 0 ].point
   if (intersects[0]["object"].name === "ground"){
@@ -196,7 +199,8 @@ addEventListener('click', () => {
 
 // clicking a clue
 addEventListener('click', () => {
-  const intersects = raycaster.intersectObjects(testScene.children)
+  debugger
+  const intersects = raycaster.intersectObjects(currentScene.children)
   //find the player model
   const selectedPoint = intersects[ 0 ].point
   if (currentScene.clues.includes((intersects[0]["object"].name))){
