@@ -3,6 +3,8 @@ import * as THREE from 'three';
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 /// what does a location have
+// class location
+// has npcs, clues, buildings/props, floor, player 
 
 // scene
 const scene = new THREE.Scene();
