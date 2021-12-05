@@ -6,6 +6,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Clue } from './assets/classes/clue';
 import { Location } from './assets/classes/Location';
 
+import { city } from './assets/locations/city';
+
 
 // renderer - what will make everything show up on the screen
 const renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -34,17 +36,6 @@ const mouse = {
 
 
 
-// camera follow loop
-
-function cameraFollow(camera, character) {
-    
-    camera.lookAt(character.position);
-    camera.position.x = character.position.x + 1;
-    camera.position.y = character.position.y + 1;
-    camera.position.z = character.position.z + 1;
-}
-
-
 const plane = new THREE.PlaneGeometry(100,100,10,10);
 const material = new THREE.MeshBasicMaterial({ color: (0x404040)});
 
@@ -55,17 +46,28 @@ ground.receiveShadow = true;
 ground.rotation.x =-Math.PI/2;
 ground.name = "ground"
 ground.layers.enable(1)
-testScene.add(ground)
+//testScene.add(ground)
+const ambLight = new THREE.AmbientLight(0x404040)
+const pLight =  new THREE.DirectionalLight( 0xffffff, 1)
+const lights =  [ambLight, pLight]
 
-const newLocation = new Location([], [], ground, [], [] )
+const newLocation = new Location(ground, [], lights, [], [], [] )
+//debugger
+
+const locations = []
+locations.push(newLocation)
+let selectedLocation = locations[0]
+let currentScene = locations[0].scene
+
+currentScene = city.scene
 debugger
-let currentScene = newLocation.scene
+console.log(city)
 
 const archibald = new Character('./src/assets/characters/malcolm.fbx', 'Archibald')
 // load player
-archibald.addModel(testScene, .01, ['src/assets/characters/animations/Walking.fbx'])
+archibald.addModel(currentScene, .01, ['src/assets/characters/animations/Walking.fbx'])
 //archibald.addAnimation('src/assets/characters/animations/Walking.fbx')
-console.log(archibald)
+//console.log(archibald)
 currentScene.add(archibald.characterObject)
 // ground
 
@@ -87,24 +89,29 @@ testSceneClues.push(testClue)
 
 currentScene.add(clue)
 //loader
-const loader = new GLTFLoader();
-// // //loading tree
-loader.load("./src/assets/tree/scene.gltf", function(gltf) {
-    const tree = gltf.scene;
-    tree.scale.set(.01, .01, .01)
-    tree.position.y = 15
-    tree.traverse(c => {
-      c.castShadow = true
-    })
-    tree.children[0].layers.enable(1)
-    console.log(tree)
-    currentScene.add(tree)
+  const testArray = []
+  
+  const loader = new GLTFLoader();
+  loader.load("./src/assets/tree/scene.gltf", function(gltf) {
+      const tree = gltf.scene;
+      tree.scale.set(.01, .01, .01)
+      tree.position.y = 15
+      tree.traverse(c => {
+        c.castShadow = true
+      })
+      tree.children[0].layers.enable(1)
+      //console.log(tree)
+      testArray.push(tree)
+      //console.log(testArray)
+      //currentScene.add(tree)
+      console.log(testArray)    
 })
 loader.load("./src/assets/low_poly_city/scene.gltf", function(gltf) {
     const city = gltf.scene;
     // city.position.y = 15
     // city.position.x = 15
     currentScene.add(city)
+    
 })
 
 // popup box
@@ -199,11 +206,13 @@ addEventListener('click', () => {
 
 // clicking a clue
 addEventListener('click', () => {
-  debugger
+  //debugger
   const intersects = raycaster.intersectObjects(currentScene.children)
   //find the player model
   const selectedPoint = intersects[ 0 ].point
-  if (currentScene.clues.includes((intersects[0]["object"].name))){
+  console.log(selectedPoint)
+  console.log(selectedLocation)
+  if (selectedLocation.clueArr.includes((intersects[0]["object"]))){
     console.log('you clicked a clue')
 
   }
@@ -211,9 +220,11 @@ addEventListener('click', () => {
 //const walk = archibald.characterMixer(player.animations[0])
 addEventListener('click', () => {
   if (playerMovement === true) {
-    const walkingMix =archibald.characterMixer
+    const walkingMix = archibald.characterMixer
     const walkingAni = archibald.characterObject.animations[0]
-    ///debugger
-    walkingMix.clipAction(walkingAni).play()
+    // console.log(walkingAni)
+    // console.log(walkingMix)
+    // ///debugger
+    // walkingMix.clipAction(walkingAni).play()
   }
 })
