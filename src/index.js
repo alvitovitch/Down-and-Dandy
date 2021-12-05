@@ -21,7 +21,11 @@ camera.lookAt( 0, 0, 0 );
 
 const raycaster = new THREE.Raycaster()
 
-//raycaster.layers.set( 1 );
+// raycaster layers
+// 1 = ground (walkable terrain)
+// 2 = clue 
+// 3 = npc
+//raycaster.layers.set(1);
 
 const mouse = {
   x: undefined,
@@ -44,6 +48,7 @@ let currentScene = testScene
 
 // load player
 loadCharacter(currentScene)
+
 console.log(testScene)
 
 // ground
@@ -57,6 +62,7 @@ ground.castShadow = false;
 ground.receiveShadow = true;
 ground.rotation.x =-Math.PI/2;
 ground.name = "ground"
+ground.layers.enable(1)
 testScene.add(ground)
 
 // clue
@@ -75,7 +81,6 @@ const testClue = new Clue(clue, ['this is a clue'])
 testSceneClues.push(testClue)
 
 testScene.add(clue)
-
 //loader
 const loader = new GLTFLoader();
 // // //loading tree
@@ -84,7 +89,7 @@ loader.load("./src/assets/tree/scene.gltf", function(gltf) {
     tree.scale.set(.01, .01, .01)
     tree.position.y = 15
     tree.children[0].layers.enable(1)
-
+    console.log(tree)
     testScene.add(tree)
 })
 loader.load("./src/assets/low_poly_city/scene.gltf", function(gltf) {
@@ -105,6 +110,7 @@ loader.load("./src/assets/low_poly_city/scene.gltf", function(gltf) {
 let targetX = undefined;
 let targetZ = undefined;
 
+let playerMovement = false;
 function characterMovement(char, camera) {
   if (char !== undefined) {
     if (targetX > char.position.x) {
@@ -123,6 +129,10 @@ function characterMovement(char, camera) {
       char.position.z -= 0.1
       camera.position.z -= 0.1
     }
+  }
+  if (char.position.x === targetX && char.position.y === targetZ) {
+    playerMovement = false
+    debugger
   }
 }
 
@@ -150,14 +160,15 @@ const animate = function () {
     //controls.update();
     raycaster.setFromCamera(mouse, camera)
     const player = testScene.getObjectByName('Archibald')
-    characterMovement(player, camera);
+    if (player !== undefined && playerMovement === true){
+      characterMovement(player, camera);
+      player.animations[1].update(.01)
+    }
     //cameraTracking(camera, player)
     isClue()
 
 };
 animate();
-
-
 
 
 addEventListener('mousemove', (event) => {
@@ -173,8 +184,9 @@ addEventListener('click', () => {
   //find the player model
   const selectedPoint = intersects[ 0 ].point
   if (intersects[0]["object"].name === "ground"){
-    targetX = Math.round((selectedPoint.x * 10) / 10)
-    targetZ = Math.round((selectedPoint.z * 10) / 10)
+    playerMovement = true
+    targetX = (Math.round((selectedPoint.x * 10)) / 10)
+    targetZ = (Math.round((selectedPoint.z * 10)) / 10)
 }})
 
 // clicking a clue
@@ -187,3 +199,10 @@ addEventListener('click', () => {
 
   }
   })
+
+addEventListener('click', () => {
+  if (playerMovement === true) {
+    const player = testScene.getObjectByName('Archibald')
+    player.animations[1].clipAction(player.animations[0]).play()
+  }
+})

@@ -9,6 +9,7 @@ class Clue {
         this.hoverColor = new THREE.Color('yellow');
         this.ogColor = clueObject.material.color;
         this.clueObject.clue = true;
+        this.clueObject.layers.enable(2)
     }
 
     // what does the hover state do? 

@@ -1,6 +1,30 @@
 import * as THREE from 'three';
 import {FBXLoader} from 'three/examples/jsm/loaders/FBXLoader.js'
 
+// character class
+
+class character {
+    constructor(characterObjectPath, name) {
+        this.loader = new FBXLoader();
+        this.characterObject = undefined;
+        loader.load(characterObjectPath, (char) => {
+            char.name = name
+            this.characterObject = char
+        })
+        this.characterMixer = new THREE.AnimationMixer(this.characterObject);
+        
+    }
+}
+
+character.prototype.addAnimation = function(clip) {
+    this.characterObject.animations.push(clip)
+}
+
+character.prototype.update = function() {
+    this.characterMixer.update((.2))
+}
+
+
 export function loadCharacter(scene) {
     const loader = new FBXLoader();
     loader.load('src/assets/characters/malcolm.fbx', (fbx) => {
@@ -17,6 +41,7 @@ export function loadCharacter(scene) {
         walk.play();
     })
     fbx.name = "Archibald"
+    ///fbx.movement = false;
     scene.add(fbx)
     })
 }
