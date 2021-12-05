@@ -2,7 +2,8 @@ import * as THREE from 'three';
 import {FBXLoader} from 'three/examples/jsm/loaders/FBXLoader.js'
 
 // character class
-// model, name, animations
+// model, name, animationmixer, animations
+// might need a state class
 
 // player class
 // inherits from character class
