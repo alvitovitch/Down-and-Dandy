@@ -17,7 +17,7 @@ class character {
 }
 
 character.prototype.addAnimation = function(clip) {
-    this.characterObject.animations.push(clip)
+    this.characterMixer.clipAction(clip)
 }
 
 character.prototype.update = function() {
