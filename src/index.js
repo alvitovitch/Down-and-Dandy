@@ -1,11 +1,12 @@
 import * as THREE from 'three';
 import { testScene } from './assets/classes/Location';
-import { loadCharacter } from './assets/classes/character';
+import { Character } from './assets/classes/character';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Clue } from './assets/classes/clue';
 
 import { sampleText } from './assets/classes/textbox';
+import { ArcCurve } from 'three';
 
 // renderer - what will make everything show up on the screen
 const renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -46,11 +47,12 @@ function cameraFollow(camera, character) {
 
 let currentScene = testScene 
 
+const archibald = new Character('./src/assets/characters/malcolm.fbx', 'Archibald')
 // load player
-loadCharacter(currentScene)
-
-console.log(testScene)
-
+archibald.addModel(testScene, .01, ['src/assets/characters/animations/Walking.fbx'])
+//archibald.addAnimation('src/assets/characters/animations/Walking.fbx')
+console.log(archibald)
+currentScene.add(archibald.characterObject)
 // ground
 
 const plane = new THREE.PlaneGeometry(100,100,10,10);
@@ -88,6 +90,9 @@ loader.load("./src/assets/tree/scene.gltf", function(gltf) {
     const tree = gltf.scene;
     tree.scale.set(.01, .01, .01)
     tree.position.y = 15
+    tree.traverse(c => {
+      c.castShadow = true
+    })
     tree.children[0].layers.enable(1)
     console.log(tree)
     testScene.add(tree)
@@ -162,7 +167,7 @@ const animate = function () {
     const player = testScene.getObjectByName('Archibald')
     if (player !== undefined && playerMovement === true){
       characterMovement(player, camera);
-      player.animations[1].update(.01)
+      archibald.characterMixer.update(.01)
     }
     //cameraTracking(camera, player)
     isClue()
@@ -199,10 +204,12 @@ addEventListener('click', () => {
 
   }
   })
-
+//const walk = archibald.characterMixer(player.animations[0])
 addEventListener('click', () => {
   if (playerMovement === true) {
-    const player = testScene.getObjectByName('Archibald')
-    player.animations[1].clipAction(player.animations[0]).play()
+    const walkingMix =archibald.characterMixer
+    const walkingAni = archibald.characterObject.animations[0]
+    ///debugger
+    walkingMix.clipAction(walkingAni).play()
   }
 })

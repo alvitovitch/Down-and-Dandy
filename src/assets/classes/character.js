@@ -9,24 +9,51 @@ import {FBXLoader} from 'three/examples/jsm/loaders/FBXLoader.js'
 // inherits from character class
 // also has movement
 
-class character {
+class Character {
     constructor(characterObjectPath, name) {
         this.loader = new FBXLoader();
-        this.characterObject = undefined;
-        loader.load(characterObjectPath, (char) => {
-            char.name = name
-            this.characterObject = char
-        })
+        this.characterObjectPath = characterObjectPath
+        this.name = name
         this.characterMixer = new THREE.AnimationMixer(this.characterObject);
         
     }
 }
 
-character.prototype.addAnimation = function(clip) {
-    this.characterMixer.clipAction(clip)
+Character.prototype.addModel = function(scene, size, animations) {
+    this.loader.load(this.characterObjectPath, (char) => {
+        char.name = this.name
+        char.scale.setScalar(size)
+        this.characterObject = char
+        const mixer = this.characterMixer
+        scene.add(char)
+        animations.forEach((animation) =>{
+            debugger
+            this.loader.load(animation, (animate) => {
+                debugger
+                const walk = mixer.clipAction(animate.animations[0])
+                debugger
+                //const walk = this.characterMixer(player.animations[0])
+                walk.play()
+            })
+        })
+        
+    }, undefined, function(error) {
+        console.log('error')
+        console.error(error)
+    })}
+
+Character.prototype.addAnimation = function(clipPath) {
+    const model = this.characterObject
+    debugger
+    this.loader.load(clipPath, (animate) => {
+        debugger
+        model.animations.push(animate.animations[0])
+        debugger
+    })
+    //this.characterMixer.clipAction(clip)
 }
 
-character.prototype.update = function() {
+Character.prototype.update = function() {
     this.characterMixer.update((.2))
 }
 
@@ -52,3 +79,6 @@ export function loadCharacter(scene) {
     })
 }
 
+//arhcibald = new Character('src/assets/characters/malcolm.fbx', 'Archibald')
+
+export {Character} 

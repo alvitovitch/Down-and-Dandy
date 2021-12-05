@@ -6,6 +6,18 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 // class location
 // has npcs, clues, buildings/props, floor, player 
 
+class location {
+    constructor(buildingsArr, propsArr, floor, clueArr, npcArr){
+        this.scene = new THREE.Scene()
+        this.light = new THREE.AmbientLight(0x404040) // kinda grey light
+        this.floor = floor;
+        this.buildingsArr = buildingsArr;
+        this.propsArr = propsArr;
+        this.clueArr = clueArr;
+        this.npcArr = npcArr;
+    }
+}
+
 // scene
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(255,255,255)
