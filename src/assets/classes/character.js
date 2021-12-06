@@ -43,6 +43,9 @@ Character.prototype.addModel = function(scene, size) {
         this.characterObject = char
         this.characterMixer = new THREE.AnimationMixer(char)
         scene.add(char)
+        char.layers.enable(1)
+        char.traverse((child) => {
+            child.layers.enable(1)})
     }, undefined, function(error) {
         console.log('error')
         console.error(error)

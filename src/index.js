@@ -197,3 +197,14 @@ addEventListener('click', () => {
     //archibald.characterObject.visible = false
   }
 })
+addEventListener('click', () => {
+  const intersects = raycaster.intersectObjects(currentScene.children)[0].object
+  if (intersects.parent.name === 'Eve') {
+    
+    console.log('eve')
+  }
+    //makeWalk().play()
+    //debugger
+    //archibald.characterObject.visible = false
+  }
+)
