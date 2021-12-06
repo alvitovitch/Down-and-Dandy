@@ -10,15 +10,12 @@ import { testCity } from './assets/locations/city';
 
 const pleaseCity = testCity
 
-debugger
-
-
 // renderer - what will make everything show up on the screen
 const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize( window.innerWidth, window.innerHeight);
 
 // camera
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, .1, 1000);
+const camera = new THREE.PerspectiveCamera( 75, (window.innerWidth / window.innerHeight), .1, 1000);
 camera.position.set( 10, 10, 2 );
 camera.lookAt( 0, 0, 0 );
 
@@ -31,7 +28,7 @@ const raycaster = new THREE.Raycaster()
 // 1 = ground (walkable terrain)
 // 2 = clue 
 // 3 = npc
-//raycaster.layers.set(1);
+raycaster.layers.set(1);
 
 const mouse = {
   x: undefined,
@@ -64,65 +61,15 @@ let selectedLocation = locations[0]
 let currentScene = locations[0].scene
 
 currentScene = testCity.scene
-debugger
+
 console.log(testCity)
 
 const archibald = new Character('./src/assets/characters/malcolm.fbx', 'Archibald')
 // load player
-archibald.addModel(currentScene, .01, ['src/assets/characters/animations/Walking.fbx'])
-//archibald.addAnimation('src/assets/characters/animations/Walking.fbx')
+archibald.addModel(currentScene, .01)
+archibald.addAnimation('src/assets/characters/animations/Walking.fbx')
 //console.log(archibald)
 currentScene.add(archibald.characterObject)
-// ground
-
-
-// clue
-
-// const testSceneClues = []
-
-// const cube = new THREE.BoxGeometry(1,1,1)
-// const cubeSkin = new THREE.MeshPhysicalMaterial()
-// const clue = new THREE.Mesh(cube, cubeSkin);
-
-// clue.position.x = 5
-// clue.position.z = 5
-// clue.name = "testClue"
-
-// const testClue = new Clue(clue, ['this is a clue'])
-// testSceneClues.push(testClue)
-
-// currentScene.add(clue)
-//loader
-  const testArray = []
-  
-  const loader = new GLTFLoader();
-  loader.load("./src/assets/tree/scene.gltf", function(gltf) {
-      const tree = gltf.scene;
-      tree.scale.set(.01, .01, .01)
-      tree.position.y = 15
-      tree.traverse(c => {
-        c.castShadow = true
-      })
-      tree.children[0].layers.enable(1)
-      //console.log(tree)
-      testArray.push(tree)
-      //console.log(testArray)
-      //currentScene.add(tree)
-      console.log(testArray)    
-})
-loader.load("./src/assets/low_poly_city/scene.gltf", function(gltf) {
-    const city = gltf.scene;
-    // city.position.y = 15
-    // city.position.x = 15
-    currentScene.add(city)
-    
-})
-
-// popup box
-
-// const controls = new OrbitControls(
-//     camera, renderer.domElement);
-//   controls.target.set(0, 20, 0);
 
 // player movement
 let targetX = undefined;
@@ -151,7 +98,7 @@ function characterMovement(char, camera) {
     }
   }
   if (char.position.x === targetX && char.position.z === targetZ) {
-    playerMovement = false
+    //playerMovement = false
   }
 }
 
@@ -159,13 +106,14 @@ function characterMovement(char, camera) {
 function isClue(){
   if (raycaster.intersectObjects(currentScene.children).length > 0 ){ 
       selectedLocation.clueArr.forEach( (ele) => {
-          ele.hover(raycaster, currentScene)
+          //ele.hover(raycaster, currentScene)
         }
       )
   }
 }
 
 /// testing out scene change
+
 document.body.appendChild( renderer.domElement );
 
 window.addEventListener('resize', () => {
@@ -177,12 +125,11 @@ window.addEventListener('resize', () => {
 const animate = function () {
     requestAnimationFrame(animate);
     renderer.render(currentScene, camera)
-    //controls.update();
     raycaster.setFromCamera(mouse, camera)
     const player = currentScene.getObjectByName('Archibald')
     if (player !== undefined && playerMovement === true){
       characterMovement(player, camera);
-      archibald.characterMixer.update(.01)
+      archibald.update()
     }
     //cameraTracking(camera, player)
     isClue()
@@ -211,7 +158,6 @@ addEventListener('click', () => {
 
 // clicking a clue
 addEventListener('click', () => {
-  //debugger
   const intersects = raycaster.intersectObjects(currentScene.children)
   selectedLocation.clueArr.forEach((clue) => {
     if (clue.clueObject === (intersects[0]["object"])){
@@ -224,11 +170,7 @@ addEventListener('click', () => {
 //const walk = archibald.characterMixer(player.animations[0])
 addEventListener('click', () => {
   if (playerMovement === true) {
-    const walkingMix = archibald.characterMixer
-    const walkingAni = archibald.characterObject.animations[0]
-    // console.log(walkingAni)
-    // console.log(walkingMix)
-    // ///debugger
-    // walkingMix.clipAction(walkingAni).play()
+    archibald.characterMixer.clipAction(archibald.characterObject.animations[0]).play()
+    //setTimeout(() => {debugger}, 500) 
   }
 })
