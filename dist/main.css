@@ -41,7 +41,7 @@ canvas {
   transition: 1s opacity;
   text-align: center;
   font-size: 126px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.857);
   top: 50%;
   margin: 0;
   position: absolute;
@@ -49,6 +49,7 @@ canvas {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   justify-content: space-around;
+  opacity: 75%;
 }
 
 button {
@@ -60,7 +61,7 @@ button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 72px;
 }
 
 li {
