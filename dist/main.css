@@ -30,9 +30,10 @@ canvas {
   background-color: blanchedalmond;
 }
 
-#textbox {
-  display: block;
+#characterTextBox {
+  display: inline-block;
   position: relative;
+  align-items: center;
   top: 50%;
   left: 50%;
   opacity: 0;
@@ -40,4 +41,5 @@ canvas {
   text-align: center;
   font-size: 126px;
   background-color: blanchedalmond;
+  background-color: white;
 }

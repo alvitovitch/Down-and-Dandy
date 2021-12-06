@@ -31,8 +31,8 @@ NPC.prototype.movement = function() {
 }
 
 NPC.prototype.displayText = function() {
-  let textbox = document.getElementById("textbox")
-  textbox.innerText = this.messageArray[0]
+  let textbox = document.getElementById("characterTextBox")
+  textbox.innerText = this.messageArr[0]
   textbox.style.opacity = '1'
 }
 export { NPC }

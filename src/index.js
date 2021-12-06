@@ -169,6 +169,7 @@ addEventListener('click', () => {
       /// might makethe following a function
       if (relativePostion(archibald.characterObject, clue.clueObject)) {
         // add to document
+        debugger
         clue.displayText()
         //currentScene.remove(intersects[0]["object"])
         //setTimeout()
@@ -197,16 +198,18 @@ addEventListener('click', () => {
 //     //playerMixer.clipAction(playerWalk).play()
 //     }
 // })
+
+// npc dialogue box pop up
 addEventListener('click', () => {
   const intersects = raycaster.intersectObjects(currentScene.children)[0].object
-  if (intersects.parent.name === 'Eve')
-
-    if (relativePostion(intersects.parent, archibald.characterObject)){
-      console.log('eve')
-
+  selectedLocation.npcArr.forEach((npc) => {
+    if (npc.characterObject.name === intersects.parent.name){
+      if (relativePostion(intersects.parent, archibald.characterObject)){
+        npc.displayText()
+      }
     }
   }
     //makeWalk().play()
     //debugger
     //archibald.characterObject.visible = false
-)
+)})
