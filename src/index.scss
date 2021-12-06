@@ -13,10 +13,12 @@ canvas {
     position: absolute;
     left: 0;
     top: 0;
+    z-index: -100;
 }
 
 #clueText {
     display: flexbox;
+    z-index: -10;
     justify-content: center;
     position: relative;
     top: 0;
@@ -29,16 +31,36 @@ canvas {
 }
 
 #characterTextBox {
-    display: inline-block;
-    position: relative;
-    align-items: center;
-    top: 50%;
-    left: 50%;
+    z-index: 100;
+    display: flex;
+    width: 33%;
+    align-items: flex-start;
     opacity: 0;
     transition: 1s opacity;
     text-align: center;
     font-size: 126px;
-    background-color: blanchedalmond;
     background-color:white;
-    
+    top: 50%;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    justify-content: space-around;
+}
+
+button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+
+li {
+    list-style: none;
+    display: block;
 }

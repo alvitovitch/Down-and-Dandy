@@ -61,7 +61,7 @@ clueArr.push(testClue)
 
 
 const npcArr = []
-const eve = new NPC('/src/assets/characters/eve.fbx', 'Eve', [10, 10, 0], [0,0,0], ['Hello There!'])
+const eve = new NPC('/src/assets/characters/eve.fbx', 'Eve', [10, 10, 0], [0,0,0], [['Hello There! My name is Eve!', 'This is an option', 'this is also an option', 'this is one too!']])
 npcArr.push(eve)
 
 

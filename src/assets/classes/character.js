@@ -21,6 +21,7 @@ class Character {
         this.posX = posArr[0]
         this.posY = posArr[1]
         this.posZ = posArr[2]
+        this.actions = []
         // this.loader.load(this.characterObjectPath, (char) => {
         //     debugger
         //     char.name = this.name
@@ -38,14 +39,15 @@ class Character {
 
 Character.prototype.addModel = function(scene, size) {
     this.loader.load(this.characterObjectPath, (char) => {
+        this.characterMixer = new THREE.AnimationMixer(char)
+        this.characterObject = char
         char.name = this.name
         char.scale.setScalar(size)
-        this.characterObject = char
-        this.characterMixer = new THREE.AnimationMixer(char)
-        scene.add(char)
         char.layers.enable(1)
         char.traverse((child) => {
-            child.layers.enable(1)})
+            child.layers.enable(1)
+        })
+        scene.add(char)
     }, undefined, function(error) {
         console.log('error')
         console.error(error)
@@ -62,13 +64,15 @@ Character.prototype.setPosition = function(x,y,z) {
 }
 // Character.prototype.addAnimation = function(clipPath) {
 //     const model = this.characterObject
-//     const test = function(animate) {
-//         debugger
-//         model.animations.push(animate.animations[0])
+//     const testFunction = function() {
+//         return model
 //     }
-//     this.loader.load(clipPath, (animate) => {
+//     this.characterObject = this.characterObject 
+//     this.loader.load(clipPath, animate => {
+        
+//         testFunction()
 //         debugger
-//         test(animate)})
+//         model.animations.push(animate)})
 //     debugger
 // }
 

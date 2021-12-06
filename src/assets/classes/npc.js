@@ -30,9 +30,25 @@ NPC.prototype.movement = function() {
 
 }
 
-NPC.prototype.displayText = function() {
+NPC.prototype.displayText = function(dialougeTreeNum) {
+  // get the textbox
   let textbox = document.getElementById("characterTextBox")
-  textbox.innerText = this.messageArr[0]
   textbox.style.opacity = '1'
+
+  // create the unordered list
+  const dialougeBox = document.createElement('ul')
+  dialougeBox.innerText = this.messageArr[dialougeTreeNum][0]
+  textbox.appendChild(dialougeBox)
+  // for each option in the dialogue tree add a li
+  for (let i = 1; i < this.messageArr[dialougeTreeNum].length; i++){
+    const textOption = document.createElement('li')
+    const textButton = document.createElement('button')
+    textButton.class = 'button'
+    
+    textButton.innerText = this.messageArr[dialougeTreeNum][i]
+    textOption.appendChild(textButton)
+    textbox.firstChild.appendChild(textOption)
+  }    
 }
+
 export { NPC }

@@ -47,6 +47,7 @@ console.log(testCity)
 const archibald = new Character('./src/assets/characters/malcolm.fbx', 'Archibald', [10,10,10])
 // load player
 archibald.addModel(currentScene, .01)
+//archibald.addAnimation('src/assets/characters/animations/BreathingIdle.fbx')
 
 
 // player movement
@@ -169,7 +170,7 @@ addEventListener('click', () => {
       /// might makethe following a function
       if (relativePostion(archibald.characterObject, clue.clueObject)) {
         // add to document
-        debugger
+        
         clue.displayText()
         //currentScene.remove(intersects[0]["object"])
         //setTimeout()
@@ -181,7 +182,6 @@ addEventListener('click', () => {
 
   }
   )
-  let playerMixer = []
 // addEventListener('click', () => {
 //   if (playerMovement === true) {
 //     if (playerMixer !== archibald.characterMixer)
@@ -205,7 +205,7 @@ addEventListener('click', () => {
   selectedLocation.npcArr.forEach((npc) => {
     if (npc.characterObject.name === intersects.parent.name){
       if (relativePostion(intersects.parent, archibald.characterObject)){
-        npc.displayText()
+        npc.displayText(0)
       }
     }
   }
