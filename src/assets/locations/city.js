@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { Location } from '../classes/Location';
 import { Clue } from '../classes/clue';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { Character } from '../classes/character';
 
 
 // let's make a floor
@@ -61,6 +62,9 @@ clueArr.push(testClue)
 
 
 const npcArr = []
+const eve = new Character('/src/assets/characters/eve.fbx', 'Eve', [10, 1, 10])
+npcArr.push(eve)
+
 
 // make a test City
 
@@ -77,7 +81,7 @@ loader.load("./src/assets/tree/scene.gltf", function(gltf) {
         c.castShadow = true
     })
     tree.children[0].layers.enable(1)
-    testCity.clueArr.push(tree)
+    testCity.propsArr.push(tree)
     testCity.scene.add(tree)
     
       
@@ -110,7 +114,7 @@ loader.load("./src/assets/tree/scene.gltf", function(gltf) {
         c.castShadow = true
     })
     tree.children[0].layers.enable(1)
-    testCity.clueArr.push(tree)
+    testCity.propsArr.push(tree)
     testCity.scene.add(tree)
     
       
@@ -125,7 +129,7 @@ loader.load("./src/assets/tree/scene.gltf", function(gltf) {
         c.castShadow = true
     })
     tree.children[0].layers.enable(1)
-    testCity.clueArr.push(tree)
+    testCity.propsArr.push(tree)
     testCity.scene.add(tree)
     
       
@@ -140,7 +144,7 @@ loader.load("./src/assets/tree/scene.gltf", function(gltf) {
         c.castShadow = true
     })
     tree.children[0].layers.enable(1)
-    testCity.clueArr.push(tree)
+    testCity.propsArr.push(tree)
     testCity.scene.add(tree)
     
       

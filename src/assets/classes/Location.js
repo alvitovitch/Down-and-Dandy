@@ -40,7 +40,7 @@ class Location {
 
         // add npc
         this.npcArr.forEach((npc) => {
-            this.scene.add(npc.characterObject)
+            npc.addModel(this.scene, npc.size)
         })
     }
 }

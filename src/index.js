@@ -3,9 +3,8 @@ import * as THREE from 'three';
 import { Character } from './assets/classes/character';
 //import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 //import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-//import { Clue } from './assets/classes/clue';
+import { Clue } from './assets/classes/clue';
 //import { Location } from './assets/classes/Location';
-
 import { testCity } from './assets/locations/city';
 
 const pleaseCity = testCity
@@ -67,9 +66,9 @@ console.log(testCity)
 const archibald = new Character('./src/assets/characters/malcolm.fbx', 'Archibald')
 // load player
 archibald.addModel(currentScene, .01)
-archibald.addAnimation('src/assets/characters/animations/Walking.fbx')
+//const walk = makeWalk()
 //console.log(archibald)
-currentScene.add(archibald.characterObject)
+
 
 // player movement
 let targetX = undefined;
@@ -116,6 +115,9 @@ function isClue(){
 /// testing out scene change
 
 document.body.appendChild( renderer.domElement );
+let clueText = document.createElement("div")
+clueText.id = "clueText"
+document.body.appendChild(clueText)
 
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -129,14 +131,16 @@ const animate = function () {
     raycaster.setFromCamera(mouse, camera)
     const player = currentScene.getObjectByName('Archibald')
     if (player !== undefined && playerMovement === true){
+      //walk = archibald.characterMixer.clipAction(archibald.characterObject.animations[0])
       characterMovement(player, camera);
       archibald.update()
     }
-    //cameraTracking(camera, player)
-    isClue()
+    //isClue()
 
 };
 animate();
+
+
 
 
 addEventListener('mousemove', (event) => {
@@ -144,6 +148,7 @@ addEventListener('mousemove', (event) => {
   // as such you need to map everything out via the following math
   mouse.x = (event.clientX / innerWidth) * 2 - 1
   mouse.y = -(event.clientY / innerHeight) * 2 + 1
+  isClue()
 })
 
 // movement
@@ -166,16 +171,8 @@ addEventListener('click', () => {
       /// might makethe following a function
       if (Math.abs(clue.clueObject.position.x) - Math.abs(archibald.characterObject.position.x) < 2 &&
       Math.abs(clue.clueObject.position.y) - Math.abs(archibald.characterObject.position.y) < 2) {
-        console.log(clue.messageArray[0])
-
         // add to document
-        const cluePara = document.createElement("p")
-        const paraWords = document.createTextNode(clue.messageArray[0])
-        cluePara.appendChild(paraWords)
-        debugger
-        const clueDisplay = document.getElementsByName("clueDisplay")
-        debugger
-        document.body.appendChild(cluePara)
+        clue.displayText()
         currentScene.remove(intersects[0]["object"])
         //setTimeout()
         
@@ -189,7 +186,11 @@ addEventListener('click', () => {
 //const walk = archibald.characterMixer(player.animations[0])
 addEventListener('click', () => {
   if (playerMovement === true) {
-    archibald.characterMixer.clipAction(archibald.characterObject.animations[0]).play()
+    //debugger
+    //makeWalk().play()
+    //debugger
+    const eve = selectedLocation.npcArr[0]
+    eve.characterMixer.clipAction(eve.characterObject.animations[0]).play()
     //archibald.characterObject.visible = false
   }
 })

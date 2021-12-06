@@ -11,12 +11,14 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 // also has movement
 
 class Character {
-    constructor(characterObjectPath, name) {
+    constructor(characterObjectPath, name, posArr) {
         this.loader = new FBXLoader();
         this.characterObjectPath = characterObjectPath
         this.name = name
         this.characterObject = []
         this.characterMixer = undefined
+        this.size = .01
+        this.posArr = posArr
         // this.loader.load(this.characterObjectPath, (char) => {
         //     debugger
         //     char.name = this.name

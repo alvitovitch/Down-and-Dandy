@@ -17,14 +17,22 @@ class Clue {
 
 }
 
-Clue.prototype.hover = function(raycaster, scene) {
-    if (raycaster.intersectObjects(scene.children)[0].object === this.clueObject) {
-        this.clueObject.material.color = this.hoverColor
-    } else {
-        this.clueObject.material.color = this.ogColor
-    }
+Clue.prototype.displayText = function() {
+    let clueText = document.getElementById("clueText")
+    clueText.innerText = this.messageArray[0]
+    clueText.style.opacity = '1'
+    setTimeout(() => {
+        clueText.style.opacity = '0'
+    }, 7000)
 }
 
+Clue.prototype.hover = function(raycaster, scene) {
+        if (raycaster.intersectObjects(scene.children)[0].object === this.clueObject) {
+            this.clueObject.material.color = this.hoverColor
+        } else {
+            this.clueObject.material.color = this.ogColor
+        }
+    }
 
 
 export {Clue}
