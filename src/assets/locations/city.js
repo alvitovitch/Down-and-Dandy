@@ -56,7 +56,7 @@ clue.position.x = 5
 clue.position.z = 5
 clue.name = "testClue"
 clue.layers.enable(1)
-const testClue = new Clue(clue, ['this is a clue'])
+const testClue = new Clue(clue, ['The white box. The simplest and most important of clues!'])
 clueArr.push(testClue)
 
 

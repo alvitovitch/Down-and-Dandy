@@ -163,10 +163,21 @@ addEventListener('click', () => {
   selectedLocation.clueArr.forEach((clue) => {
     if (clue.clueObject === (intersects[0]["object"])){
       
+      /// might makethe following a function
       if (Math.abs(clue.clueObject.position.x) - Math.abs(archibald.characterObject.position.x) < 2 &&
       Math.abs(clue.clueObject.position.y) - Math.abs(archibald.characterObject.position.y) < 2) {
-        console.log('you clicked a clue')
+        console.log(clue.messageArray[0])
+
+        // add to document
+        const cluePara = document.createElement("p")
+        const paraWords = document.createTextNode(clue.messageArray[0])
+        cluePara.appendChild(paraWords)
+        debugger
+        const clueDisplay = document.getElementsByName("clueDisplay")
+        debugger
+        document.body.appendChild(cluePara)
         currentScene.remove(intersects[0]["object"])
+        //setTimeout()
         
       }
 
