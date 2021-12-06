@@ -3,8 +3,7 @@ import { Location } from '../classes/Location';
 import { Clue } from '../classes/clue';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Character } from '../classes/character';
-
-
+import { NPC } from '../classes/npc';
 // let's make a floor
 
 const plane = new THREE.PlaneGeometry(100,100,10,10);
@@ -62,7 +61,7 @@ clueArr.push(testClue)
 
 
 const npcArr = []
-const eve = new Character('/src/assets/characters/eve.fbx', 'Eve', [10, 1, 10])
+const eve = new NPC('/src/assets/characters/eve.fbx', 'Eve', [10, 10, 0], [0,0,0], ['Hello There!'])
 npcArr.push(eve)
 
 

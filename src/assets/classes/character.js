@@ -52,7 +52,6 @@ Character.prototype.addModel = function(scene, size) {
 
 Character.prototype.setPosition = function(x,y,z) {
     if (this.characterObject.uuid !== undefined) {
-        debugger
         this.characterObject.position.x = x
         this.characterObject.position.y = y
         this.characterObject.position.z = z

@@ -135,6 +135,11 @@ const animate = function () {
       characterMovement(player, camera);
       archibald.update()
     }
+
+    const eve = selectedLocation.npcArr[0]
+    if (eve !== undefined){
+      eve.movement()
+    }
     //isClue()
 
 };
@@ -189,9 +194,6 @@ addEventListener('click', () => {
     //debugger
     //makeWalk().play()
     //debugger
-    const eve = selectedLocation.npcArr[0]
-    debugger
-    eve.setPosition(10,10,10)
     //archibald.characterObject.visible = false
   }
 })
