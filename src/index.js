@@ -35,25 +35,6 @@ const mouse = {
 }
 
 
-
-const plane = new THREE.PlaneGeometry(100,100,10,10);
-const material = new THREE.MeshBasicMaterial({ color: (0x404040)});
-
-
-const ground = new THREE.Mesh(plane, material)
-ground.castShadow = false;
-ground.receiveShadow = true;
-ground.rotation.x =-Math.PI/2;
-ground.name = "ground"
-ground.layers.enable(1)
-//testScene.add(ground)
-const ambLight = new THREE.AmbientLight(0x404040)
-const pLight =  new THREE.DirectionalLight( 0xffffff, 1)
-const lights =  [ambLight, pLight]
-
-//const newLocation = new Location(ground, [], lights, [], [], [] )
-//debugger
-
 const locations = []
 locations.push(pleaseCity)
 let selectedLocation = locations[0]
@@ -66,8 +47,6 @@ console.log(testCity)
 const archibald = new Character('./src/assets/characters/malcolm.fbx', 'Archibald', [10,10,10])
 // load player
 archibald.addModel(currentScene, .01)
-//const walk = makeWalk()
-//console.log(archibald)
 
 
 // player movement
@@ -115,9 +94,17 @@ function isClue(){
 /// testing out scene change
 
 document.body.appendChild( renderer.domElement );
+// add a clue text box
 let clueText = document.createElement("div")
 clueText.id = "clueText"
 document.body.appendChild(clueText)
+
+// add a character text box
+
+let characterText = document.createElement("div")
+characterText.id = "characterTextBox"
+document.body.appendChild(characterText)
+
 
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -145,7 +132,10 @@ const animate = function () {
 };
 animate();
 
-
+const relativePostion = function(firstModel, secondModel){
+    return (Math.abs(Math.abs(firstModel.position.x) - Math.abs(secondModel.position.x)) < 2 &&
+      Math.abs(Math.abs(firstModel.position.z) - Math.abs(secondModel.position.z)) < 2)
+}
 
 
 addEventListener('mousemove', (event) => {
@@ -171,11 +161,13 @@ addEventListener('click', () => {
 addEventListener('click', () => {
   const intersects = raycaster.intersectObjects(currentScene.children)
   selectedLocation.clueArr.forEach((clue) => {
+
+    // if the first object the raycaster intersects is a clue
     if (clue.clueObject === (intersects[0]["object"])){
       
+      // if the archibald is close enough tot the clue
       /// might makethe following a function
-      if (Math.abs(clue.clueObject.position.x) - Math.abs(archibald.characterObject.position.x) < 2 &&
-      Math.abs(clue.clueObject.position.y) - Math.abs(archibald.characterObject.position.y) < 2) {
+      if (relativePostion(archibald.characterObject, clue.clueObject)) {
         // add to document
         clue.displayText()
         //currentScene.remove(intersects[0]["object"])
@@ -188,23 +180,33 @@ addEventListener('click', () => {
 
   }
   )
-//const walk = archibald.characterMixer(player.animations[0])
-addEventListener('click', () => {
-  if (playerMovement === true) {
-    //debugger
-    //makeWalk().play()
-    //debugger
-    //archibald.characterObject.visible = false
-  }
-})
+  let playerMixer = []
+// addEventListener('click', () => {
+//   if (playerMovement === true) {
+//     if (playerMixer !== archibald.characterMixer)
+//     {
+//       playerMixer = archibald.characterMixer
+//       debugger
+//       archibald.addAnimation('./src/assets/characters/animations/walking.fbx')
+//     }
+//     if (playerWalk !== archibald.characterObject.animations[1]){
+
+//       playerWalk = archibald.characterObject.animations[1]
+//     }
+//     //debugger
+//     //playerMixer.clipAction(playerWalk).play()
+//     }
+// })
 addEventListener('click', () => {
   const intersects = raycaster.intersectObjects(currentScene.children)[0].object
-  if (intersects.parent.name === 'Eve') {
-    
-    console.log('eve')
+  if (intersects.parent.name === 'Eve')
+
+    if (relativePostion(intersects.parent, archibald.characterObject)){
+      console.log('eve')
+
+    }
   }
     //makeWalk().play()
     //debugger
     //archibald.characterObject.visible = false
-  }
 )

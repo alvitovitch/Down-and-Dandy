@@ -60,11 +60,17 @@ Character.prototype.setPosition = function(x,y,z) {
         this.characterObject.position.z = z
     }
 }
-Character.prototype.addAnimation = function(clipPath) {
-    const model = this.characterObject
-    this.loader.load(clipPath, (animate) => {
-        model.animations.push(animate.animations[0])
-    })}
+// Character.prototype.addAnimation = function(clipPath) {
+//     const model = this.characterObject
+//     const test = function(animate) {
+//         debugger
+//         model.animations.push(animate.animations[0])
+//     }
+//     this.loader.load(clipPath, (animate) => {
+//         debugger
+//         test(animate)})
+//     debugger
+// }
 
 Character.prototype.update = function() {
     this.characterMixer.update(.2)
