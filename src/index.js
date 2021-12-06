@@ -1,10 +1,10 @@
 import * as THREE from 'three';
-import { testScene } from './assets/classes/Location';
+//import { testScene } from './assets/classes/Location';
 import { Character } from './assets/classes/character';
 //import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { Clue } from './assets/classes/clue';
-import { Location } from './assets/classes/Location';
+//import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+//import { Clue } from './assets/classes/clue';
+//import { Location } from './assets/classes/Location';
 
 import { testCity } from './assets/locations/city';
 
@@ -98,7 +98,8 @@ function characterMovement(char, camera) {
     }
   }
   if (char.position.x === targetX && char.position.z === targetZ) {
-    //playerMovement = false
+    playerMovement = false
+    archibald.characterObject.visible = true
   }
 }
 
@@ -106,7 +107,7 @@ function characterMovement(char, camera) {
 function isClue(){
   if (raycaster.intersectObjects(currentScene.children).length > 0 ){ 
       selectedLocation.clueArr.forEach( (ele) => {
-          //ele.hover(raycaster, currentScene)
+          ele.hover(raycaster, currentScene)
         }
       )
   }
@@ -161,7 +162,14 @@ addEventListener('click', () => {
   const intersects = raycaster.intersectObjects(currentScene.children)
   selectedLocation.clueArr.forEach((clue) => {
     if (clue.clueObject === (intersects[0]["object"])){
-      console.log('you clicked a clue')
+      
+      if (Math.abs(clue.clueObject.position.x) - Math.abs(archibald.characterObject.position.x) < 2 &&
+      Math.abs(clue.clueObject.position.y) - Math.abs(archibald.characterObject.position.y) < 2) {
+        console.log('you clicked a clue')
+        currentScene.remove(intersects[0]["object"])
+        
+      }
+
 
   }})
 
@@ -171,6 +179,6 @@ addEventListener('click', () => {
 addEventListener('click', () => {
   if (playerMovement === true) {
     archibald.characterMixer.clipAction(archibald.characterObject.animations[0]).play()
-    //setTimeout(() => {debugger}, 500) 
+    //archibald.characterObject.visible = false
   }
 })
