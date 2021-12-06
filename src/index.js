@@ -63,7 +63,7 @@ currentScene = testCity.scene
 
 console.log(testCity)
 
-const archibald = new Character('./src/assets/characters/malcolm.fbx', 'Archibald')
+const archibald = new Character('./src/assets/characters/malcolm.fbx', 'Archibald', [10,10,10])
 // load player
 archibald.addModel(currentScene, .01)
 //const walk = makeWalk()
@@ -173,7 +173,7 @@ addEventListener('click', () => {
       Math.abs(clue.clueObject.position.y) - Math.abs(archibald.characterObject.position.y) < 2) {
         // add to document
         clue.displayText()
-        currentScene.remove(intersects[0]["object"])
+        //currentScene.remove(intersects[0]["object"])
         //setTimeout()
         
       }
@@ -190,7 +190,8 @@ addEventListener('click', () => {
     //makeWalk().play()
     //debugger
     const eve = selectedLocation.npcArr[0]
-    eve.characterMixer.clipAction(eve.characterObject.animations[0]).play()
+    debugger
+    eve.setPosition(10,10,10)
     //archibald.characterObject.visible = false
   }
 })

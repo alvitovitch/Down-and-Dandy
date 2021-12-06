@@ -18,7 +18,9 @@ class Character {
         this.characterObject = []
         this.characterMixer = undefined
         this.size = .01
-        this.posArr = posArr
+        this.posX = posArr[0]
+        this.posY = posArr[1]
+        this.posZ = posArr[2]
         // this.loader.load(this.characterObjectPath, (char) => {
         //     debugger
         //     char.name = this.name
@@ -47,6 +49,15 @@ Character.prototype.addModel = function(scene, size) {
     })
     
     }
+
+Character.prototype.setPosition = function(x,y,z) {
+    if (this.characterObject.uuid !== undefined) {
+        debugger
+        this.characterObject.position.x = x
+        this.characterObject.position.y = y
+        this.characterObject.position.z = z
+    }
+}
 Character.prototype.addAnimation = function(clipPath) {
     const model = this.characterObject
     this.loader.load(clipPath, (animate) => {
