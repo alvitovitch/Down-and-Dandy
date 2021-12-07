@@ -230,11 +230,21 @@ addEventListener('click', (e) => {
   if(buttons.length > 0) {
     buttons = [...buttons]
     buttons.forEach((button) => {
-      debugger
-      if (e.target == button) {
+      if (e.target == button) { 
+        if (button.name === 'close') {
         document.getElementById('characterTextBox').innerHTML = ''
         textBoxDisplayed = false;
+      } else {
+        selectedLocation.npcArr.forEach((npc) => {
+          npc.messageArr.forEach((message) => {
+            if (message.name === button.name){
+              document.getElementById('characterTextBox').innerHTML = ''
+              npc.displayText(npc.messageArr.indexOf(message))
+            }
+          })
+        })
       }
-    })
+    }
+  })
   }
 })

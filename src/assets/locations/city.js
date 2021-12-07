@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { Location } from '../classes/Location';
 import { Clue } from '../classes/clue';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { Character } from '../classes/character';
+import { Textbox } from '../classes/textbox';
 import { NPC } from '../classes/npc';
 // let's make a floor
 
@@ -61,7 +61,16 @@ clueArr.push(testClue)
 
 
 const npcArr = []
-const eve = new NPC('/src/assets/characters/eve.fbx', 'Eve', [10, 10, 0], [0,0,0], [['Hello There! My name is Eve!', 'This is an option', 'this is also an option', 'this is one too!']])
+// make eve's textbox
+const eveTextboxArr = []
+const eveTextboxOne = new Textbox('hello there', 'src/assets/emoji/smileyFace.png','Hello There! My name is Eve!',  ['Hi Eve, nice to meet you! My name is Archibald', 'shutup bitch!', 'close'] )
+const eveTextboxTwo = new Textbox('Hi Eve, nice to meet you! My name is Archibald', 'src/assets/emoji/smileyFace.png','It is wonderful to meet you Archibald!',  ['close'] )
+const eveTextboxThree = new Textbox('shutup bitch!', 'src/assets/emoji/angryFace.png','How rude! You are a fucking creep!!!',  ['close'] )
+eveTextboxArr.push(eveTextboxOne)
+eveTextboxArr.push(eveTextboxTwo)
+eveTextboxArr.push(eveTextboxThree)
+
+const eve = new NPC('/src/assets/characters/eve.fbx', 'Eve', [10, 10, 0], [0,0,0], eveTextboxArr)
 npcArr.push(eve)
 
 

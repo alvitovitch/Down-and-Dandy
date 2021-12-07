@@ -68,3 +68,10 @@ li {
   list-style: none;
   display: block;
 }
+
+#characterTextBox img {
+  display: flex;
+  position: absolute;
+  top: -30%;
+  left: 50%;
+}
