@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import {FBXLoader} from 'three/examples/jsm/loaders/FBXLoader.js'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 // character class
 // model, name, animationmixer, animations
@@ -62,19 +61,10 @@ Character.prototype.setPosition = function(x,y,z) {
         this.characterObject.position.z = z
     }
 }
-// Character.prototype.addAnimation = function(clipPath) {
-//     const model = this.characterObject
-//     const testFunction = function() {
-//         return model
-//     }
-//     this.characterObject = this.characterObject 
-//     this.loader.load(clipPath, animate => {
-        
-//         testFunction()
-//         debugger
-//         model.animations.push(animate)})
-//     debugger
-// }
+Character.prototype.addAnimation = function(clip) {
+    this.animations.push(animate)
+    
+}
 
 Character.prototype.update = function() {
     this.characterMixer.update(.2)

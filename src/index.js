@@ -1,10 +1,7 @@
 import * as THREE from 'three';
-//import { testScene } from './assets/classes/Location';
 import { Character } from './assets/classes/character';
 //import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
-//import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Clue } from './assets/classes/clue';
-//import { Location } from './assets/classes/Location';
 import { testCity } from './assets/locations/city';
 
 const pleaseCity = testCity
@@ -34,6 +31,7 @@ const mouse = {
   y: undefined,
 }
 
+let textBoxDisplayed = false;
 
 const locations = []
 locations.push(pleaseCity)
@@ -46,8 +44,13 @@ console.log(testCity)
 
 const archibald = new Character('./src/assets/characters/malcolm.fbx', 'Archibald', [10,10,10])
 // load player
-archibald.addModel(currentScene, .01)
-//archibald.addAnimation('src/assets/characters/animations/BreathingIdle.fbx')
+if (archibald.addModel(currentScene, .01)){
+  debugger
+  archibald.loader.load('src/assets/characters/animations/Walking.fbx',(ani) =>{
+    debugger
+    archibald.addAnimation(ani)
+  })}
+
 
 
 // player movement
@@ -55,6 +58,7 @@ let targetX = undefined;
 let targetZ = undefined;
 
 let playerMovement = false;
+
 function characterMovement(char, camera) {
   if (char !== undefined) {
     char.position.x = Math.round(char.position.x * 10)/10 
@@ -117,6 +121,11 @@ const animate = function () {
     requestAnimationFrame(animate);
     renderer.render(currentScene, camera)
     raycaster.setFromCamera(mouse, camera)
+    if (textBoxDisplayed === true) {
+      raycaster.layers.set(3)
+    } else {
+      raycaster.layers.set(1)
+    }
     const player = currentScene.getObjectByName('Archibald')
     if (player !== undefined && playerMovement === true){
       //walk = archibald.characterMixer.clipAction(archibald.characterObject.animations[0])
@@ -128,7 +137,7 @@ const animate = function () {
     if (eve !== undefined){
       eve.movement()
     }
-    //isClue()
+    
 
 };
 animate();
@@ -149,6 +158,7 @@ addEventListener('mousemove', (event) => {
 
 // movement
 addEventListener('click', () => {
+  if (textBoxDisplayed === false) {
   const intersects = raycaster.intersectObjects(currentScene.children)
   //find the player model
   const selectedPoint = intersects[ 0 ].point
@@ -156,10 +166,11 @@ addEventListener('click', () => {
     playerMovement = true
     targetX = (Math.round((selectedPoint.x * 10)) / 10)
     targetZ = (Math.round((selectedPoint.z * 10)) / 10)
-}})
+}}})
 
 // clicking a clue
 addEventListener('click', () => {
+  if (textBoxDisplayed === false) {
   const intersects = raycaster.intersectObjects(currentScene.children)
   selectedLocation.clueArr.forEach((clue) => {
 
@@ -181,7 +192,7 @@ addEventListener('click', () => {
   }})
 
   }
-  )
+})
 // addEventListener('click', () => {
 //   if (playerMovement === true) {
 //     if (playerMixer !== archibald.characterMixer)
@@ -201,15 +212,29 @@ addEventListener('click', () => {
 
 // npc dialogue box pop up
 addEventListener('click', () => {
+  if (textBoxDisplayed === false) {
   const intersects = raycaster.intersectObjects(currentScene.children)[0].object
   selectedLocation.npcArr.forEach((npc) => {
     if (npc.characterObject.name === intersects.parent.name){
       if (relativePostion(intersects.parent, archibald.characterObject)){
+        textBoxDisplayed = true;
         npc.displayText(0)
       }
     }
   }
-    //makeWalk().play()
-    //debugger
-    //archibald.characterObject.visible = false
-)})
+)}})
+
+// if you click on a button get rid of the text box
+addEventListener('click', (e) => {
+  let buttons = document.getElementsByTagName("button"); 
+  if(buttons.length > 0) {
+    buttons = [...buttons]
+    buttons.forEach((button) => {
+      debugger
+      if (e.target == button) {
+        document.getElementById('characterTextBox').innerHTML = ''
+        textBoxDisplayed = false;
+      }
+    })
+  }
+})
