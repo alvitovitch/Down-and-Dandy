@@ -27,8 +27,6 @@ class Textbox {
 	}
 }
 
-Textbox.prototype.boxContents = function() {
-	
-}
+
 
 export {Textbox}

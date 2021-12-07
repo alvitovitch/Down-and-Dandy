@@ -3,7 +3,9 @@ import * as THREE from 'three';
 class Clue {
     // what does a clue have?
     //  3d Object, message array, hover state
-    constructor(clueObject, messageArray) {
+    constructor(clueObject, messageArray, clueImgPath) {
+        this.clueImgPath = clueImgPath
+        this.name = clueObject.name
         this.clueObject = clueObject;
         this.messageArray = messageArray;
         this.hoverColor = new THREE.Color('yellow');

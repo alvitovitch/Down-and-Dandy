@@ -62,12 +62,16 @@ Character.prototype.setPosition = function(x,y,z) {
     }
 }
 Character.prototype.addAnimation = function(clip) {
-    this.animations.push(animate)
+    this.loader.load(clip, ((animate) => {
+        this.characterObject.animations.push(animate.animations[0])
+        const walk = this.characterObject.animations[1]
+        this.characterMixer.clipAction(walk).play()
+    }).bind(this))
     
 }
 
 Character.prototype.update = function() {
-    this.characterMixer.update(.2)
+    this.characterMixer.update(1)
 }
 
 

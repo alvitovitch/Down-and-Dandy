@@ -76,7 +76,7 @@ npcArr.push(eve)
 
 // make a test City
 
-const testCity = new Location(floor, buildingArr, lightArr, propArr, clueArr, npcArr)
+const testCity = new Location('Haberdashery', floor, buildingArr, lightArr, propArr, clueArr, npcArr)
 
 // add a tree to the propArr
 const loader = new GLTFLoader();

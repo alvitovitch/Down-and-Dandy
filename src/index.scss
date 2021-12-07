@@ -54,7 +54,7 @@ button {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 15%,15%, 15%,15%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -83,4 +83,43 @@ li {
 
 #phone:hover {
     opacity: 1;
+}
+
+#phoneOn {
+    left: 33%;
+    position: absolute;
+    top: 10%;
+    align-content: center;
+    height: 80%;
+}
+
+#phoneOn > img {
+    height: 100%;
+    width: auto;
+}
+
+#phoneOn > ul {
+    position: absolute;
+    height: 50%;
+    width: 88%;
+    left: 3%;
+    top: 15%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#mapButtons  {
+    display: flex;
+    width: 85%;
+    left: 6%;
+    position: absolute;
+    bottom: 13%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    height: 5%;
 }

@@ -7,8 +7,9 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 // has npcs, clues, buildings/props, floor, player 
 
 class Location {
-    constructor(floor, buildingsArr, lightArr, propsArr,  clueArr, npcArr){
+    constructor(name, floor, buildingsArr, lightArr, propsArr,  clueArr, npcArr){
         this.scene = new THREE.Scene()
+        this.scene.name = name
         this.floor = floor;
         this.lights = lightArr// kinda grey light
         this.buildingsArr = buildingsArr;

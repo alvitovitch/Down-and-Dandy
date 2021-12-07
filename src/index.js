@@ -1,9 +1,9 @@
 import * as THREE from 'three';
-import { Character } from './assets/classes/character';
+import { Player } from './assets/classes/player'; 
 //import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { Clue } from './assets/classes/clue';
 import { testCity } from './assets/locations/city';
-
+import { Phone } from './assets/classes/Phone';
 const pleaseCity = testCity
 
 // renderer - what will make everything show up on the screen
@@ -42,9 +42,11 @@ currentScene = testCity.scene
 
 console.log(testCity)
 
-const archibald = new Character('./src/assets/characters/malcolm.fbx', 'Archibald', [10,10,10])
+const archibald = new Player('./src/assets/characters/malcolm.fbx', 'Archibald', [10,10,10])
 // load player
+debugger
 if (archibald.addModel(currentScene, .01)){
+  debugger
   archibald.loader.load('src/assets/characters/animations/Walking.fbx',(ani) =>{
     archibald.addAnimation(ani)
   })}
@@ -115,6 +117,9 @@ let characterText = document.createElement("div")
 characterText.id = "characterTextBox"
 document.body.appendChild(characterText)
 
+const phoneMenu = new Phone()
+document.body.appendChild(phoneMenu.phonebox)
+
 
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -163,6 +168,55 @@ addEventListener('mousemove', (e) => {
 })
 
 
+// phone popup
+
+addEventListener('click', (e) => {
+  if (textBoxDisplayed === false) {
+    if (e.target === document.getElementById("phone")){
+      textBoxDisplayed = true;
+      phoneMenu.phoneMainMenu()
+    }
+  }
+})
+
+// phone menu options
+
+addEventListener('click', (e) => {
+  if (textBoxDisplayed === true) {
+    if (e.target === document.getElementById("mapButton")) {
+      phoneMenu.phoneMap(locations)
+    }
+  }
+})
+
+// phone menu change
+
+addEventListener('mouseover', (e) => {
+  if (textBoxDisplayed === true) {
+    if (e.target === document.getElementById("Port")){
+      document.getElementById("mapImage").src = 'src/assets/phone/Docks.png'
+    } else if (e.target === document.getElementById("Haberdashery")){
+      document.getElementById("mapImage").src = 'src/assets/phone/Haberdashery.png'
+    } else if (e.target === document.getElementById("Station")){
+      document.getElementById("mapImage").src = 'src/assets/phone/Subway.png'
+    } else if (e.target === document.getElementById("mapImage") || e.target === document.getElementById("mapButtons")){
+      document.getElementById("mapImage").src = 'src/assets/phone/map.png'
+    }
+  }
+})
+
+// phone menue close
+addEventListener('click', (e) => {
+  if (textBoxDisplayed === true) {
+    locations.forEach((location) => {
+      if (e.target === document.getElementById(location.scene.name)){
+        textBoxDisplayed = false;
+        document.getElementById("phoneOn").innerHTML = ''
+      }
+    })
+  }
+})
+
 // movement
 addEventListener('click', () => {
   if (textBoxDisplayed === false) {
@@ -190,7 +244,9 @@ addEventListener('click', () => {
         // add to document
         
         clue.displayText()
+        archibald.foundClues.push(clue)
         currentScene.remove(intersects[0]["object"])
+
         //setTimeout()
         
       }
@@ -200,22 +256,26 @@ addEventListener('click', () => {
 
   }
 })
-// addEventListener('click', () => {
-//   if (playerMovement === true) {
-//     if (playerMixer !== archibald.characterMixer)
-//     {
-//       playerMixer = archibald.characterMixer
-//       debugger
-//       archibald.addAnimation('./src/assets/characters/animations/walking.fbx')
-//     }
-//     if (playerWalk !== archibald.characterObject.animations[1]){
 
-//       playerWalk = archibald.characterObject.animations[1]
-//     }
-//     //debugger
-//     //playerMixer.clipAction(playerWalk).play()
-//     }
-// })
+let playerMixer = undefined
+let playerWalk = undefined
+
+addEventListener('click', () => {
+  if (playerMovement === true) {
+    if (playerMixer !== archibald.characterMixer)
+    {
+      playerMixer = archibald.characterMixer
+      debugger
+      archibald.addAnimation('./src/assets/characters/animations/Walking.fbx')
+    }
+    // if (playerWalk !== archibald.characterObject.animations[0]){
+    //   debugger
+    //   playerWalk = archibald.characterObject.animations[0]
+    // }
+    
+    // playerMixer.clipAction(playerWalk).play()
+    }
+})
 
 // npc dialogue box pop up
 addEventListener('click', () => {
@@ -231,7 +291,8 @@ addEventListener('click', () => {
   }
 )}})
 
-// if you click on a button get rid of the text box
+
+// if you click on a button get rid of the text box else progress through dialogue tree
 addEventListener('click', (e) => {
   let buttons = document.getElementsByTagName("button"); 
   if(buttons.length > 0) {
