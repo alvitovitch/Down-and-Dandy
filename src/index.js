@@ -45,9 +45,7 @@ console.log(testCity)
 const archibald = new Character('./src/assets/characters/malcolm.fbx', 'Archibald', [10,10,10])
 // load player
 if (archibald.addModel(currentScene, .01)){
-  debugger
   archibald.loader.load('src/assets/characters/animations/Walking.fbx',(ani) =>{
-    debugger
     archibald.addAnimation(ani)
   })}
 
@@ -104,6 +102,13 @@ let clueText = document.createElement("div")
 clueText.id = "clueText"
 document.body.appendChild(clueText)
 
+const phone = document.createElement("div")
+const smartPhone = document.createElement("img")
+smartPhone.id = "phone"
+smartPhone.src = "src/assets/phone/iphone-1936818_1280.png"
+phone.appendChild(smartPhone)
+document.body.appendChild(phone)
+
 // add a character text box
 
 let characterText = document.createElement("div")
@@ -148,13 +153,15 @@ const relativePostion = function(firstModel, secondModel){
 }
 
 
-addEventListener('mousemove', (event) => {
+addEventListener('mousemove', (e) => {
   // 3js uses coordinates with the (0,0) being the center of the screen, 
   // as such you need to map everything out via the following math
-  mouse.x = (event.clientX / innerWidth) * 2 - 1
-  mouse.y = -(event.clientY / innerHeight) * 2 + 1
+  mouse.x = (e.clientX / innerWidth) * 2 - 1
+  mouse.y = -(e.clientY / innerHeight) * 2 + 1
   isClue()
+ 
 })
+
 
 // movement
 addEventListener('click', () => {
@@ -183,7 +190,7 @@ addEventListener('click', () => {
         // add to document
         
         clue.displayText()
-        //currentScene.remove(intersects[0]["object"])
+        currentScene.remove(intersects[0]["object"])
         //setTimeout()
         
       }

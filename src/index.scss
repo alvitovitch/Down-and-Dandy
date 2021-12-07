@@ -71,3 +71,16 @@ li {
     top: -30%;
     left: 50%;
 }
+
+#phone{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    width: 5%;
+    height: auto;
+    opacity: .7;
+}
+
+#phone:hover {
+    opacity: 1;
+}

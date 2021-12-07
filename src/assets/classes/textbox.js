@@ -16,9 +16,7 @@ class Textbox {
 		this.img.src = imgPath
 		this.textbox.appendChild(this.img)
 		this.subTextArr = subTextArr
-		debugger
 		for (let i = 0; i < this.subTextArr.length; i++){
-			debugger;
 			const textOption = document.createElement('li')
 			const textButton = document.createElement('button')
 			textButton.name = subTextArr[i]
