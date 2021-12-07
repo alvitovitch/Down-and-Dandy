@@ -47,11 +47,12 @@ Character.prototype.addModel = function(scene, size) {
             child.layers.enable(1)
         })
         scene.add(char)
+        this.addAnimation('src/assets/characters/animations/BreathingIdle.fbx')
+        this.characterMixer.clipAction(this.characterObject.animations[0]).play()
     }, undefined, function(error) {
         console.log('error')
         console.error(error)
     })
-    
     }
 
 Character.prototype.setPosition = function(x,y,z) {
@@ -71,7 +72,7 @@ Character.prototype.addAnimation = function(clip) {
 }
 
 Character.prototype.update = function() {
-    this.characterMixer.update(1)
+    this.characterMixer.update(.009)
 }
 
 

@@ -7,7 +7,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 // has npcs, clues, buildings/props, floor, player 
 
 class Location {
-    constructor(name, floor, buildingsArr, lightArr, propsArr,  clueArr, npcArr){
+    constructor(name, floor, buildingsArr, lightArr, propsArr,  clueArr, npcArr, startingPosArr){
         this.scene = new THREE.Scene()
         this.scene.name = name
         this.floor = floor;
@@ -16,6 +16,7 @@ class Location {
         this.propsArr = propsArr;
         this.clueArr = clueArr;
         this.npcArr = npcArr;
+        this.startingPos = new THREE.Vector3(startingPosArr[0],startingPosArr[1],startingPosArr[2])
 
         this.scene.add(this.floor)
 
@@ -45,6 +46,7 @@ class Location {
             npc.setPosition(npc.posX, npc.posY, npc.posZ)
         })
     }
+
 }
 
 export { Location }

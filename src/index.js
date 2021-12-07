@@ -2,9 +2,10 @@ import * as THREE from 'three';
 import { Player } from './assets/classes/player'; 
 //import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { Clue } from './assets/classes/clue';
-import { testCity } from './assets/locations/city';
+import { haberdashery } from './assets/locations/city';
 import { Phone } from './assets/classes/Phone';
-const pleaseCity = testCity
+import { port } from './assets/locations/port';
+
 
 // renderer - what will make everything show up on the screen
 const renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -34,19 +35,14 @@ const mouse = {
 let textBoxDisplayed = false;
 
 const locations = []
-locations.push(pleaseCity)
+locations.push(haberdashery)
+locations.push(port)
 let selectedLocation = locations[0]
-let currentScene = locations[0].scene
-
-currentScene = testCity.scene
-
-console.log(testCity)
+let currentScene = selectedLocation.scene
 
 const archibald = new Player('./src/assets/characters/malcolm.fbx', 'Archibald', [10,10,10])
 // load player
-debugger
 if (archibald.addModel(currentScene, .01)){
-  debugger
   archibald.loader.load('src/assets/characters/animations/Walking.fbx',(ani) =>{
     archibald.addAnimation(ani)
   })}
@@ -143,6 +139,13 @@ const animate = function () {
       archibald.update()
     }
 
+    selectedLocation.npcArr.forEach((npc) => {
+      if (currentScene.getObjectByName(npc.name) !== undefined){
+        npc.characterMixer.clipAction(npc.characterObject.animations[0]).play()
+        npc.update()
+      }
+    })
+
     const eve = selectedLocation.npcArr[0]
     if (eve !== undefined){
       eve.movement()
@@ -205,17 +208,7 @@ addEventListener('mouseover', (e) => {
   }
 })
 
-// phone menue close
-addEventListener('click', (e) => {
-  if (textBoxDisplayed === true) {
-    locations.forEach((location) => {
-      if (e.target === document.getElementById(location.scene.name)){
-        textBoxDisplayed = false;
-        document.getElementById("phoneOn").innerHTML = ''
-      }
-    })
-  }
-})
+
 
 // movement
 addEventListener('click', () => {
@@ -265,16 +258,12 @@ addEventListener('click', () => {
     if (playerMixer !== archibald.characterMixer)
     {
       playerMixer = archibald.characterMixer
-      debugger
       archibald.addAnimation('./src/assets/characters/animations/Walking.fbx')
     }
-    // if (playerWalk !== archibald.characterObject.animations[0]){
-    //   debugger
-    //   playerWalk = archibald.characterObject.animations[0]
-    // }
-    
-    // playerMixer.clipAction(playerWalk).play()
+    if (archibald.characterObject.animations[1] !== undefined){
+    archibald.characterMixer.clipAction(archibald.characterObject.animations[1]).play()
     }
+  }
 })
 
 // npc dialogue box pop up
@@ -290,7 +279,27 @@ addEventListener('click', () => {
     }
   }
 )}})
-
+// phone menue close
+addEventListener('click', (e) => {
+  if (textBoxDisplayed === true) {
+    locations.forEach((location) => {
+      if (e.target === document.getElementById(location.scene.name)){
+        textBoxDisplayed = false;
+        document.getElementById("phoneOn").innerHTML = ''
+        selectedLocation = location
+        currentScene.remove(archibald.characterObject)
+        currentScene = selectedLocation.scene
+        currentScene.add(archibald.characterObject)
+        archibald.characterObject.position.copy(selectedLocation.startingPos)
+        camera.position.copy(archibald.characterObject.position)
+        camera.position.x += 10
+        camera.position.y += 10
+        camera.position.z += 2
+        camera.lookAt(archibald.characterObject.position)
+      }
+    })
+  }
+})
 
 // if you click on a button get rid of the text box else progress through dialogue tree
 addEventListener('click', (e) => {

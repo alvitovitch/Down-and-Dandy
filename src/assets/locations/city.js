@@ -73,10 +73,9 @@ eveTextboxArr.push(eveTextboxThree)
 const eve = new NPC('/src/assets/characters/eve.fbx', 'Eve', [10, 10, 0], [0,0,0], eveTextboxArr)
 npcArr.push(eve)
 
-
 // make a test City
 
-const testCity = new Location('Haberdashery', floor, buildingArr, lightArr, propArr, clueArr, npcArr)
+const haberdashery = new Location('Haberdashery', floor, buildingArr, lightArr, propArr, clueArr, npcArr, [0,0,0])
 
 // add a tree to the propArr
 const loader = new GLTFLoader();
@@ -89,8 +88,8 @@ loader.load("./src/assets/tree/scene.gltf", function(gltf) {
         c.castShadow = true
     })
     tree.children[0].layers.enable(1)
-    testCity.propsArr.push(tree)
-    testCity.scene.add(tree)
+    haberdashery.propsArr.push(tree)
+    haberdashery.scene.add(tree)
     
       
 })
@@ -100,8 +99,8 @@ loader.load("./src/assets/3dAssets/road.glb", function(glb){
   road.castShadow = false;
   road.receiveShadow = true;
   road.scale.set(5,1,8)
-  testCity.propsArr.push(road)
-  testCity.scene.add(road)
+  haberdashery.propsArr.push(road)
+  haberdashery.scene.add(road)
 })
 loader.load("./src/assets/3dAssets/testBuilding.glb", function(glb){
   const building = glb.scene
@@ -110,8 +109,8 @@ loader.load("./src/assets/3dAssets/testBuilding.glb", function(glb){
   building.receiveShadow = true;
   building.position.x = -40;
   ///building.scale.set(5,1,8)
-  testCity.propsArr.push(building)
-  testCity.scene.add(building)
+  haberdashery.propsArr.push(building)
+  haberdashery.scene.add(building)
 })
 loader.load("./src/assets/tree/scene.gltf", function(gltf) {
     const tree = gltf.scene;
@@ -122,8 +121,8 @@ loader.load("./src/assets/tree/scene.gltf", function(gltf) {
         c.castShadow = true
     })
     tree.children[0].layers.enable(1)
-    testCity.propsArr.push(tree)
-    testCity.scene.add(tree)
+    haberdashery.propsArr.push(tree)
+    haberdashery.scene.add(tree)
     
       
 })
@@ -137,8 +136,8 @@ loader.load("./src/assets/tree/scene.gltf", function(gltf) {
         c.castShadow = true
     })
     tree.children[0].layers.enable(1)
-    testCity.propsArr.push(tree)
-    testCity.scene.add(tree)
+    haberdashery.propsArr.push(tree)
+    haberdashery.scene.add(tree)
     
       
 })
@@ -152,8 +151,8 @@ loader.load("./src/assets/tree/scene.gltf", function(gltf) {
         c.castShadow = true
     })
     tree.children[0].layers.enable(1)
-    testCity.propsArr.push(tree)
-    testCity.scene.add(tree)
+    haberdashery.propsArr.push(tree)
+    haberdashery.scene.add(tree)
     
       
 })
@@ -161,4 +160,4 @@ loader.load("./src/assets/tree/scene.gltf", function(gltf) {
 
 
 
-export {testCity}
+export {haberdashery}
