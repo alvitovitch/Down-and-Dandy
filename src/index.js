@@ -123,7 +123,7 @@ window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 })
-//const controls = new OrbitControls( camera, renderer.domElement )
+const controls = new OrbitControls( camera, renderer.domElement )
 
 const animate = function () {
     requestAnimationFrame(animate);
@@ -152,7 +152,7 @@ const animate = function () {
     if (eve !== undefined){
       eve.movement()
     }
-    //controls.update()
+    controls.update()
 
 };
 animate();

@@ -92,6 +92,7 @@ loader.load("src/assets/3dAssets/haberdasheryStreet.glb", function(glb){
   building.position.z = 6;
   building.position.y = -.5
   building.scale.set(3,3,3)
+  //building.visible = false
   haberdashery.propsArr.push(building)
   haberdashery.scene.add(building)
 })
@@ -121,5 +122,113 @@ loader.load('src/assets/3dAssets/stairs/stairs.gltf', (gltf) =>{
   haberdashery.scene.add(building)
 })
 
+loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
+  const tree = gltf.scene;
+  tree.scale.set(.005, .005, .005)
+  tree.position.y = 0
+  tree.position.z = 10
+  tree.position.x = 13
+  tree.traverse(c => {
+      c.castShadow = true
+  })
+  tree.children[0].layers.enable(1)
+  haberdashery.propsArr.push(tree)
+  haberdashery.scene.add(tree)
+  
+    
+})
+loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
+  const tree = gltf.scene;
+  tree.scale.set(.005, .005, .005)
+  tree.position.y = 0
+  tree.position.z = 10
+  tree.position.x = -14
+  tree.traverse(c => {
+      c.castShadow = true
+  })
+  tree.children[0].layers.enable(1)
+  haberdashery.propsArr.push(tree)
+  haberdashery.scene.add(tree)
+  
+    
+})
+loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
+  const tree = gltf.scene;
+  tree.scale.set(.005, .005, .005)
+  tree.position.y = 0
+  tree.position.z = -8
+  tree.position.x = -14
+  tree.traverse(c => {
+      c.castShadow = true
+  })
+  tree.children[0].layers.enable(1)
+  haberdashery.propsArr.push(tree)
+  haberdashery.scene.add(tree)
+  
+    
+})
+loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
+  const tree = gltf.scene;
+  tree.scale.set(.005, .005, .005)
+  tree.position.y = 0
+  tree.position.z = -8
+  tree.position.x = 13
+  tree.traverse(c => {
+      c.castShadow = true
+  })
+  tree.children[0].layers.enable(1)
+  haberdashery.propsArr.push(tree)
+  haberdashery.scene.add(tree)
+  
+    
+})
+loader.load("src/assets/3dAssets/angers_shop_2_france/scene.gltf", function(gltf) {
+  const tree = gltf.scene;
+  tree.scale.set(1.5, 1.5, 1.5)
+  tree.rotation.y = -Math.PI
+  tree.position.y = 0
+  tree.position.z = 23.8
+  tree.position.x = 23
+  tree.traverse(c => {
+      c.castShadow = true
+  })
+  tree.children[0].layers.enable(1)
+  haberdashery.propsArr.push(tree)
+  haberdashery.scene.add(tree)
+  
+    
+})
+// loader.load("src/assets/3dAssets/low_poly_modular_road_segment_-_sketchup/scene.gltf", function(gltf) {
+//   const road = gltf.scene;
+//   road.scale.set(.02, .02, .02)
+//   road.rotation.y = -Math.PI/2
+//   road.position.y = 0
+//   road.position.z = -7
+//   road.position.x = -8
+//   road.traverse(c => {
+//       c.castShadow = true
+//   })
+//   road.children[0].layers.enable(1)
+//   haberdashery.propsArr.push(road)
+//   haberdashery.scene.add(road)
+  
+    
+// })
+// loader.load("src/assets/3dAssets/low_poly_modular_road_segment_-_sketchup/scene.gltf", function(gltf) {
+//   const road = gltf.scene;
+//   road.scale.set(.02, .02, .02)
+//   road.rotation.y = -Math.PI/2
+//   road.position.y = 0
+//   road.position.z = -7
+//   road.position.x = 4
+//   road.traverse(c => {
+//       c.castShadow = true
+//   })
+//   road.children[0].layers.enable(1)
+//   haberdashery.propsArr.push(road)
+//   haberdashery.scene.add(road)
+  
+    
+// })
 
 export {haberdashery}
