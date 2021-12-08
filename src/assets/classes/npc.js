@@ -24,9 +24,9 @@ NPC.prototype.movement = function() {
             char.position.z -= 0.1
           }
     }
-    if (this.destinationArr[0] === 0){
-        this.destinationArr[0] = 10
-    }
+    // if (this.destinationArr[0] === 0){
+    //     this.destinationArr[0] = 10
+    // }
 
 }
 

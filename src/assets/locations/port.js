@@ -7,6 +7,7 @@ import { NPC } from '../classes/npc';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 // let's make a floor
 
+const loader = new GLTFLoader();
 const plane = new THREE.PlaneGeometry(10,25,10,10);
 const material = new THREE.MeshBasicMaterial({ color: "blue" })
 const floor = new THREE.Mesh(plane, material);
@@ -44,16 +45,36 @@ const clueArr = []
 
 // test clue
 
-const cube = new THREE.BoxGeometry(1,1,1)
+const cube = new THREE.BoxGeometry(1.5,.3,1)
 const cubeSkin = new THREE.MeshPhysicalMaterial()
 const clue = new THREE.Mesh(cube, cubeSkin);
+clue.material.color = new THREE.Color('black')
 
-clue.position.x = 5
+clue.position.x = -14
 clue.position.z = 5
 clue.name = "testClue"
 clue.layers.enable(1)
 const testClue = new Clue(clue, ['The white box. The simplest and most important of clues!'])
 clueArr.push(testClue)
+
+loader.load('src/assets/3dAssets/briefcase/scene.gltf', (gltf) => {
+    const briefcase = gltf.scene
+    briefcase.rotation.y = Math.PI/2
+    briefcase.position.x = -14
+    briefcase.position.y = 0
+    briefcase.position.z = -7
+    briefcase.scale.set(.5, .5, .5)
+    briefcase.layers.enable(1)
+    briefcase.traverse(c => {
+        c.castShadow = true
+        c.receiveShadow = true
+    })
+    const briefClue = new Clue(briefcase, ['A briefcase full of cash?! AND TAX DOCUMENTS?!'])
+    propArr.push(briefClue)
+    port.scene.add(briefcase)
+})
+
+
 
 
 const npcArr = []
@@ -73,7 +94,6 @@ npcArr.push(eve)
 
 
 // add a tree to the propArr
-const loader = new GLTFLoader();
 loader.load('src/assets/3dAssets/low_poly_cargo_ship/scene.gltf', (gltf) => {
     const ship = gltf.scene
     ship.rotation.y = Math.PI/2

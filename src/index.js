@@ -45,8 +45,10 @@ camera.position.x += 10
 camera.position.y += 10
 camera.lookAt( selectedLocation.startingPos);
 
+
 const archibald = new Player('./src/assets/characters/malcolm.fbx', 'Archibald', selectedLocation.startingPos)
 // load player
+
 if (archibald.addModel(currentScene, .01)){
   archibald.loader.load('src/assets/characters/animations/Walking.fbx',(ani) =>{
     archibald.addAnimation(ani)
@@ -144,7 +146,7 @@ const animate = function () {
       characterMovement(player, camera);
       archibald.update()
     } else if (player !== undefined) {
-      //camera.lookAt(player.position)
+      camera.lookAt(player.position)
     }
 
     selectedLocation.npcArr.forEach((npc) => {
@@ -154,11 +156,8 @@ const animate = function () {
       }
     })
 
-    const eve = selectedLocation.npcArr[0]
-    if (eve !== undefined){
-      eve.movement()
-    }
-    controls.update()
+    
+    //controls.update()
 };
 animate();
 

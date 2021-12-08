@@ -17,9 +17,8 @@ class Character {
         this.characterObject = []
         this.characterMixer = undefined
         this.size = .01
-        const pos = new THREE.Vector3()
-        pos.copy(posArr)
-        this.position = pos
+        this.position = new THREE.Vector3()
+        this.position.copy(posArr)
         this.actions = []
         // this.loader.load(this.characterObjectPath, (char) => {
         //     debugger
@@ -43,10 +42,10 @@ Character.prototype.addModel = function(scene, size) {
         char.name = this.name
         char.scale.setScalar(size)
         char.layers.enable(1)
-        char.position.copy(this.position)
         char.traverse((child) => {
             child.layers.enable(1)
         })
+        char.position.copy(this.position)
         scene.add(char)
         this.addAnimation('src/assets/characters/animations/BreathingIdle.fbx')
         this.characterMixer.clipAction(this.characterObject.animations[0]).play()
