@@ -13,8 +13,7 @@ renderer.setSize( window.innerWidth, window.innerHeight);
 
 // camera
 const camera = new THREE.PerspectiveCamera( 75, (window.innerWidth / window.innerHeight), .1, 1000);
-camera.position.set( 20, 10, 10 );
-camera.lookAt( 10, 0, 10 );
+
 
 
 // raycaster - a laserpointer from your mouse to the 3d space
@@ -38,10 +37,15 @@ let phoneBoxDisplayed = false;
 const locations = []
 locations.push(haberdashery)
 locations.push(port)
-let selectedLocation = locations[0]
+let selectedLocation = locations[1]
 let currentScene = selectedLocation.scene
 
-const archibald = new Player('./src/assets/characters/malcolm.fbx', 'Archibald', [10,0,10])
+camera.position.copy(selectedLocation.startingPos);
+camera.position.x += 10
+camera.position.y += 10
+camera.lookAt( selectedLocation.startingPos);
+
+const archibald = new Player('./src/assets/characters/malcolm.fbx', 'Archibald', selectedLocation.startingPos)
 // load player
 if (archibald.addModel(currentScene, .01)){
   archibald.loader.load('src/assets/characters/animations/Walking.fbx',(ani) =>{
@@ -139,6 +143,8 @@ const animate = function () {
       //walk = archibald.characterMixer.clipAction(archibald.characterObject.animations[0])
       characterMovement(player, camera);
       archibald.update()
+    } else if (player !== undefined) {
+      //camera.lookAt(player.position)
     }
 
     selectedLocation.npcArr.forEach((npc) => {
@@ -153,7 +159,6 @@ const animate = function () {
       eve.movement()
     }
     controls.update()
-
 };
 animate();
 
@@ -305,8 +310,7 @@ addEventListener('click', (e) => {
         camera.position.copy(archibald.characterObject.position)
         camera.position.x += 10
         camera.position.y += 10
-        camera.position.z += 2
-        camera.lookAt(archibald.characterObject.position)
+        camera.position.z += 0
       }
     })
   }

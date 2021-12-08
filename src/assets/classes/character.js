@@ -17,7 +17,9 @@ class Character {
         this.characterObject = []
         this.characterMixer = undefined
         this.size = .01
-        this.position = new THREE.Vector3(posArr[0],posArr[1], posArr[2])
+        const pos = new THREE.Vector3()
+        pos.copy(posArr)
+        this.position = pos
         this.actions = []
         // this.loader.load(this.characterObjectPath, (char) => {
         //     debugger

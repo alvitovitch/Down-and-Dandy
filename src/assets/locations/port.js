@@ -7,9 +7,10 @@ import { NPC } from '../classes/npc';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 // let's make a floor
 
-const plane = new THREE.PlaneGeometry(10,10,10,10);
+const plane = new THREE.PlaneGeometry(10,25,10,10);
 const material = new THREE.MeshBasicMaterial({ color: "blue" })
 const floor = new THREE.Mesh(plane, material);
+floor.position.z = -8
 floor.castShadow = false;
 floor.receiveShadow = true;
 floor.rotation.x =-Math.PI/2;
@@ -25,8 +26,11 @@ const buildingArr = []
 const lightArr = []
 
 //adding lights
-const ambLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1)
-const pLight =  new THREE.DirectionalLight( 0xffffff, 1)
+const ambLight = new THREE.HemisphereLight( 0xffffbb, 0x34568b, .7)
+const pLight =  new THREE.DirectionalLight( 0xffffbb, .7)
+pLight.position.set(10,10,10)
+pLight.target.position.set(0,0,0)
+lightArr
 
 lightArr.push(ambLight)
 lightArr.push(pLight)
@@ -62,21 +66,37 @@ eveTextboxArr.push(eveTextboxOne)
 eveTextboxArr.push(eveTextboxTwo)
 eveTextboxArr.push(eveTextboxThree)
 
-const eve = new NPC('/src/assets/characters/eve.fbx', 'Eve', [10, 10, 0], [0,0,0], eveTextboxArr)
+const eve = new NPC('/src/assets/characters/eve.fbx', 'Eve', [5, 0, 5], [5, 0, 5], eveTextboxArr)
 npcArr.push(eve)
 
 // make a test City
 
 
 // add a tree to the propArr
-const loader = new FBXLoader();
-loader.load('src/assets/3dAssets/port.fbx', (fbx) => {
+const loader = new GLTFLoader();
+loader.load('src/assets/3dAssets/low_poly_cargo_ship/scene.gltf', (gltf) => {
+    const ship = gltf.scene
+    ship.rotation.y = Math.PI/2
+    ship.position.x = -10
+    ship.position.y = 10
+    ship.position.z = -40
+    ship.scale.set(0.03, 0.03, 0.03)
+    ship.layers.enable(1)
+    ship.traverse(c => {
+        c.castShadow = true
+        c.receiveShadow = true
+    })
+    propArr.push(ship)
+    port.scene.add(ship)
+})
+
+const Floader = new FBXLoader();
+Floader.load('src/assets/3dAssets/port.fbx', (fbx) => {
     fbx.scale.set(0.01, 0.01, 0.01)
     propArr.push(fbx)
     port.scene.add(fbx)
     fbx.layers.enable(1)
 })
-
 
 
 
