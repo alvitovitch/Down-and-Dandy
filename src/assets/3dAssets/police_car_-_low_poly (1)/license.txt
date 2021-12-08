@@ -1,0 +1,11 @@
+Model Information:
+* title:	POLICE CAR - LOW POLY
+* source:	https://sketchfab.com/3d-models/police-car-low-poly-0f5b12ea1f474887b9664fd7a171c17a
+* author:	Jasmin Daniel (https://sketchfab.com/jasmin.daniel)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "POLICE CAR - LOW POLY" (https://sketchfab.com/3d-models/police-car-low-poly-0f5b12ea1f474887b9664fd7a171c17a) by Jasmin Daniel (https://sketchfab.com/jasmin.daniel) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

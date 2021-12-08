@@ -5,6 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Textbox } from '../classes/textbox';
 import { NPC } from '../classes/npc';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
+import { skybox } from './skybox';
 // let's make a floor
 
 const loader = new GLTFLoader();
@@ -43,39 +44,55 @@ const propArr = [];
 
 const clueArr = []
 
-// test clue
+// briefcase clue
 
 const cube = new THREE.BoxGeometry(1.5,.3,1)
 const cubeSkin = new THREE.MeshPhysicalMaterial()
 const clue = new THREE.Mesh(cube, cubeSkin);
 clue.material.color = new THREE.Color('black')
 
-clue.position.x = -14
-clue.position.z = 5
-clue.name = "testClue"
+clue.position.x = -22
+clue.position.z = -15
+clue.rotation.y = Math.PI/2
+clue.name = "briefcase"
 clue.layers.enable(1)
 const testClue = new Clue(clue, ['A briefcase full of cash?! AND TAX DOCUMENTS?!'])
 clueArr.push(testClue)
 
+// boxofimported clothes clue
 
+const box = new THREE.BoxGeometry(1.5,1.5,1.5)
+const boxSkin = new THREE.MeshPhysicalMaterial()
+const boxClue = new THREE.Mesh(box, boxSkin);
+boxClue.material.color = new THREE.Color('brown')
+
+boxClue.position.x = -10
+boxClue.position.z = -20
+boxClue.rotation.y = Math.PI/2
+boxClue.name = "fakeChannel"
+boxClue.layers.enable(1)
+const theBoxClue = new Clue(boxClue, ['A box full of counterfit Channel. It feels like polyester'])
+clueArr.push(theBoxClue)
 
 
 
 
 const npcArr = []
 // make eve's textbox
-const eveTextboxArr = []
-const eveTextboxOne = new Textbox('hello there', 'src/assets/emoji/smileyFace.png','Hello There! My name is Eve!',  ['Hi Eve, nice to meet you! My name is Archibald', 'shutup bitch!', 'close'] )
-const eveTextboxTwo = new Textbox('Hi Eve, nice to meet you! My name is Archibald', 'src/assets/emoji/smileyFace.png','It is wonderful to meet you Archibald!',  ['close'] )
-const eveTextboxThree = new Textbox('shutup bitch!', 'src/assets/emoji/angryFace.png','How rude! You are a fucking creep!!!',  ['close'] )
-eveTextboxArr.push(eveTextboxOne)
-eveTextboxArr.push(eveTextboxTwo)
-eveTextboxArr.push(eveTextboxThree)
+const dockWorkerText = []
+const dockworkerTextOne = new Textbox('Shiver me timbers!!!', 'src/assets/emoji/smileyFace.png','It be a hard night on the ocean! The waves are BEASTS!',  ['Hi Eve, nice to meet you! My name is Archibald', 'shutup bitch!', 'close'] )
+const dockWorkerTextTwo = new Textbox('Hi Eve, nice to meet you! My name is Archibald', 'src/assets/emoji/smileyFace.png','It is wonderful to meet you Archibald!',  ['close'] )
+const dockWorkerTextThree = new Textbox('shutup bitch!', 'src/assets/emoji/angryFace.png','How rude! You are a fucking creep!!!',  ['close'] )
+dockWorkerText.push(dockworkerTextOne)
+dockWorkerText.push(dockWorkerTextTwo)
+dockWorkerText.push(dockWorkerTextThree)
 
-const eve = new NPC('/src/assets/characters/eve.fbx', 'Eve', [5, 0, 5], [5, 0, 5], eveTextboxArr)
-npcArr.push(eve)
+const dockWorker = new NPC('/src/assets/characters/eve.fbx', 'Eve', [-15, 0, -4], [-15, 0, -4], dockWorkerText)
+npcArr.push(dockWorker)
 
 // make a test City
+
+
 
 
 // add a tree to the propArr
@@ -106,4 +123,8 @@ Floader.load('src/assets/3dAssets/port.fbx', (fbx) => {
 
 
 const port = new Location('Port', floor, buildingArr, lightArr, propArr, clueArr, npcArr, [-15, 0, -4])
+
+skybox.name = "skybox"
+const portbox = skybox
+port.scene.add(portbox)
 export {port}

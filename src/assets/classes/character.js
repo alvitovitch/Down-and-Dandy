@@ -17,7 +17,7 @@ class Character {
         this.characterObject = []
         this.characterMixer = undefined
         this.size = .01
-        this.position = new THREE.Vector3()
+        this.position = new THREE.Vector3(0,0,0)
         this.position.copy(posArr)
         this.actions = []
         // this.loader.load(this.characterObjectPath, (char) => {

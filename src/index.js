@@ -37,7 +37,7 @@ let phoneBoxDisplayed = false;
 const locations = []
 locations.push(haberdashery)
 locations.push(port)
-let selectedLocation = locations[0]
+let selectedLocation = locations[1]
 let currentScene = selectedLocation.scene
 
 camera.position.copy(selectedLocation.startingPos);
@@ -129,7 +129,7 @@ window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 })
-const controls = new OrbitControls( camera, renderer.domElement )
+//const controls = new OrbitControls( camera, renderer.domElement )
 
 const animate = function () {
     requestAnimationFrame(animate);
@@ -162,8 +162,8 @@ const animate = function () {
 animate();
 
 const relativePostion = function(firstModel, secondModel){
-    return (Math.abs(Math.abs(firstModel.position.x) - Math.abs(secondModel.position.x)) < 2 &&
-      Math.abs(Math.abs(firstModel.position.z) - Math.abs(secondModel.position.z)) < 2)
+    return (Math.abs(Math.abs(firstModel.position.x) - Math.abs(secondModel.position.x)) < 3 &&
+      Math.abs(Math.abs(firstModel.position.z) - Math.abs(secondModel.position.z)) < 3)
 }
 
 

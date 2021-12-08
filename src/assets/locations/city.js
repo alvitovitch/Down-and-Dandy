@@ -5,6 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Textbox } from '../classes/textbox';
 import { NPC } from '../classes/npc';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
+import { skybox } from './skybox';
 // let's make a floor
 
 const plane = new THREE.PlaneGeometry(50,25,10,10);
@@ -25,15 +26,20 @@ const buildingArr = []
 const lightArr = []
 
 //adding lights
-const ambLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, .7)
+const ambLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1)
 const pLight =  new THREE.DirectionalLight( 0xffffff, .5)
+pLight.position.set(10,10,10)
+pLight.target.position.set(0,0,0)
 
 lightArr.push(ambLight)
-lightArr.push(pLight)
+//lightArr.push(pLight)
 
 // making a propArr
 const propArr = [];
-// let's make a street
+
+// let's add a skybox
+propArr.push(skybox)
+
 
 const clueArr = []
 
@@ -68,6 +74,8 @@ npcArr.push(eve)
 
 const haberdashery = new Location('Haberdashery', floor, buildingArr, lightArr, propArr, clueArr, npcArr, [18.5,0,0])
 
+skybox.name = "skybox"
+haberdashery.scene.add(skybox)
 // add a tree to the propArr
 const loader = new GLTFLoader();
 const buildingLoader = new FBXLoader()
@@ -87,16 +95,16 @@ loader.load("src/assets/3dAssets/haberdasheryStreet.glb", function(glb){
   haberdashery.scene.add(building)
 })
 
-loader.load('src/assets/3dAssets/stairs/stairs.gltf', (gltf) =>{
-  const building = gltf.scene;
-  building.scale.set(20,20,40)
-  building.position.y = 20
-  building.position.z = -10.8
-  building.position.x = -17
-  building.rotation.y = Math.PI / 2
-  buildingArr.push(building)
-  haberdashery.scene.add(building)
-})
+// loader.load('src/assets/3dAssets/stairs/stairs.gltf', (gltf) =>{
+//   const building = gltf.scene;
+//   building.scale.set(20,20,40)
+//   building.position.y = 20
+//   building.position.z = -10.8
+//   building.position.x = -17
+//   building.rotation.y = Math.PI / 2
+//   buildingArr.push(building)
+//   haberdashery.scene.add(building)
+// })
 
 // building the backdrop
 
@@ -124,16 +132,16 @@ loader.load('src/assets/3dAssets/pinkCityBackdrop.glb', (gltf) =>{
 
 
 
-loader.load('src/assets/3dAssets/stairs/stairs.gltf', (gltf) =>{
-  const building = gltf.scene;
-  building.scale.set(20,20,25)
-  building.position.y = 20
-  building.position.z = -11
-  building.position.x = 21
-  building.rotation.y = Math.PI / 2
-  buildingArr.push(building)
-  haberdashery.scene.add(building)
-})
+// loader.load('src/assets/3dAssets/stairs/stairs.gltf', (gltf) =>{
+//   const building = gltf.scene;
+//   building.scale.set(20,20,25)
+//   building.position.y = 20
+//   building.position.z = -11
+//   building.position.x = 21
+//   building.rotation.y = Math.PI / 2
+//   buildingArr.push(building)
+//   haberdashery.scene.add(building)
+// })
 
 loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
   const tree = gltf.scene;
@@ -195,53 +203,38 @@ loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
   
     
 })
-loader.load("src/assets/3dAssets/angers_shop_2_france/scene.gltf", function(gltf) {
-  const tree = gltf.scene;
-  tree.scale.set(1.5, 1.5, 1.5)
-  tree.rotation.y = -Math.PI
-  tree.position.y = 0
-  tree.position.z = 23.8
-  tree.position.x = 23
-  tree.traverse(c => {
+// loader.load("src/assets/3dAssets/angers_shop_2_france/scene.gltf", function(gltf) {
+//   const tree = gltf.scene;
+//   tree.scale.set(1.5, 1.5, 1.5)
+//   tree.rotation.y = -Math.PI
+//   tree.position.y = 0
+//   tree.position.z = 23.8
+//   tree.position.x = 23
+//   tree.traverse(c => {
+//       c.castShadow = true
+//   })
+//   tree.children[0].layers.enable(1)
+//   haberdashery.propsArr.push(tree)
+//   haberdashery.scene.add(tree)
+  
+    
+// })
+loader.load("src/assets/3dAssets/police_car_-_low_poly (1)/scene.gltf", function(gltf) {
+  const policeCar = gltf.scene;
+  policeCar.scale.set(2, 2, 2)
+  policeCar.rotation.y = -Math.PI/2
+  policeCar.position.y = 0
+  policeCar.position.z = 0
+  policeCar.position.x = -18
+  policeCar.traverse(c => {
       c.castShadow = true
   })
-  tree.children[0].layers.enable(1)
-  haberdashery.propsArr.push(tree)
-  haberdashery.scene.add(tree)
+  policeCar.children[0].layers.enable(1)
+  haberdashery.propsArr.push(policeCar)
+  haberdashery.scene.add(policeCar)
   
     
 })
-// loader.load("src/assets/3dAssets/low_poly_modular_road_segment_-_sketchup/scene.gltf", function(gltf) {
-//   const road = gltf.scene;
-//   road.scale.set(.02, .02, .02)
-//   road.rotation.y = -Math.PI/2
-//   road.position.y = 0
-//   road.position.z = -7
-//   road.position.x = -8
-//   road.traverse(c => {
-//       c.castShadow = true
-//   })
-//   road.children[0].layers.enable(1)
-//   haberdashery.propsArr.push(road)
-//   haberdashery.scene.add(road)
-  
-    
-// })
-// loader.load("src/assets/3dAssets/low_poly_modular_road_segment_-_sketchup/scene.gltf", function(gltf) {
-//   const road = gltf.scene;
-//   road.scale.set(.02, .02, .02)
-//   road.rotation.y = -Math.PI/2
-//   road.position.y = 0
-//   road.position.z = -7
-//   road.position.x = 4
-//   road.traverse(c => {
-//       c.castShadow = true
-//   })
-//   road.children[0].layers.enable(1)
-//   haberdashery.propsArr.push(road)
-//   haberdashery.scene.add(road)
-  
-    
-// })
+
 
 export {haberdashery}
