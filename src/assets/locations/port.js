@@ -80,5 +80,5 @@ loader.load('src/assets/3dAssets/port.fbx', (fbx) => {
 
 
 
-const port = new Location('Port', floor, buildingArr, lightArr, propArr, clueArr, npcArr, [0, 0, -25])
+const port = new Location('Port', floor, buildingArr, lightArr, propArr, clueArr, npcArr, [-15, 0, -4])
 export {port}

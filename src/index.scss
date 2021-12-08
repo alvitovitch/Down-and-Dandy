@@ -26,7 +26,7 @@ canvas {
     opacity: 0;
     transition: 1s opacity;
     text-align: center;
-    font-size: 126px;
+    font-size: 2ve;
     background-color: blanchedalmond;
 }
 
@@ -36,9 +36,9 @@ canvas {
     width: 33%;
     align-items: flex-start;
     opacity: 0;
-    transition: 1s opacity;
+    transition: .5s opacity;
     text-align: center;
-    font-size: 126px;
+    font-size: 2vw;
     background-color:rgba(255, 255, 255, 0.857);
     top: 50%;
     margin: 0;
@@ -48,6 +48,7 @@ canvas {
     transform: translate(-50%, -50%);
     justify-content: space-around;
     opacity: 75%;
+    user-select: none;
 }
 
 button {
@@ -58,7 +59,7 @@ button {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 72px;
+    font-size: 1vw;
   }
 
 li {
@@ -68,11 +69,13 @@ li {
 #characterTextBox img {
     display: flex;
     position: absolute;
-    top: -30%;
+    top: -100%;
     left: 50%;
+    width: 33%;
 }
 
 #phone{
+    user-select: none;
     position: absolute;
     top: 5%;
     right: 5%;
@@ -86,6 +89,7 @@ li {
 }
 
 #phoneOn {
+    user-select: none;
     left: 33%;
     position: absolute;
     top: 10%;
@@ -100,6 +104,8 @@ li {
 
 #phoneOn > ul {
     position: absolute;
+    margin: 0%;
+    padding: 2.5%;
     height: 50%;
     width: 88%;
     left: 3%;

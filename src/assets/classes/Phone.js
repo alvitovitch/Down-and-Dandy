@@ -65,4 +65,8 @@ Phone.prototype.createClues = function() {
     phoneDiv.appendChild(foundClueArr)
 }
 
+Phone.prototype.closePhone = function() {
+    const phoneDiv = document.getElementById(this.phonebox.id)
+    phoneDiv.textContent = ''
+}
 export {Phone}

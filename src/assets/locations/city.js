@@ -4,15 +4,17 @@ import { Clue } from '../classes/clue';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Textbox } from '../classes/textbox';
 import { NPC } from '../classes/npc';
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 // let's make a floor
 
-const plane = new THREE.PlaneGeometry(100,100,10,10);
+const plane = new THREE.PlaneGeometry(50,25,10,10);
 const material = new THREE.MeshBasicMaterial({ color: "green" })
 const floor = new THREE.Mesh(plane, material);
 floor.castShadow = false;
 floor.receiveShadow = true;
 floor.rotation.x =-Math.PI/2;
 floor.name = "ground"
+floor.visible = false
 floor.layers.enable(1)
 
 
@@ -23,8 +25,8 @@ const buildingArr = []
 const lightArr = []
 
 //adding lights
-const ambLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1)
-const pLight =  new THREE.DirectionalLight( 0xffffff, 1)
+const ambLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, .7)
+const pLight =  new THREE.DirectionalLight( 0xffffff, .5)
 
 lightArr.push(ambLight)
 lightArr.push(pLight)
@@ -32,17 +34,6 @@ lightArr.push(pLight)
 // making a propArr
 const propArr = [];
 // let's make a street
-
-const streetPlane = new THREE.PlaneGeometry(100, 20, 10, 10);
-const streetMaterial = new THREE.MeshBasicMaterial({ color: "grey"})
-const street = new THREE.Mesh(streetPlane, streetMaterial)
-street.castShadow = false;
-street.receiveShadow = true;
-street.rotation.x =-Math.PI/2;
-street.name = "street"
-street.position.y = 0.01
-
-propArr.push(street)
 
 const clueArr = []
 
@@ -70,94 +61,74 @@ eveTextboxArr.push(eveTextboxOne)
 eveTextboxArr.push(eveTextboxTwo)
 eveTextboxArr.push(eveTextboxThree)
 
-const eve = new NPC('/src/assets/characters/eve.fbx', 'Eve', [10, 10, 0], [0,0,0], eveTextboxArr)
+const eve = new NPC('/src/assets/characters/eve.fbx', 'Eve', [10, 0, 0], [0,0,0], eveTextboxArr)
 npcArr.push(eve)
 
 // make a test City
 
-const haberdashery = new Location('Haberdashery', floor, buildingArr, lightArr, propArr, clueArr, npcArr, [0,0,0])
+const haberdashery = new Location('Haberdashery', floor, buildingArr, lightArr, propArr, clueArr, npcArr, [18.5,0,0])
 
 // add a tree to the propArr
 const loader = new GLTFLoader();
-loader.load("./src/assets/tree/scene.gltf", function(gltf) {
-    const tree = gltf.scene;
-    tree.scale.set(.01, .01, .01)
-    tree.position.y = 15
-    tree.position.z = 20
-    tree.traverse(c => {
-        c.castShadow = true
-    })
-    tree.children[0].layers.enable(1)
-    haberdashery.propsArr.push(tree)
-    haberdashery.scene.add(tree)
-    
-      
-})
-loader.load("./src/assets/3dAssets/road.glb", function(glb){
-  const road = glb.scene
-  road.rotateY(Math.PI/2)
-  road.castShadow = false;
-  road.receiveShadow = true;
-  road.scale.set(5,1,8)
-  haberdashery.propsArr.push(road)
-  haberdashery.scene.add(road)
-})
-loader.load("./src/assets/3dAssets/testBuilding.glb", function(glb){
+const buildingLoader = new FBXLoader()
+
+// buildingLoader.load('src/assets/3dAssets/road_straight/source/0a4a98ec7e604ea2b22bb82e66d926dc.fbx', (gltf) => {
+//   const building = gltf;
+//   building.name = "street"
+//   building.scale.set(.2,.2,.2)
+//   building.position.y = 1
+//   building.position.x = 10
+//   building.position.z = -15
+//   buildingArr.push(building)
+//   haberdashery.scene.add(building)
+// })
+
+loader.load("src/assets/3dAssets/haberdasheryStreet.glb", function(glb){
   const building = glb.scene
-  //building.rotateY(Math.PI/2)
+  building.rotateY(Math.PI/2)
   building.castShadow = false;
   building.receiveShadow = true;
-  building.position.x = -40;
-  ///building.scale.set(5,1,8)
+  building.position.x = -5;
+  building.position.z = 6;
+  building.position.y = -.5
+  building.scale.set(3,3,3)
   haberdashery.propsArr.push(building)
   haberdashery.scene.add(building)
 })
-loader.load("./src/assets/tree/scene.gltf", function(gltf) {
-    const tree = gltf.scene;
-    tree.scale.set(.007, .007, .007)
-    tree.position.y = 10
-    tree.position.z = -15
-    tree.traverse(c => {
-        c.castShadow = true
-    })
-    tree.children[0].layers.enable(1)
-    haberdashery.propsArr.push(tree)
-    haberdashery.scene.add(tree)
-    
-      
+
+loader.load('src/assets/3dAssets/stairs/stairs.gltf', (gltf) =>{
+  const building = gltf.scene;
+  building.scale.set(20,20,20)
+  building.position.y = 20
+  building.position.z = -12
+  building.position.x = -20
+  building.rotation.y = Math.PI / 2
+  buildingArr.push(building)
+  haberdashery.scene.add(building)
 })
-loader.load("./src/assets/tree/scene.gltf", function(gltf) {
-    const tree = gltf.scene;
-    tree.scale.set(.01, .01, .01)
-    tree.position.y = 15
-    tree.position.z = 20
-    tree.position.x = 30
-    tree.traverse(c => {
-        c.castShadow = true
-    })
-    tree.children[0].layers.enable(1)
-    haberdashery.propsArr.push(tree)
-    haberdashery.scene.add(tree)
-    
-      
-})
-loader.load("./src/assets/tree/scene.gltf", function(gltf) {
-    const tree = gltf.scene;
-    tree.scale.set(.007, .007, .007)
-    tree.position.y = 10
-    tree.position.z = -15
-    tree.position.z = -20
-    tree.traverse(c => {
-        c.castShadow = true
-    })
-    tree.children[0].layers.enable(1)
-    haberdashery.propsArr.push(tree)
-    haberdashery.scene.add(tree)
-    
-      
+
+loader.load('src/assets/3dAssets/alley_shop/scene.gltf', (gltf) =>{
+  const building = gltf.scene;
+  building.scale.set(20,20,20)
+  building.position.y = 0
+  building.position.z = -12
+  building.rotation.y = Math.PI / 2
+  buildingArr.push(building)
+  haberdashery.scene.add(building)
+  
 })
 
 
+loader.load('src/assets/3dAssets/stairs/stairs.gltf', (gltf) =>{
+  const building = gltf.scene;
+  building.scale.set(20,20,25)
+  building.position.y = 20
+  building.position.z = -11
+  building.position.x = 21
+  building.rotation.y = Math.PI / 2
+  buildingArr.push(building)
+  haberdashery.scene.add(building)
+})
 
 
 export {haberdashery}

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { Player } from './assets/classes/player'; 
-//import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import { Clue } from './assets/classes/clue';
 import { haberdashery } from './assets/locations/city';
 import { Phone } from './assets/classes/Phone';
@@ -13,8 +13,8 @@ renderer.setSize( window.innerWidth, window.innerHeight);
 
 // camera
 const camera = new THREE.PerspectiveCamera( 75, (window.innerWidth / window.innerHeight), .1, 1000);
-camera.position.set( 10, 10, 2 );
-camera.lookAt( 0, 0, 0 );
+camera.position.set( 20, 10, 10 );
+camera.lookAt( 10, 0, 10 );
 
 
 // raycaster - a laserpointer from your mouse to the 3d space
@@ -33,6 +33,7 @@ const mouse = {
 }
 
 let textBoxDisplayed = false;
+let phoneBoxDisplayed = false;
 
 const locations = []
 locations.push(haberdashery)
@@ -40,7 +41,7 @@ locations.push(port)
 let selectedLocation = locations[0]
 let currentScene = selectedLocation.scene
 
-const archibald = new Player('./src/assets/characters/malcolm.fbx', 'Archibald', [10,10,10])
+const archibald = new Player('./src/assets/characters/malcolm.fbx', 'Archibald', [10,0,10])
 // load player
 if (archibald.addModel(currentScene, .01)){
   archibald.loader.load('src/assets/characters/animations/Walking.fbx',(ani) =>{
@@ -122,12 +123,13 @@ window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 })
+//const controls = new OrbitControls( camera, renderer.domElement )
 
 const animate = function () {
     requestAnimationFrame(animate);
     renderer.render(currentScene, camera)
     raycaster.setFromCamera(mouse, camera)
-    if (textBoxDisplayed === true) {
+    if (textBoxDisplayed === true || phoneBoxDisplayed === true) {
       raycaster.layers.set(3)
     } else {
       raycaster.layers.set(1)
@@ -150,7 +152,7 @@ const animate = function () {
     if (eve !== undefined){
       eve.movement()
     }
-    
+    //controls.update()
 
 };
 animate();
@@ -174,9 +176,9 @@ addEventListener('mousemove', (e) => {
 // phone popup
 
 addEventListener('click', (e) => {
-  if (textBoxDisplayed === false) {
+  if (phoneBoxDisplayed === false) {
     if (e.target === document.getElementById("phone")){
-      textBoxDisplayed = true;
+      phoneBoxDisplayed = true;
       phoneMenu.phoneMainMenu()
     }
   }
@@ -185,17 +187,17 @@ addEventListener('click', (e) => {
 // phone menu options
 
 addEventListener('click', (e) => {
-  if (textBoxDisplayed === true) {
+  if (phoneBoxDisplayed === true) {
     if (e.target === document.getElementById("mapButton")) {
       phoneMenu.phoneMap(locations)
     }
   }
 })
 
-// phone menu change
+// phone menu hover change
 
 addEventListener('mouseover', (e) => {
-  if (textBoxDisplayed === true) {
+  if (phoneBoxDisplayed === true) {
     if (e.target === document.getElementById("Port")){
       document.getElementById("mapImage").src = 'src/assets/phone/Docks.png'
     } else if (e.target === document.getElementById("Haberdashery")){
@@ -210,9 +212,9 @@ addEventListener('mouseover', (e) => {
 
 
 
-// movement
+// player movement
 addEventListener('click', () => {
-  if (textBoxDisplayed === false) {
+  if (textBoxDisplayed === false && phoneBoxDisplayed === false) {
   const intersects = raycaster.intersectObjects(currentScene.children)
   //find the player model
   const selectedPoint = intersects[ 0 ].point
@@ -220,7 +222,11 @@ addEventListener('click', () => {
     playerMovement = true
     targetX = (Math.round((selectedPoint.x * 10)) / 10)
     targetZ = (Math.round((selectedPoint.z * 10)) / 10)
-}}})
+    
+    }}
+  
+  console.log(targetX, targetZ)
+})
 
 // clicking a clue
 addEventListener('click', () => {
@@ -250,8 +256,10 @@ addEventListener('click', () => {
   }
 })
 
+
+// loading the walk, need to refactor
 let playerMixer = undefined
-let playerWalk = undefined
+
 
 addEventListener('click', () => {
   if (playerMovement === true) {
@@ -261,13 +269,14 @@ addEventListener('click', () => {
       archibald.addAnimation('./src/assets/characters/animations/Walking.fbx')
     }
     if (archibald.characterObject.animations[1] !== undefined){
-    archibald.characterMixer.clipAction(archibald.characterObject.animations[1]).play()
+    archibald.characterMixer.clipAction(archibald.characterObject.animations[2]).play()
     }
   }
 })
 
 // npc dialogue box pop up
 addEventListener('click', () => {
+  debugger
   if (textBoxDisplayed === false) {
   const intersects = raycaster.intersectObjects(currentScene.children)[0].object
   selectedLocation.npcArr.forEach((npc) => {
@@ -281,10 +290,12 @@ addEventListener('click', () => {
 )}})
 // phone menue close
 addEventListener('click', (e) => {
-  if (textBoxDisplayed === true) {
+  if (phoneBoxDisplayed === true) {
+
+    // loop through the locations and make 
     locations.forEach((location) => {
       if (e.target === document.getElementById(location.scene.name)){
-        textBoxDisplayed = false;
+        phoneBoxDisplayed = false;
         document.getElementById("phoneOn").innerHTML = ''
         selectedLocation = location
         currentScene.remove(archibald.characterObject)

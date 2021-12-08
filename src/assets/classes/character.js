@@ -17,9 +17,7 @@ class Character {
         this.characterObject = []
         this.characterMixer = undefined
         this.size = .01
-        this.posX = posArr[0]
-        this.posY = posArr[1]
-        this.posZ = posArr[2]
+        this.position = new THREE.Vector3(posArr[0],posArr[1], posArr[2])
         this.actions = []
         // this.loader.load(this.characterObjectPath, (char) => {
         //     debugger
@@ -43,6 +41,7 @@ Character.prototype.addModel = function(scene, size) {
         char.name = this.name
         char.scale.setScalar(size)
         char.layers.enable(1)
+        char.position.copy(this.position)
         char.traverse((child) => {
             child.layers.enable(1)
         })
