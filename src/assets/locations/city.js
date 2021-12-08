@@ -98,25 +98,16 @@ loader.load("src/assets/3dAssets/haberdasheryStreet.glb", function(glb){
 
 loader.load('src/assets/3dAssets/stairs/stairs.gltf', (gltf) =>{
   const building = gltf.scene;
-  building.scale.set(20,20,20)
+  building.scale.set(20,20,40)
   building.position.y = 20
-  building.position.z = -12
-  building.position.x = -20
+  building.position.z = -10.8
+  building.position.x = -17
   building.rotation.y = Math.PI / 2
   buildingArr.push(building)
   haberdashery.scene.add(building)
 })
 
-loader.load('src/assets/3dAssets/alley_shop/scene.gltf', (gltf) =>{
-  const building = gltf.scene;
-  building.scale.set(20,20,20)
-  building.position.y = 0
-  building.position.z = -12
-  building.rotation.y = Math.PI / 2
-  buildingArr.push(building)
-  haberdashery.scene.add(building)
-  
-})
+
 
 
 loader.load('src/assets/3dAssets/stairs/stairs.gltf', (gltf) =>{
