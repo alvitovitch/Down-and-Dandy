@@ -54,25 +54,10 @@ clue.position.x = -14
 clue.position.z = 5
 clue.name = "testClue"
 clue.layers.enable(1)
-const testClue = new Clue(clue, ['The white box. The simplest and most important of clues!'])
+const testClue = new Clue(clue, ['A briefcase full of cash?! AND TAX DOCUMENTS?!'])
 clueArr.push(testClue)
 
-loader.load('src/assets/3dAssets/briefcase/scene.gltf', (gltf) => {
-    const briefcase = gltf.scene
-    briefcase.rotation.y = Math.PI/2
-    briefcase.position.x = -14
-    briefcase.position.y = 0
-    briefcase.position.z = -7
-    briefcase.scale.set(.5, .5, .5)
-    briefcase.layers.enable(1)
-    briefcase.traverse(c => {
-        c.castShadow = true
-        c.receiveShadow = true
-    })
-    const briefClue = new Clue(briefcase, ['A briefcase full of cash?! AND TAX DOCUMENTS?!'])
-    propArr.push(briefClue)
-    port.scene.add(briefcase)
-})
+
 
 
 

@@ -72,16 +72,6 @@ const haberdashery = new Location('Haberdashery', floor, buildingArr, lightArr, 
 const loader = new GLTFLoader();
 const buildingLoader = new FBXLoader()
 
-// buildingLoader.load('src/assets/3dAssets/road_straight/source/0a4a98ec7e604ea2b22bb82e66d926dc.fbx', (gltf) => {
-//   const building = gltf;
-//   building.name = "street"
-//   building.scale.set(.2,.2,.2)
-//   building.position.y = 1
-//   building.position.x = 10
-//   building.position.z = -15
-//   buildingArr.push(building)
-//   haberdashery.scene.add(building)
-// })
 
 loader.load("src/assets/3dAssets/haberdasheryStreet.glb", function(glb){
   const building = glb.scene
@@ -104,6 +94,29 @@ loader.load('src/assets/3dAssets/stairs/stairs.gltf', (gltf) =>{
   building.position.z = -10.8
   building.position.x = -17
   building.rotation.y = Math.PI / 2
+  buildingArr.push(building)
+  haberdashery.scene.add(building)
+})
+
+// building the backdrop
+
+loader.load('src/assets/3dAssets/cityBackdrop.glb', (gltf) =>{
+  const building = gltf.scene;
+  building.scale.set(100,100,100)
+  building.position.y = 8
+  building.position.z = 0
+  building.position.x = -100
+  //building.rotation.y = Math.PI / 2
+  buildingArr.push(building)
+  haberdashery.scene.add(building)
+})
+loader.load('src/assets/3dAssets/pinkCityBackdrop.glb', (gltf) =>{
+  const building = gltf.scene;
+  building.scale.set(100,120,100)
+  building.position.y = 10
+  building.position.z = 15
+  building.position.x = -105
+  //building.rotation.y = Math.PI / 2
   buildingArr.push(building)
   haberdashery.scene.add(building)
 })

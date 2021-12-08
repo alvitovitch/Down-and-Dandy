@@ -37,12 +37,12 @@ let phoneBoxDisplayed = false;
 const locations = []
 locations.push(haberdashery)
 locations.push(port)
-let selectedLocation = locations[1]
+let selectedLocation = locations[0]
 let currentScene = selectedLocation.scene
 
 camera.position.copy(selectedLocation.startingPos);
 camera.position.x += 10
-camera.position.y += 10
+camera.position.y += 5
 camera.lookAt( selectedLocation.startingPos);
 
 
@@ -308,7 +308,7 @@ addEventListener('click', (e) => {
         archibald.characterObject.position.copy(selectedLocation.startingPos)
         camera.position.copy(archibald.characterObject.position)
         camera.position.x += 10
-        camera.position.y += 10
+        camera.position.y += 5
         camera.position.z += 0
       }
     })
