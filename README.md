@@ -5,7 +5,8 @@
 <img src= "src/assets/locations/city_layout.png" height=300>
 <img src= "src/assets/locations/port_layout.png" height=300>
 <img src= "src/assets/locations/jail.png" height=300>
-<button onclick="window.open('https://alvitovitch.github.io/jsProject/','_blank')">
+<br>
+<a href='https://alvitovitch.github.io/jsProject/' target='_blank'>Play?</a>
 </div>
 <br>
 
@@ -22,8 +23,7 @@ This is achieved through a point/click mechanic for investigating clues shown on
 <h2>Phase II: Confrontation</h2>
 
 During the Confrontation phase Archibald confronts his rivals across the street. This may be done at any time, however depending on the information and 
-evidence you uncover differnt moves/options will be available to you.
-This section is more of a JRPG turn based strategy sectiona and will end... with DRAMA!
+evidence you uncover different things will happen!
 <br><br><br>
 <h1>Functionality</h1>
 
@@ -31,18 +31,14 @@ This section is more of a JRPG turn based strategy sectiona and will end... with
 
 <ul>
 <li>open and interact with a map to change their location</li>
-<li>review found clues and information in their inventory</li>
 <li>interact in dialog trees with npcs.</li>
 <li>Do a battle of wits and words to throw their rival in jail</li>
-<li>select moves based off of found items/information</li>
 </ul>
 
 <h3>In addition, this project will include:</h3>
 <ul>
 <li>Intructions</li>
 <li>Exciting point and click action</li>
-<li>Music and sound effects</li>
-<li>And (possibly) much MUCH more (or less)</li>
 </ul>
 <br><br>
 <h1>Wireframes</h1>
@@ -123,36 +119,32 @@ There will be the option to have the player make responses. Arrow keys/ mouse cl
                             <li>NPC - Shop Assistant</li>
                             <li>Clue - Reciept from the docks</li>
                         </ul>
-                    <li>The Docks</li>
-                        <ul>
-                            <li>NPC - Dock Worker</li>
-                            <li>Clue - Illegally imported goods</li>
-                            <li>Clue - Shipping ledger</li>
-                        </ul>
-                    <li>Crime Alley/ Train Station</li>
-                        <ul>
-                            <li>(optional) NPC - Lady of the Street</li>
-                            <li>Clue - Photos of the villain doing illegal activities</li>
-                            <li>Clue - Proof of counterfit goods</li>
-                        </ul>
                 </ul>
         </ul>
         <br>
 
 <h2>Tuesday</h2>
-<ul><li>Start Confrontration scene
+<ul><li>Refine first location and work on second one
     <ul>
-        <li> Implement the JPG turn based strategy via revamping dialogue tree </li>
-        <li> Each 'turn' you will have the option to say a piece of knowledge or show off evidence </li>
-        <li> The antagonist will rebuttle with one of four predetermined moves </li>
-        <li> At the end of the 'fight' if you did enough 'moves' you send him to jail</li>
-</ul>
+        <li>The Docks</li>
+            <ul>
+                <li>NPC - Dock Worker</li>
+                <li>Clue - Illegally imported goods</li>
+                <li>Clue - Shipping ledger</li>
+            </ul>
+    </ul>
 </ul>
 <br>
 
 <h2>Wednesday</h2>
 <ul>
-    <li> Finish confrontation and add details to anything missed or that I didn't have time to finish</li>
+    <li> Add third location and finish end conditions</li>
+    <li>Crime Alley/ Train Station</li>
+        <ul>
+            <li>(optional) NPC - Lady of the Street</li>
+            <li>Clue - Photos of the villain doing illegal activities</li>
+            <li>Clue - Proof of counterfit goods</li>
+        </ul>
 </ul>
 <br>
 <h2>Thursday Morning</h2>
@@ -167,6 +159,10 @@ Additional directions to take this project include:
 <ul><li>Additional locations</li>
     <li>Additional npcs</li>
     <li>Love interests</li>
-    <li>Actually making the second phase</li>
+    <li>Turn Phase II into a JRPG style convo fight!</li>
     <li>More than one villian and a second Act!</li>
+    <li>Music and sound effects</li>
+    <li>review found clues and information via a journal</li>
+
+
 </ul>

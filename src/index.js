@@ -382,7 +382,7 @@ addEventListener('click', (e) => {
           jailtextbox.appendChild(jailtextdiv)
           textbox.appendChild(jailtextbox)
           textbox.opacity = 1
-        }, 2000)
+        }, 1000)
       } else if (button.id === 'playAgain'){
         //crude but effective
         location.reload()
