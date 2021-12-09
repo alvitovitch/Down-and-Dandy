@@ -1,0 +1,11 @@
+Model Information:
+* title:	Abandoned Jail Cell
+* source:	https://sketchfab.com/3d-models/abandoned-jail-cell-dae4ac3f9f9941bda5651cfee6580aac
+* author:	FrequentLag (https://sketchfab.com/FrequentLag)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Abandoned Jail Cell" (https://sketchfab.com/3d-models/abandoned-jail-cell-dae4ac3f9f9941bda5651cfee6580aac) by FrequentLag (https://sketchfab.com/FrequentLag) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

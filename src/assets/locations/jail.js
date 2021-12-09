@@ -9,15 +9,15 @@ import { skybox } from './skybox';
 // let's make a floor
 
 const loader = new GLTFLoader();
-const plane = new THREE.PlaneGeometry(8,25,10,10);
+const plane = new THREE.PlaneGeometry(5,5,10,10);
 const material = new THREE.MeshBasicMaterial({ color: "blue" })
 const floor = new THREE.Mesh(plane, material);
-floor.position.z = 0
-floor.position.x = 0
+floor.position.z = -1
+floor.position.x = 2
 floor.castShadow = false;
 floor.receiveShadow = true;
 floor.rotation.x =-Math.PI/2;
-floor.visible = true
+floor.visible = false
 floor.name = "ground"
 floor.layers.enable(1)
 
@@ -56,13 +56,13 @@ const clueArr = []
 const npcArr = []
 
 // add a tree to the propArr
-loader.load('src/assets/3dAssets/jail_cell/scene.gltf', (gltf) => {
+loader.load('src/assets/3dAssets/abandoned_jail_cell/scene.gltf', (gltf) => {
     const jail = gltf.scene
     jail.rotation.y = Math.PI/2
-    jail.position.x = -10
-    jail.position.y = 10
-    jail.position.z = -40
-    //jail.scale.set(0.03, 0.03, 0.03)
+    jail.position.x = 0
+    jail.position.y = 0
+    jail.position.z = 0
+    jail.scale.set(0.01, 0.01, 0.01)
     jail.layers.enable(1)
     jail.traverse(c => {
         c.castShadow = true

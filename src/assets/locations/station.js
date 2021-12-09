@@ -20,6 +20,7 @@ floor.name = "ground"
 floor.position.x = -17
 floor.position.y = .5
 floor.layers.enable(1)
+floor.visible = false
 
 
 

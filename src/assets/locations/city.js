@@ -17,7 +17,7 @@ floor.rotation.x =-Math.PI/2;
 floor.name = "ground"
 floor.position.x = 5
 floor.position.z = 0.5
-//floor.visible = false
+floor.visible = false
 floor.layers.enable(1)
 
 

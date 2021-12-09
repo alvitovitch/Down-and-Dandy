@@ -38,7 +38,7 @@ const mouse = {
 let textBoxDisplayed = false;
 let phoneBoxDisplayed = false;
 
-const locations = [jailcell]
+const locations = []
 locations.push(haberdashery)
 //locations.push(port)
 let selectedLocation = locations[0]
@@ -350,7 +350,36 @@ addEventListener('click', (e) => {
         if (button.name === 'close') {
         document.getElementById('characterTextBox').innerHTML = ''
         textBoxDisplayed = false;
-      } else {
+      } else if (button.name === "You did it! I'm calling the police!!!") {
+        document.getElementById('characterTextBox').innerHTML = ''
+        textBoxDisplayed = false
+        selectedLocation = jailcell
+        currentScene.remove(archibald.characterObject)
+        currentScene = selectedLocation.scene
+        currentScene.add(archibald.characterObject)
+        currentScene.add(skybox)
+        archibald.characterObject.position.copy(selectedLocation.startingPos)
+        camera.position.copy(archibald.characterObject.position)
+        camera.position.x += 10
+        camera.position.y += 5
+        camera.position.z += 0
+
+        setTimeout(()=> {
+          let textbox = document.getElementById("characterTextBox")
+          let jailtextbox = document.createElement('ul')
+          jailtextbox.innerText = "Sadly you didn't have enough clues and were arrested for being a nucense. Your business failed and like went on without you. Eventually even the memory of you faded as you rotted in your ineptitude"
+          let tryAgain = document.createElement('button')
+          tryAgain.id = 'tryAgain'
+          tryAgain.innerText = 'Try again?'
+          jailtextbox.appendChild(tryAgain)
+          textbox.appendChild(jailtextbox)
+          textbox.opacity = 1
+        }, 2000)
+      } else if (button.id === 'tryAgain'){
+        //crude but effective
+        location.reload()
+      }
+      else {
         selectedLocation.npcArr.forEach((npc) => {
           npc.messageArr.forEach((message) => {
             if (message.name === button.name){
@@ -367,8 +396,8 @@ addEventListener('click', (e) => {
 })
 
 let hab = haberdashery
-const garyTextBox = new Textbox('less than three clues', 'src/assets/emoji/smileyFace.png',"Bad luck having your window smashed. Looks like you'll be out of business unless you figure out who did it... IF you can figure out who did it",  ["You did it! I'm calling the police",'close'] )
-const garyTextBoxTwo = new Textbox('2 < x < 5', 'src/assets/emoji/smileyFace.png',"So you found a briefcase and some clothes, that proves nothing! I didn't do anything!",  ["I'm calling the police!!!", 'close'] )
+const garyTextBox = new Textbox('less than three clues', 'src/assets/emoji/smileyFace.png',"Bad luck having your window smashed. Looks like you'll be out of business unless you figure out who did it... IF you can figure out who did it",  ["You did it! I'm calling the police!!!",'close'] )
+const garyTextBoxTwo = new Textbox('2 < x < 5', 'src/assets/emoji/smileyFace.png',"So you found a briefcase and some clothes, that proves nothing! I didn't do anything!",  ["You did it! I'm calling the police!!!", 'close'] )
 const garyTextBoxThree = new Textbox('5', 'src/assets/emoji/smileyFace.png',"You found the tesseract AND the smoking gun?!",  ["It's over Gary. You're going to jail!"] )
 // Gary dialogue tree switch up!
 addEventListener('click', () => {
