@@ -70,7 +70,7 @@ eveTextboxArr.push(eveTextboxOne)
 eveTextboxArr.push(eveTextboxTwo)
 eveTextboxArr.push(eveTextboxThree)
 
-const eve = new NPC('/src/assets/characters/eve.fbx', 'Eve', [-15, 0, 7], [-15, 0, 7], eveTextboxArr)
+const eve = new NPC('src/assets/characters/eve.fbx', 'Eve', [-15, 0, 7], [-15, 0, 7], eveTextboxArr)
 npcArr.push(eve)
 const gary = new NPC('src/assets/3dAssets/Orc Idle.fbx', 'Gary', [0, 0, 10], [0, 0, 10], eveTextboxArr)
 npcArr.push(gary)
