@@ -90,7 +90,7 @@ dockWorkerText.push(dockWorkerTextTwo)
 dockWorkerText.push(dockWorkerTextThree)
 dockWorkerText.push(dockWorkerTextFour)
 
-const dockWorker = new NPC('src/assets/characters/eve.fbx', 'Eve', [-22, 0, -4], [-22, 0, -4], dockWorkerText)
+const dockWorker = new NPC('./src/assets/characters/eve.fbx', 'Eve', [-22, 0, -4], [-22, 0, -4], dockWorkerText)
 npcArr.push(dockWorker)
 
 // make a test City
