@@ -138,3 +138,13 @@ li {
   align-content: flex-start;
   height: 5%;
 }
+
+#navbar img {
+  width: 3%;
+  border-radius: 40%;
+  opacity: 0.5;
+}
+
+#navbar img:hover {
+  opacity: 1;
+}
