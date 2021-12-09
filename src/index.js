@@ -183,8 +183,8 @@ const animate = function () {
 animate();
 
 const relativePostion = function(firstModel, secondModel){
-    return (Math.abs(Math.abs(firstModel.position.x) - Math.abs(secondModel.position.x)) < 3 &&
-      Math.abs(Math.abs(firstModel.position.z) - Math.abs(secondModel.position.z)) < 3)
+    return (Math.abs(Math.abs(firstModel.position.x) - Math.abs(secondModel.position.x)) < 5 &&
+      Math.abs(Math.abs(firstModel.position.z) - Math.abs(secondModel.position.z)) < 5)
 }
 
 
@@ -368,16 +368,40 @@ addEventListener('click', (e) => {
           let textbox = document.getElementById("characterTextBox")
           let jailtextbox = document.createElement('ul')
           jailtextbox.innerText = "Sadly you didn't have enough clues and were arrested for being a nucense. Your business failed and like went on without you. Eventually even the memory of you faded as you rotted in your ineptitude"
-          let tryAgain = document.createElement('button')
-          tryAgain.id = 'tryAgain'
-          tryAgain.innerText = 'Try again?'
-          jailtextbox.appendChild(tryAgain)
+          let playAgain = document.createElement('button')
+          playAgain.id = 'playAgain'
+          playAgain.innerText = 'Play again?'
+          jailtextbox.appendChild(playAgain)
           textbox.appendChild(jailtextbox)
           textbox.opacity = 1
         }, 2000)
-      } else if (button.id === 'tryAgain'){
+      } else if (button.id === 'playAgain'){
         //crude but effective
         location.reload()
+      } else if (button.name === "It's over Gary. You're going to jail!") {
+        let gary = selectedLocation.npcArr[1].characterObject
+        selectedLocation = jailcell
+        currentScene = selectedLocation.scene
+        currentScene.add(gary)
+        gary.position.copy(jailcell.startingPos)
+        camera.position.copy(jailcell.startingPos)
+        camera.position.x += 10
+        camera.position.y += 5
+        camera.position.z += 0
+        camera.lookAt(jailcell.startingPos)
+        document.getElementById('characterTextBox').innerHTML = ''
+        setTimeout(()=> {
+          let textbox = document.getElementById("characterTextBox")
+          let jailtextbox = document.createElement('ul')
+          jailtextbox.innerText = "And thus your business was saved! Gary was thrown in jail for being the absolute worst and everyone else was very, very happy!"
+          let playAgain = document.createElement('button')
+          playAgain.id = 'playAgain'
+          playAgain.innerText = 'Play again?'
+          jailtextbox.appendChild(playAgain)
+          textbox.appendChild(jailtextbox)
+          textbox.opacity = 1
+        }, 2000)
+
       }
       else {
         selectedLocation.npcArr.forEach((npc) => {
