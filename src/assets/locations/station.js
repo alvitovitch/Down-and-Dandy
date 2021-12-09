@@ -59,7 +59,7 @@ tesseractBox.position.y = .5
 tesseractBox.rotation.y = Math.PI/2
 tesseractBox.name = "tesseract"
 tesseractBox.layers.enable(1)
-const tesseractClue = new Clue(tesseractBox, ["THIS IS UNDENYABLE PROOF OF GARY'S GUILT"])
+const tesseractClue = new Clue(tesseractBox, ["Photos of Gary breaking into my shop!"])
 clueArr.push(tesseractClue)
 
 // boxofimported clothes clue
@@ -74,7 +74,7 @@ smokingGunBox.position.z = -20
 smokingGunBox.rotation.y = Math.PI/2
 smokingGunBox.name = "smokingGun"
 smokingGunBox.layers.enable(1)
-const smokingGunClue = new Clue(smokingGunBox, ['The smoking gun!'])
+const smokingGunClue = new Clue(smokingGunBox, ['Photos of Gary kicking puppies! He is such a bad man!!!'])
 clueArr.push(smokingGunClue)
 
 

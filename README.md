@@ -1,5 +1,14 @@
 <img src="./src/assets/logo/downAndDandyLogo.png" width="900" height="300">
 
+<h1> Take a look!</h1>
+<div>
+<img src= "src/assets/locations/city_layout.png" height=300>
+<img src= "src/assets/locations/port_layout.png" height=300>
+<img src= "src/assets/locations/jail.png" height=300>
+<button onclick="window.open('https://alvitovitch.github.io/jsProject/','_blank')">
+</div>
+<br>
+
 <h1>Background</h1>
 
 'Down and Dandy' is a JavaScript mystery game where you play as Archibald, the owner of a struggling haberdashery in the downtown metro area.
@@ -120,9 +129,9 @@ There will be the option to have the player make responses. Arrow keys/ mouse cl
                             <li>Clue - Illegally imported goods</li>
                             <li>Clue - Shipping ledger</li>
                         </ul>
-                    <li>Crime Alley</li>
+                    <li>Crime Alley/ Train Station</li>
                         <ul>
-                            <li>NPC - Lady of the Street</li>
+                            <li>(optional) NPC - Lady of the Street</li>
                             <li>Clue - Photos of the villain doing illegal activities</li>
                             <li>Clue - Proof of counterfit goods</li>
                         </ul>
@@ -158,5 +167,6 @@ Additional directions to take this project include:
 <ul><li>Additional locations</li>
     <li>Additional npcs</li>
     <li>Love interests</li>
+    <li>Actually making the second phase</li>
     <li>More than one villian and a second Act!</li>
 </ul>
