@@ -144,10 +144,24 @@ li {
 
 #navbar img {
     width: 3%;
+    height: auto;
     border-radius: 40%;
     opacity: .5;
 }
 
 #navbar img:hover {
     opacity: 1;
+}
+
+#dropdown-text {
+    display: none;
+    width: 30%;
+    background-color: white;
+    padding: 1%;
+}
+
+
+
+#instructions:hover #dropdown-text {
+    display: block;
 }
