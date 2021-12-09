@@ -51,7 +51,6 @@ Character.prototype.addModel = function(scene, size) {
             child.layers.enable(1)
         })
         char.position.copy(this.position)
-        debugger
         scene.add(char)
         this.addAnimation('src/assets/characters/animations/BreathingIdle.fbx')
         this.characterMixer.clipAction(this.characterObject.animations[0]).play()

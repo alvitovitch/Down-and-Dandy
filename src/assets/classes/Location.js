@@ -43,9 +43,7 @@ class Location {
 
         // add npc
         this.npcArr.forEach((npc) => {
-            debugger
             npc.addModel(this.scene, npc.size)
-            debugger
             //npc.setPosition(npc.position)
         })
     }

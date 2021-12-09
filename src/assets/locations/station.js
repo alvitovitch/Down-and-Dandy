@@ -59,7 +59,7 @@ tesseractBox.position.y = .5
 tesseractBox.rotation.y = Math.PI/2
 tesseractBox.name = "tesseract"
 tesseractBox.layers.enable(1)
-const tesseractClue = new Clue(tesseractBox, ["THIS IS UNDENYABLE PROOF OF RED'S GUILT"])
+const tesseractClue = new Clue(tesseractBox, ["THIS IS UNDENYABLE PROOF OF GARY'S GUILT"])
 clueArr.push(tesseractClue)
 
 // boxofimported clothes clue

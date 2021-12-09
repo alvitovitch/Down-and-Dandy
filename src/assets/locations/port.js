@@ -104,7 +104,23 @@ loader.load('src/assets/3dAssets/low_poly_cargo_ship/scene.gltf', (gltf) => {
     ship.rotation.y = Math.PI/2
     ship.position.x = -10
     ship.position.y = 10
-    ship.position.z = -40
+    ship.position.z = -35
+    ship.scale.set(0.03, 0.03, 0.03)
+    ship.layers.enable(1)
+    ship.traverse(c => {
+        c.castShadow = true
+        c.receiveShadow = true
+        //c.emissive = new THREE.Color("blue")
+    })
+    propArr.push(ship)
+    port.scene.add(ship)
+})
+loader.load('src/assets/3dAssets/low_poly_cargo_ship/scene.gltf', (gltf) => {
+    const ship = gltf.scene
+    ship.rotation.y = Math.PI/2
+    ship.position.x = -10
+    ship.position.y = 10
+    ship.position.z = 20
     ship.scale.set(0.03, 0.03, 0.03)
     ship.layers.enable(1)
     ship.traverse(c => {

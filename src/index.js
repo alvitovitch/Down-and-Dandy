@@ -49,7 +49,6 @@ camera.position.x += 10
 camera.position.y += 5
 camera.lookAt( selectedLocation.startingPos);
 
-debugger
 const archibald = new Player('./src/assets/characters/malcolm.fbx', 'Archibald', selectedLocation.startingPos)
 // load player
 
@@ -58,38 +57,47 @@ if (archibald.addModel(currentScene, .01)){
     archibald.addAnimation(ani)
   })}
 
-
-
 // player movement
 let targetX = undefined;
+let targetY = undefined;
 let targetZ = undefined;
 
 let playerMovement = false;
 
 function characterMovement(char, camera) {
   if (char !== undefined) {
+    let targetPos = new THREE.Vector3(targetX, targetY, targetZ)
+    let targetAngle = char.position.angleTo(targetPos)
     char.position.x = Math.round(char.position.x * 10)/10 
     char.position.z = Math.round(char.position.z * 10)/10 
     if (targetX > char.position.x) {
       char.position.x += 0.1
       camera.position.x += 0.1
+      char.rotation.y += targetAngle
+
       //char.quaternion.y += 1
     }
     if (targetX < char.position.x) {
       char.position.x -= 0.1
       camera.position.x -= 0.1
       //char.qiaternion.y -= 1
+      char.rotation.y -= targetAngle
+
 
     }
     if (targetZ > char.position.z) {
       char.position.z += 0.1
       camera.position.z += 0.1
       //char.qiaternion.x += 1
+      char.rotation.y += targetAngle
+
 
     }
     if (targetZ < char.position.z) {
       char.position.z -= 0.1
       camera.position.z -= 0.1
+      char.rotation.y -= targetAngle
+
       //char.qiaternion.x -= 1
 
     }
@@ -248,11 +256,10 @@ addEventListener('click', () => {
   if (intersects[0]["object"].name === "ground"){
     playerMovement = true
     targetX = (Math.round((selectedPoint.x * 10)) / 10)
+    targetY = (Math.round((selectedPoint.y * 10)) / 10)
     targetZ = (Math.round((selectedPoint.z * 10)) / 10)
     
     }}
-  
-  console.log(targetX, targetZ)
 })
 
 // clicking a clue
@@ -308,7 +315,6 @@ addEventListener('click', () => {
   const intersects = raycaster.intersectObjects(currentScene.children)[0].object
   selectedLocation.npcArr.forEach((npc) => {
     if (npc.characterObject.name === intersects.parent.name || npc.characterObject.name === intersects.parent.parent.name){
-      debugger
       if (relativePostion(intersects.parent, archibald.characterObject) || (relativePostion(intersects.parent.parent, archibald.characterObject))){
         textBoxDisplayed = true;
         npc.displayText(0)
@@ -371,7 +377,9 @@ addEventListener('click', (e) => {
           let playAgain = document.createElement('button')
           playAgain.id = 'playAgain'
           playAgain.innerText = 'Play again?'
-          jailtextbox.appendChild(playAgain)
+          let jailtextdiv = document.createElement('div')
+          jailtextdiv.appendChild(playAgain)
+          jailtextbox.appendChild(jailtextdiv)
           textbox.appendChild(jailtextbox)
           textbox.opacity = 1
         }, 2000)
@@ -394,9 +402,11 @@ addEventListener('click', (e) => {
           let textbox = document.getElementById("characterTextBox")
           let jailtextbox = document.createElement('ul')
           jailtextbox.innerText = "And thus your business was saved! Gary was thrown in jail for being the absolute worst and everyone else was very, very happy!"
+          let playAgainLi = document.createElement('li')
           let playAgain = document.createElement('button')
           playAgain.id = 'playAgain'
           playAgain.innerText = 'Play again?'
+          playAgain.appendChild(playAgainLi)
           jailtextbox.appendChild(playAgain)
           textbox.appendChild(jailtextbox)
           textbox.opacity = 1
@@ -422,7 +432,7 @@ addEventListener('click', (e) => {
 let hab = haberdashery
 const garyTextBox = new Textbox('less than three clues', 'src/assets/emoji/smileyFace.png',"Bad luck having your window smashed. Looks like you'll be out of business unless you figure out who did it... IF you can figure out who did it",  ["You did it! I'm calling the police!!!",'close'] )
 const garyTextBoxTwo = new Textbox('2 < x < 5', 'src/assets/emoji/smileyFace.png',"So you found a briefcase and some clothes, that proves nothing! I didn't do anything!",  ["You did it! I'm calling the police!!!", 'close'] )
-const garyTextBoxThree = new Textbox('5', 'src/assets/emoji/smileyFace.png',"You found the tesseract AND the smoking gun?!",  ["It's over Gary. You're going to jail!"] )
+const garyTextBoxThree = new Textbox('5', 'src/assets/emoji/smileyFace.png',"Waaa?! You found all my evidence?!!! Impossible!!!",  ["It's over Gary. You're going to jail!"] )
 // Gary dialogue tree switch up!
 addEventListener('click', () => {
   if (selectedLocation === haberdashery) {

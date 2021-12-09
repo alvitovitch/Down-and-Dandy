@@ -121,6 +121,14 @@ li {
     justify-content: space-around;
 }
 
+#menu > li {
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+    height: auto;
+}
+
 #mapButtons  {
     display: flex;
     width: 85%;
