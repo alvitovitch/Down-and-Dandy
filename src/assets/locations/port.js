@@ -9,15 +9,16 @@ import { skybox } from './skybox';
 // let's make a floor
 
 const loader = new GLTFLoader();
-const plane = new THREE.PlaneGeometry(10,25,10,10);
+const plane = new THREE.PlaneGeometry(8,25,10,10);
 const material = new THREE.MeshBasicMaterial({ color: "blue" })
 const floor = new THREE.Mesh(plane, material);
-floor.position.z = -8
+floor.position.z = -7.8
+floor.position.x = -16
 floor.castShadow = false;
 floor.receiveShadow = true;
 floor.rotation.x =-Math.PI/2;
+floor.visible = false
 floor.name = "ground"
-floor.position.x = -15
 floor.layers.enable(1)
 
 
@@ -29,8 +30,8 @@ const lightArr = []
 
 //adding lights
 const ambLight = new THREE.HemisphereLight( 0xffffbb, 0x34568b, .7)
-const pLight =  new THREE.DirectionalLight( 0xffffbb, .7)
-pLight.position.set(10,10,10)
+const pLight =  new THREE.DirectionalLight( 0xffffbb, .5)
+pLight.position.set(-10,8,-0)
 pLight.target.position.set(0,0,0)
 lightArr
 
@@ -80,14 +81,16 @@ clueArr.push(theBoxClue)
 const npcArr = []
 // make eve's textbox
 const dockWorkerText = []
-const dockworkerTextOne = new Textbox('Shiver me timbers!!!', 'src/assets/emoji/smileyFace.png','It be a hard night on the ocean! The waves are BEASTS!',  ['Hi Eve, nice to meet you! My name is Archibald', 'shutup bitch!', 'close'] )
-const dockWorkerTextTwo = new Textbox('Hi Eve, nice to meet you! My name is Archibald', 'src/assets/emoji/smileyFace.png','It is wonderful to meet you Archibald!',  ['close'] )
-const dockWorkerTextThree = new Textbox('shutup bitch!', 'src/assets/emoji/angryFace.png','How rude! You are a fucking creep!!!',  ['close'] )
+const dockworkerTextOne = new Textbox('Shiver me timbers!!!', 'src/assets/emoji/smileyFace.png','It be a hard night on the ocean! The waves are BEASTS!',  ['What mysteries have you seen on the seas tonight?', 'See anything suspicious on the docks?', 'close'] )
+const dockWorkerTextTwo = new Textbox('What mysteries have you seen on the seas tonight?', 'src/assets/emoji/smileyFace.png','I saw an orb so green and fair I thought she be a mer-orb!',  ['close'] )
+const dockWorkerTextThree = new Textbox('See anything suspicious on the docks?', 'src/assets/emoji/angryFace.png','Some shady red orb was going through a box over yonder.', ['Oh that is interesting!'] )
+const dockWorkerTextFour = new Textbox('Oh that is interesting!', 'src/assets/emoji/angryFace.png','He left when I shouted at him! The box is over by the ship if you want to check it out!', ['close'] )
 dockWorkerText.push(dockworkerTextOne)
 dockWorkerText.push(dockWorkerTextTwo)
 dockWorkerText.push(dockWorkerTextThree)
+dockWorkerText.push(dockWorkerTextFour)
 
-const dockWorker = new NPC('/src/assets/characters/eve.fbx', 'Eve', [-15, 0, -4], [-15, 0, -4], dockWorkerText)
+const dockWorker = new NPC('/src/assets/characters/eve.fbx', 'Eve', [-22, 0, -4], [-22, 0, -4], dockWorkerText)
 npcArr.push(dockWorker)
 
 // make a test City
@@ -107,6 +110,7 @@ loader.load('src/assets/3dAssets/low_poly_cargo_ship/scene.gltf', (gltf) => {
     ship.traverse(c => {
         c.castShadow = true
         c.receiveShadow = true
+        //c.emissive = new THREE.Color("blue")
     })
     propArr.push(ship)
     port.scene.add(ship)
@@ -118,6 +122,10 @@ Floader.load('src/assets/3dAssets/port.fbx', (fbx) => {
     propArr.push(fbx)
     port.scene.add(fbx)
     fbx.layers.enable(1)
+    fbx.traverse(c => {
+        c.castShadow = true
+        c.receiveShadow = true
+    })
 })
 
 

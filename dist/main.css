@@ -32,6 +32,10 @@ canvas {
   background-color: blanchedalmond;
 }
 
+ul {
+  padding: inherit;
+}
+
 #characterTextBox {
   z-index: 100;
   display: flex;
@@ -51,6 +55,7 @@ canvas {
   justify-content: space-around;
   opacity: 75%;
   user-select: none;
+  padding: 0;
 }
 
 button {

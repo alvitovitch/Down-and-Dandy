@@ -29,6 +29,9 @@ canvas {
     font-size: 2ve;
     background-color: blanchedalmond;
 }
+ul {
+    padding: inherit;
+}
 
 #characterTextBox {
     z-index: 100;
@@ -49,6 +52,7 @@ canvas {
     justify-content: space-around;
     opacity: 75%;
     user-select: none;
+    padding: 0;
 }
 
 button {

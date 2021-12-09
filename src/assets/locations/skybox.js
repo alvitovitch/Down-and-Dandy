@@ -22,5 +22,6 @@ for (let i = 0; i <6; i++){
 }
 
 const skybox = new THREE.Mesh(skyboxGeo, skyMaterials);
+const dandyBox = new THREE.Mesh(skyboxGeo, skyMaterials);
 
-export {skybox}
+export {skybox, dandyBox}

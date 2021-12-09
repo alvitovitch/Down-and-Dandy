@@ -5,17 +5,19 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Textbox } from '../classes/textbox';
 import { NPC } from '../classes/npc';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
-import { skybox } from './skybox';
+import { dandyBox } from './skybox';
 // let's make a floor
 
-const plane = new THREE.PlaneGeometry(50,25,10,10);
+const plane = new THREE.PlaneGeometry(40,15,10,10);
 const material = new THREE.MeshBasicMaterial({ color: "green" })
 const floor = new THREE.Mesh(plane, material);
 floor.castShadow = false;
 floor.receiveShadow = true;
 floor.rotation.x =-Math.PI/2;
 floor.name = "ground"
-floor.visible = false
+floor.position.x = 5
+floor.position.z = 0.5
+//floor.visible = false
 floor.layers.enable(1)
 
 
@@ -38,44 +40,47 @@ lightArr.push(ambLight)
 const propArr = [];
 
 // let's add a skybox
-propArr.push(skybox)
+propArr.push(dandyBox)
 
 
 const clueArr = []
 
 // test clue
 
-const cube = new THREE.BoxGeometry(1,1,1)
+const cube = new THREE.CylinderGeometry(1,1,.2,25)
 const cubeSkin = new THREE.MeshPhysicalMaterial()
-const clue = new THREE.Mesh(cube, cubeSkin);
+const blood = new THREE.Mesh(cube, cubeSkin);
+blood.material.color = new THREE.Color('red')
 
-clue.position.x = 5
-clue.position.z = 5
-clue.name = "testClue"
-clue.layers.enable(1)
-const testClue = new Clue(clue, ['The white box. The simplest and most important of clues!'])
+blood.position.x = 6
+blood.position.z = 10
+blood.name = "blood"
+blood.layers.enable(1)
+const testClue = new Clue(blood, ['A puddle of blood! Inside of it you find a shipping reciept! You might want to check out the port'])
 clueArr.push(testClue)
 
 
 const npcArr = []
 // make eve's textbox
 const eveTextboxArr = []
-const eveTextboxOne = new Textbox('hello there', 'src/assets/emoji/smileyFace.png','Hello There! My name is Eve!',  ['Hi Eve, nice to meet you! My name is Archibald', 'shutup bitch!', 'close'] )
-const eveTextboxTwo = new Textbox('Hi Eve, nice to meet you! My name is Archibald', 'src/assets/emoji/smileyFace.png','It is wonderful to meet you Archibald!',  ['close'] )
-const eveTextboxThree = new Textbox('shutup bitch!', 'src/assets/emoji/angryFace.png','How rude! You are a fucking creep!!!',  ['close'] )
+const eveTextboxOne = new Textbox('hello there', 'src/assets/emoji/smileyFace.png','Aight! Keep it moving!! Nothing to see here!',  ['What happened officer?'] )
+const eveTextboxTwo = new Textbox('What happened officer?', 'src/assets/emoji/smileyFace.png',"Some hooligan busted up a shop window! He fled the scene but I'm keep watch incase he comes back!",  ['A hooligan you say?'] )
+const eveTextboxThree = new Textbox('A hooligan you say?', 'src/assets/emoji/angryFace.png',"He came down this way, but it looks like he's long gone. We're waiting for forensics to come sweep for clues!",  ['close'] )
 eveTextboxArr.push(eveTextboxOne)
 eveTextboxArr.push(eveTextboxTwo)
 eveTextboxArr.push(eveTextboxThree)
 
-const eve = new NPC('/src/assets/characters/eve.fbx', 'Eve', [10, 0, 0], [0,0,0], eveTextboxArr)
+const eve = new NPC('/src/assets/characters/eve.fbx', 'Eve', [-15, 0, 7], [-15, 0, 7], eveTextboxArr)
 npcArr.push(eve)
+const gary = new NPC('src/assets/3dAssets/Orc Idle.fbx', 'Gary', [0, 0, 10], [0, 0, 10], eveTextboxArr)
+npcArr.push(gary)
 
 // make a test City
 
 const haberdashery = new Location('Haberdashery', floor, buildingArr, lightArr, propArr, clueArr, npcArr, [18.5,0,0])
 
-skybox.name = "skybox"
-haberdashery.scene.add(skybox)
+dandyBox.name = "dandyBox"
+haberdashery.scene.add(dandyBox)
 // add a tree to the propArr
 const loader = new GLTFLoader();
 const buildingLoader = new FBXLoader()
@@ -95,17 +100,6 @@ loader.load("src/assets/3dAssets/haberdasheryStreet.glb", function(glb){
   haberdashery.scene.add(building)
 })
 
-// loader.load('src/assets/3dAssets/stairs/stairs.gltf', (gltf) =>{
-//   const building = gltf.scene;
-//   building.scale.set(20,20,40)
-//   building.position.y = 20
-//   building.position.z = -10.8
-//   building.position.x = -17
-//   building.rotation.y = Math.PI / 2
-//   buildingArr.push(building)
-//   haberdashery.scene.add(building)
-// })
-
 // building the backdrop
 
 loader.load('src/assets/3dAssets/cityBackdrop.glb', (gltf) =>{
@@ -124,24 +118,12 @@ loader.load('src/assets/3dAssets/pinkCityBackdrop.glb', (gltf) =>{
   building.position.y = 10
   building.position.z = 15
   building.position.x = -105
+  building.receiveShadow = false
   //building.rotation.y = Math.PI / 2
   buildingArr.push(building)
   haberdashery.scene.add(building)
 })
 
-
-
-
-// loader.load('src/assets/3dAssets/stairs/stairs.gltf', (gltf) =>{
-//   const building = gltf.scene;
-//   building.scale.set(20,20,25)
-//   building.position.y = 20
-//   building.position.z = -11
-//   building.position.x = 21
-//   building.rotation.y = Math.PI / 2
-//   buildingArr.push(building)
-//   haberdashery.scene.add(building)
-// })
 
 loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
   const tree = gltf.scene;
@@ -149,9 +131,9 @@ loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
   tree.position.y = 0
   tree.position.z = 10
   tree.position.x = 13
-  tree.traverse(c => {
-      c.castShadow = true
-  })
+  // tree.traverse(c => {
+  //     c.castShadow = true
+  // })
   tree.children[0].layers.enable(1)
   haberdashery.propsArr.push(tree)
   haberdashery.scene.add(tree)
@@ -164,9 +146,9 @@ loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
   tree.position.y = 0
   tree.position.z = 10
   tree.position.x = -14
-  tree.traverse(c => {
-      c.castShadow = true
-  })
+  // tree.traverse(c => {
+  //     c.castShadow = true
+  // })
   tree.children[0].layers.enable(1)
   haberdashery.propsArr.push(tree)
   haberdashery.scene.add(tree)
@@ -179,9 +161,9 @@ loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
   tree.position.y = 0
   tree.position.z = -8
   tree.position.x = -14
-  tree.traverse(c => {
-      c.castShadow = true
-  })
+  // tree.traverse(c => {
+  //     c.castShadow = true
+  // })
   tree.children[0].layers.enable(1)
   haberdashery.propsArr.push(tree)
   haberdashery.scene.add(tree)

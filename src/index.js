@@ -5,6 +5,10 @@ import { Clue } from './assets/classes/clue';
 import { haberdashery } from './assets/locations/city';
 import { Phone } from './assets/classes/Phone';
 import { port } from './assets/locations/port';
+import { station } from './assets/locations/station';
+import { Textbox } from './assets/classes/textbox';
+import { skybox } from './assets/locations/skybox';
+import { jailcell } from './assets/locations/jail';
 
 
 // renderer - what will make everything show up on the screen
@@ -34,10 +38,10 @@ const mouse = {
 let textBoxDisplayed = false;
 let phoneBoxDisplayed = false;
 
-const locations = []
+const locations = [jailcell]
 locations.push(haberdashery)
-locations.push(port)
-let selectedLocation = locations[1]
+//locations.push(port)
+let selectedLocation = locations[0]
 let currentScene = selectedLocation.scene
 
 camera.position.copy(selectedLocation.startingPos);
@@ -45,7 +49,7 @@ camera.position.x += 10
 camera.position.y += 5
 camera.lookAt( selectedLocation.startingPos);
 
-
+debugger
 const archibald = new Player('./src/assets/characters/malcolm.fbx', 'Archibald', selectedLocation.startingPos)
 // load player
 
@@ -69,18 +73,25 @@ function characterMovement(char, camera) {
     if (targetX > char.position.x) {
       char.position.x += 0.1
       camera.position.x += 0.1
+      //char.quaternion.y += 1
     }
     if (targetX < char.position.x) {
       char.position.x -= 0.1
       camera.position.x -= 0.1
+      //char.qiaternion.y -= 1
+
     }
     if (targetZ > char.position.z) {
       char.position.z += 0.1
       camera.position.z += 0.1
+      //char.qiaternion.x += 1
+
     }
     if (targetZ < char.position.z) {
       char.position.z -= 0.1
       camera.position.z -= 0.1
+      //char.qiaternion.x -= 1
+
     }
   }
   if (char.position.x === targetX && char.position.z === targetZ) {
@@ -148,6 +159,16 @@ const animate = function () {
     } else if (player !== undefined) {
       camera.lookAt(player.position)
     }
+    // add the port if you find the blood
+
+    archibald.foundClues.forEach((clue) => {
+      if (clue.name === "blood" && !locations.includes(port)) {
+        locations.push(port)
+      }
+      if (clue.name === "briefcase" && !locations.includes(station)) {
+        locations.push(station)
+      }
+    })
 
     selectedLocation.npcArr.forEach((npc) => {
       if (currentScene.getObjectByName(npc.name) !== undefined){
@@ -165,6 +186,8 @@ const relativePostion = function(firstModel, secondModel){
     return (Math.abs(Math.abs(firstModel.position.x) - Math.abs(secondModel.position.x)) < 3 &&
       Math.abs(Math.abs(firstModel.position.z) - Math.abs(secondModel.position.z)) < 3)
 }
+
+
 
 
 addEventListener('mousemove', (e) => {
@@ -280,12 +303,13 @@ addEventListener('click', () => {
 
 // npc dialogue box pop up
 addEventListener('click', () => {
-  debugger
+  
   if (textBoxDisplayed === false) {
   const intersects = raycaster.intersectObjects(currentScene.children)[0].object
   selectedLocation.npcArr.forEach((npc) => {
-    if (npc.characterObject.name === intersects.parent.name){
-      if (relativePostion(intersects.parent, archibald.characterObject)){
+    if (npc.characterObject.name === intersects.parent.name || npc.characterObject.name === intersects.parent.parent.name){
+      debugger
+      if (relativePostion(intersects.parent, archibald.characterObject) || (relativePostion(intersects.parent.parent, archibald.characterObject))){
         textBoxDisplayed = true;
         npc.displayText(0)
       }
@@ -305,6 +329,7 @@ addEventListener('click', (e) => {
         currentScene.remove(archibald.characterObject)
         currentScene = selectedLocation.scene
         currentScene.add(archibald.characterObject)
+        currentScene.add(skybox)
         archibald.characterObject.position.copy(selectedLocation.startingPos)
         camera.position.copy(archibald.characterObject.position)
         camera.position.x += 10
@@ -336,6 +361,25 @@ addEventListener('click', (e) => {
         })
       }
     }
-  })
+
+  })  
+}
+})
+
+let hab = haberdashery
+const garyTextBox = new Textbox('less than three clues', 'src/assets/emoji/smileyFace.png',"Bad luck having your window smashed. Looks like you'll be out of business unless you figure out who did it... IF you can figure out who did it",  ["You did it! I'm calling the police",'close'] )
+const garyTextBoxTwo = new Textbox('2 < x < 5', 'src/assets/emoji/smileyFace.png',"So you found a briefcase and some clothes, that proves nothing! I didn't do anything!",  ["I'm calling the police!!!", 'close'] )
+const garyTextBoxThree = new Textbox('5', 'src/assets/emoji/smileyFace.png',"You found the tesseract AND the smoking gun?!",  ["It's over Gary. You're going to jail!"] )
+// Gary dialogue tree switch up!
+addEventListener('click', () => {
+  if (selectedLocation === haberdashery) {
+    if (archibald.foundClues.length < 3 && selectedLocation === hab) {
+      hab.npcArr[1].messageArr = [garyTextBox]
+    } else if (archibald.foundClues.length > 2 && archibald.foundClues.length < 5) {
+      hab.npcArr[1].messageArr = [garyTextBoxTwo]
+    } else if (archibald.foundClues.length === 5) {
+      hab.npcArr[1].messageArr = [garyTextBoxThree]
+    }
   }
 })
+

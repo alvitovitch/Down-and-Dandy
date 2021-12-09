@@ -17,8 +17,12 @@ class Character {
         this.characterObject = []
         this.characterMixer = undefined
         this.size = .01
-        this.position = new THREE.Vector3(0,0,0)
-        this.position.copy(posArr)
+        if (posArr[0] !== undefined) {
+        this.position = new THREE.Vector3(posArr[0],posArr[1],posArr[2])
+        } else {
+            this.position = posArr
+        }
+        //this.position.copy(posArr)
         this.actions = []
         // this.loader.load(this.characterObjectPath, (char) => {
         //     debugger
@@ -36,23 +40,22 @@ class Character {
 }
 
 Character.prototype.addModel = function(scene, size) {
-    this.loader.load(this.characterObjectPath, (char) => {
+    this.loader.load(this.characterObjectPath, ((char) => {
         this.characterMixer = new THREE.AnimationMixer(char)
         this.characterObject = char
         char.name = this.name
         char.scale.setScalar(size)
+        char.rotation.y = Math.PI/2
         char.layers.enable(1)
         char.traverse((child) => {
             child.layers.enable(1)
         })
         char.position.copy(this.position)
+        debugger
         scene.add(char)
         this.addAnimation('src/assets/characters/animations/BreathingIdle.fbx')
         this.characterMixer.clipAction(this.characterObject.animations[0]).play()
-    }, undefined, function(error) {
-        console.log('error')
-        console.error(error)
-    })
+    }).bind(this))
     }
 
 Character.prototype.setPosition = function(x,y,z) {
@@ -72,7 +75,7 @@ Character.prototype.addAnimation = function(clip) {
 }
 
 Character.prototype.update = function() {
-    this.characterMixer.update(.009)
+    this.characterMixer.update(.02)
 }
 
 
