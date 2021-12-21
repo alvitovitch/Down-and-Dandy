@@ -28,7 +28,7 @@ const buildingArr = []
 const lightArr = []
 
 //adding lights
-const ambLight = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1)
+const ambLight = new THREE.HemisphereLight( 0xffffff, 0x080820, 2)
 const pLight =  new THREE.DirectionalLight( 0xffffff, .5)
 pLight.position.set(10,10,10)
 pLight.target.position.set(0,0,0)

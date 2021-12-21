@@ -14,6 +14,8 @@ import { jailcell } from './assets/locations/jail';
 // renderer - what will make everything show up on the screen
 const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize( window.innerWidth, window.innerHeight);
+renderer.gammaOutput = true;
+
 
 // camera
 const camera = new THREE.PerspectiveCamera( 75, (window.innerWidth / window.innerHeight), .1, 1000);
@@ -45,14 +47,14 @@ let selectedLocation = locations[0]
 let currentScene = selectedLocation.scene
 
 camera.position.copy(selectedLocation.startingPos);
-camera.position.x += 10
-camera.position.y += 5
+camera.position.x += 15
+camera.position.y += 10
 camera.lookAt( selectedLocation.startingPos);
 
 const archibald = new Player('./src/assets/characters/malcolm.fbx', 'Archibald', selectedLocation.startingPos)
 // load player
 
-if (archibald.addModel(currentScene, .01)){
+if (archibald.addModel(currentScene, .015)){
   archibald.loader.load('src/assets/characters/animations/Walking.fbx',(ani) =>{
     archibald.addAnimation(ani)
   })}
@@ -67,13 +69,13 @@ let playerMovement = false;
 function characterMovement(char, camera) {
   if (char !== undefined) {
     let targetPos = new THREE.Vector3(targetX, targetY, targetZ)
-    let targetAngle = char.position.angleTo(targetPos)
     char.position.x = Math.round(char.position.x * 10)/10 
     char.position.z = Math.round(char.position.z * 10)/10 
+    char.lookAt(targetPos)
+
     if (targetX > char.position.x) {
       char.position.x += 0.1
       camera.position.x += 0.1
-      char.rotation.y += targetAngle
 
       //char.quaternion.y += 1
     }
@@ -81,7 +83,6 @@ function characterMovement(char, camera) {
       char.position.x -= 0.1
       camera.position.x -= 0.1
       //char.qiaternion.y -= 1
-      char.rotation.y -= targetAngle
 
 
     }
@@ -89,14 +90,12 @@ function characterMovement(char, camera) {
       char.position.z += 0.1
       camera.position.z += 0.1
       //char.qiaternion.x += 1
-      char.rotation.y += targetAngle
 
 
     }
     if (targetZ < char.position.z) {
       char.position.z -= 0.1
       camera.position.z -= 0.1
-      char.rotation.y -= targetAngle
 
       //char.qiaternion.x -= 1
 
