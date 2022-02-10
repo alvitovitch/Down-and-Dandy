@@ -256,7 +256,7 @@ addEventListener('mouseover', (e) => {
 
 // player movement
 addEventListener('click', () => {
-  if (textBoxDisplayed === false && phoneBoxDisplayed === false) {
+  if (textBoxDisplayed === false && phoneBoxDisplayed === false && raycaster.intersectObjects(currentScene.children)[0] !== undefined) {
   const intersects = raycaster.intersectObjects(currentScene.children)
   //find the player model
   const selectedPoint = intersects[ 0 ].point
@@ -271,7 +271,7 @@ addEventListener('click', () => {
 
 // clicking a clue
 addEventListener('click', () => {
-  if (textBoxDisplayed === false) {
+  if (textBoxDisplayed === false && raycaster.intersectObjects(currentScene.children)[0] !== undefined) {
   const intersects = raycaster.intersectObjects(currentScene.children)
   selectedLocation.clueArr.forEach((clue) => {
 
@@ -318,10 +318,10 @@ addEventListener('click', () => {
 // npc dialogue box pop up
 addEventListener('click', () => {
   
-  if (textBoxDisplayed === false) {
+  if (textBoxDisplayed === false && raycaster.intersectObjects(currentScene.children)[0] !== undefined) {
   const intersects = raycaster.intersectObjects(currentScene.children)[0].object
   selectedLocation.npcArr.forEach((npc) => {
-    if (npc.characterObject.name === intersects.parent.name || npc.characterObject.name === intersects.parent.parent.name){
+    if (npc.characterObject.name === intersects.parent.name || (intersects.parent.parent !== null && npc.characterObject.name === intersects.parent.parent.name)){
       if (relativePostion(intersects.parent, archibald.characterObject) || (relativePostion(intersects.parent.parent, archibald.characterObject))){
         textBoxDisplayed = true;
         npc.displayText(0)
@@ -342,12 +342,20 @@ addEventListener('click', (e) => {
         currentScene.remove(archibald.characterObject)
         currentScene = selectedLocation.scene
         currentScene.add(archibald.characterObject)
-        currentScene.add(skybox)
+        if (currentScene.name !== 'Station'){
+          currentScene.add(skybox)
+        }
         archibald.characterObject.position.copy(selectedLocation.startingPos)
         camera.position.copy(archibald.characterObject.position)
         camera.position.x += 10
         camera.position.y += 5
         camera.position.z += 0
+        if (location.scene.name === 'Haberdashery') {
+          camera.position.copy(selectedLocation.startingPos);
+          camera.position.x += 15
+          camera.position.y += 10
+          camera.lookAt( selectedLocation.startingPos)
+        }
       }
     })
   }
@@ -437,9 +445,9 @@ addEventListener('click', (e) => {
 })
 
 let hab = haberdashery
-const garyTextBox = new Textbox('less than three clues', 'src/assets/emoji/smileyFace.png',"Bad luck having your window smashed. Looks like you'll be out of business unless you figure out who did it... IF you can figure out who did it",  ["You did it! I'm calling the police!!!",'close'] )
-const garyTextBoxTwo = new Textbox('2 < x < 5', 'src/assets/emoji/smileyFace.png',"So you found a briefcase and some clothes, that proves nothing! I didn't do anything!",  ["You did it! I'm calling the police!!!", 'close'] )
-const garyTextBoxThree = new Textbox('5', 'src/assets/emoji/smileyFace.png',"Waaa?! You found all my evidence?!!! Impossible!!!",  ["It's over Gary. You're going to jail!"] )
+const garyTextBox = new Textbox('less than three clues', 'src/assets/emoji/gary/mr-big-boss.svg',"Bad luck having your window smashed. Looks like you'll be out of business unless you figure out who did it... IF you can figure out who did it",  ["You did it! I'm calling the police!!!",'close'] )
+const garyTextBoxTwo = new Textbox('2 < x < 5', 'src/assets/emoji/gary/mr-big-boss.svg',"So you found a briefcase and some clothes, that proves nothing! I didn't do anything!",  ["You did it! I'm calling the police!!!", 'close'] )
+const garyTextBoxThree = new Textbox('5', 'src/assets/emoji/gary/mr-big-boss.svg',"Waaa?! You found all my evidence?!!! Impossible!!!",  ["It's over Gary. You're going to jail!"] )
 // Gary dialogue tree switch up!
 addEventListener('click', () => {
   if (selectedLocation === haberdashery) {

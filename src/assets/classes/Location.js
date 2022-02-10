@@ -9,7 +9,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 class Location {
     constructor(name, floor, buildingsArr, lightArr, propsArr,  clueArr, npcArr, startingPosArr){
         this.scene = new THREE.Scene()
-        //this.scene.background = new THREE.Color( 0xff0000 )
+        this.scene.background = new THREE.Color( 0x000000 )
         this.scene.name = name
         this.floor = floor;
         this.lights = lightArr// kinda grey light

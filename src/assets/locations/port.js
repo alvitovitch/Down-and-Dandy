@@ -81,10 +81,10 @@ clueArr.push(theBoxClue)
 const npcArr = []
 // make eve's textbox
 const dockWorkerText = []
-const dockworkerTextOne = new Textbox('Shiver me timbers!!!', 'src/assets/emoji/smileyFace.png','It be a hard night on the ocean! The waves are BEASTS!',  ['What mysteries have you seen on the seas tonight?', 'See anything suspicious on the docks?', 'close'] )
-const dockWorkerTextTwo = new Textbox('What mysteries have you seen on the seas tonight?', 'src/assets/emoji/smileyFace.png','I saw an orb so green and fair I thought she be a mer-orb!',  ['close'] )
-const dockWorkerTextThree = new Textbox('See anything suspicious on the docks?', 'src/assets/emoji/angryFace.png','Some shady red orb was going through a box over yonder.', ['Oh that is interesting!'] )
-const dockWorkerTextFour = new Textbox('Oh that is interesting!', 'src/assets/emoji/angryFace.png','He left when I shouted at him! The box is over by the ship if you want to check it out!', ['close'] )
+const dockworkerTextOne = new Textbox('Shiver me timbers!!!', 'src/assets/emoji/fisherman/fisherman.png','It be a hard night on the ocean! The waves are BEASTS!',  ['What mysteries have you seen on the seas tonight?', 'See anything suspicious on the docks?', 'close'] )
+const dockWorkerTextTwo = new Textbox('What mysteries have you seen on the seas tonight?', 'src/assets/emoji/fisherman/fisherman.png','I saw an lass so fine and fair I thought she be a mermaid!',  ['close'] )
+const dockWorkerTextThree = new Textbox('See anything suspicious on the docks?', 'src/assets/emoji/fisherman/fisherman.png','Some shady red orb was going through a box over yonder.', ['Oh that is interesting!'] )
+const dockWorkerTextFour = new Textbox('Oh that is interesting!', 'src/assets/emoji/fisherman/fisherman.png','He left when I shouted at him! The box is over by the ship if you want to check it out!', ['close'] )
 dockWorkerText.push(dockworkerTextOne)
 dockWorkerText.push(dockWorkerTextTwo)
 dockWorkerText.push(dockWorkerTextThree)

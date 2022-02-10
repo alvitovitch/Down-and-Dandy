@@ -33,6 +33,12 @@ ul {
     padding: inherit;
 }
 
+#outer-text-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 #characterTextBox {
     z-index: 100;
     display: flex;
@@ -42,7 +48,6 @@ ul {
     transition: .5s opacity;
     text-align: center;
     font-size: 2vw;
-    background-color:rgba(255, 255, 255, 0.857);
     top: 50%;
     margin: 0;
     position: absolute;
@@ -86,12 +91,30 @@ li {
     list-style: none;
     display: block;
 }
-#characterTextBox img {
+#outer-text-box img {
     display: flex;
-    position: absolute;
-    top: -100%;
-    left: 50%;
-    width: 33%;
+    width: 50%;
+    margin-right: 5%;
+}
+
+#text-box {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 0.5em;
+    width: 50vw;
+    height: 30vh;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#text-box-options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
 }
 
 #phone{

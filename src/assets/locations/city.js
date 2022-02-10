@@ -17,7 +17,7 @@ floor.rotation.x =-Math.PI/2;
 floor.name = "ground"
 floor.position.x = 5
 floor.position.z = 0.5
-// floor.visible = false
+floor.visible = false
 floor.layers.enable(1)
 
 
@@ -64,9 +64,9 @@ clueArr.push(testClue)
 const npcArr = []
 // make eve's textbox
 const eveTextboxArr = []
-const eveTextboxOne = new Textbox('hello there', 'src/assets/emoji/smileyFace.png','Aight! Keep it moving!! Nothing to see here!',  ['What happened officer?'] )
-const eveTextboxTwo = new Textbox('What happened officer?', 'src/assets/emoji/smileyFace.png',"Some hooligan busted up a shop window! He fled the scene but I'm keep watch incase he comes back!",  ['A hooligan you say?'] )
-const eveTextboxThree = new Textbox('A hooligan you say?', 'src/assets/emoji/angryFace.png',"He came down this way, but it looks like he's long gone. We're waiting for forensics to come sweep for clues!",  ['close'] )
+const eveTextboxOne = new Textbox('hello there', 'src/assets/emoji/eve/smiling-cop.png','Aight! Keep it moving!! Nothing to see here!',  ['What happened officer?'] )
+const eveTextboxTwo = new Textbox('What happened officer?', 'src/assets/emoji/eve/smiling-cop.png',"Some hooligan busted up a shop window! He fled the scene but I'm keep watch incase he comes back!",  ['A hooligan you say?'] )
+const eveTextboxThree = new Textbox('A hooligan you say?', 'src/assets/emoji/eve/smiling-cop.png',"He came down this way, but it looks like he's long gone. We're waiting for forensics to come sweep for clues!",  ['close'] )
 eveTextboxArr.push(eveTextboxOne)
 eveTextboxArr.push(eveTextboxTwo)
 eveTextboxArr.push(eveTextboxThree)
