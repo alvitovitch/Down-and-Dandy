@@ -17,7 +17,7 @@ floor.rotation.x =-Math.PI/2;
 floor.name = "ground"
 floor.position.x = 5
 floor.position.z = 0.5
-floor.visible = false
+// floor.visible = false
 floor.layers.enable(1)
 
 
@@ -53,6 +53,7 @@ const blood = new THREE.Mesh(cube, cubeSkin);
 blood.material.color = new THREE.Color('red')
 
 blood.position.x = 6
+blood.position.y = .5
 blood.position.z = 10
 blood.name = "blood"
 blood.layers.enable(1)
@@ -86,7 +87,7 @@ const loader = new GLTFLoader();
 const buildingLoader = new FBXLoader()
 
 
-loader.load("src/assets/3dAssets/haberdasheryStreet.glb", function(glb){
+loader.load("src/assets/3dAssets/haberdasheryStreet2.glb", function(glb){
   const building = glb.scene
   building.rotateY(Math.PI/2)
   building.castShadow = false;
@@ -96,6 +97,7 @@ loader.load("src/assets/3dAssets/haberdasheryStreet.glb", function(glb){
   building.position.y = -.5
   building.scale.set(3,3,3)
   //building.visible = false
+  building.children[0].layers.enable(1)
   haberdashery.propsArr.push(building)
   haberdashery.scene.add(building)
 })
@@ -129,8 +131,8 @@ loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
   const tree = gltf.scene;
   tree.scale.set(.005, .005, .005)
   tree.position.y = 0
-  tree.position.z = 10
-  tree.position.x = 13
+  tree.position.z = 8
+  tree.position.x = 25
   // tree.traverse(c => {
   //     c.castShadow = true
   // })
@@ -144,23 +146,8 @@ loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
   const tree = gltf.scene;
   tree.scale.set(.005, .005, .005)
   tree.position.y = 0
-  tree.position.z = 10
-  tree.position.x = -14
-  // tree.traverse(c => {
-  //     c.castShadow = true
-  // })
-  tree.children[0].layers.enable(1)
-  haberdashery.propsArr.push(tree)
-  haberdashery.scene.add(tree)
-  
-    
-})
-loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
-  const tree = gltf.scene;
-  tree.scale.set(.005, .005, .005)
-  tree.position.y = 0
-  tree.position.z = -8
-  tree.position.x = -14
+  tree.position.z = 8
+  tree.position.x = -20
   // tree.traverse(c => {
   //     c.castShadow = true
   // })
@@ -175,7 +162,22 @@ loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
   tree.scale.set(.005, .005, .005)
   tree.position.y = 0
   tree.position.z = -8
-  tree.position.x = 13
+  tree.position.x = -20
+  // tree.traverse(c => {
+  //     c.castShadow = true
+  // })
+  tree.children[0].layers.enable(1)
+  haberdashery.propsArr.push(tree)
+  haberdashery.scene.add(tree)
+  
+    
+})
+loader.load("src/assets/3dAssets/tree_low-poly/scene.gltf", function(gltf) {
+  const tree = gltf.scene;
+  tree.scale.set(.005, .005, .005)
+  tree.position.y = 0
+  tree.position.z = -8
+  tree.position.x = 25
   tree.traverse(c => {
       c.castShadow = true
   })

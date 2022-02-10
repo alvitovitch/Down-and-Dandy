@@ -3,8 +3,8 @@ class Phone {
     constructor() {
         this.phonebox = document.createElement('div')
         this.phonebox.id = "phoneOn"
-        this.phoneImg = document.createElement('img')
-        this.phoneImg.src = "./src/assets/phone/iphoneOn.png"
+        this.phoneImg = document.createElement('div')
+        this.phoneImg.id = 'phoneBackground'
         this.menu = document.createElement('ul')
         this.menu.id = "menu"
         const mapButton = document.createElement('li')
@@ -15,9 +15,9 @@ class Phone {
         this.menu.appendChild(journalButton)
         this.foundClues = []
         this.unlockedLocations = []
+
         // make the map for the phone
-        this.mapImg = document.createElement('img')
-        this.mapImg.src = 'src/assets/phone/map.png'
+        this.mapImg = document.createElement('div')
         this.mapImg.id = "mapImage"
         // create the list of locations
         this.mapButtons = document.createElement('div')
@@ -31,7 +31,7 @@ Phone.prototype.phoneMainMenu = function() {
     const phoneDiv = document.getElementById(this.phonebox.id)
     phoneDiv.textContent = ''
     phoneDiv.appendChild(this.phoneImg)
-    phoneDiv.appendChild(this.menu)
+    this.phoneImg.appendChild(this.menu)
     
 }
 
@@ -48,7 +48,7 @@ Phone.prototype.phoneMap = function(locationsArr) {
             this.mapButtons.appendChild(newButton)
         }
     })
-    document.getElementById("phoneOn").appendChild(this.mapButtons)
+    document.getElementById("mapImage").appendChild(this.mapButtons)
     
 }
 

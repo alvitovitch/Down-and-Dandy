@@ -55,6 +55,22 @@ ul {
     padding: 0;
 }
 
+#Haberdashery{
+    height: 2em;
+    margin: 3%;
+    border-radius: 1em;
+}
+#Port{
+    height: 2em;
+    margin: 3%;
+    border-radius: 1em;
+}
+#Station{
+    height: 2em;
+    margin: 3%;
+    border-radius: 1em;
+}
+
 button {
     background-color: #4CAF50; /* Green */
     border: none;
@@ -63,7 +79,7 @@ button {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 1vw;
+    font-size: 1vw
   }
 
 li {
@@ -86,23 +102,49 @@ li {
     width: 5%;
     height: auto;
     opacity: .7;
+    z-index: 6;
 }
 
 #phone:hover {
     opacity: 1;
 }
 
+#phoneBackground {
+    background-image: url(../src/assets/phone/iphoneOn.png);
+    background-size: 100% 100%;
+    background-repeat: none;
+    height: 80vh;
+    width: 20vw;
+}
+#mapImage {
+    background-image: url(../src/assets/phone/map.png);
+    background-size: 100% 100%;
+    background-repeat: none;
+    height: 80vh;
+    width: 20vw;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
 #phoneOn {
-    user-select: none;
-    left: 33%;
     position: absolute;
-    top: 10%;
+    user-select: none;
+    left: 0;
+    top: 0;
     align-content: center;
-    height: 80%;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.19);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #phoneOn > img {
-    height: 100%;
+    height: 80%;
     width: auto;
 }
 
@@ -121,25 +163,66 @@ li {
     justify-content: space-around;
 }
 
+#menu {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    padding: 0px;
+    margin: 0px;
+    justify-content: center;
+    align-items: center;
+}
+
 #menu > li {
-    width: 30%;
+    width: 55%;
     display: flex;
     justify-content: space-around;
     align-content: space-around;
-    height: auto;
+    height: 25%;
 }
 
 #mapButtons  {
     display: flex;
-    width: 85%;
-    left: 6%;
-    position: absolute;
-    bottom: 13%;
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex-wrap: nowrap;
-    align-content: flex-start;
-    height: 5%;
+    height: 89%;
+    width: inherit;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#mapButton {
+    background-image: url(../src/assets/phone/city-map.jpg);
+    background-size: 100% 100%;
+    background-repeat: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2rem;
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+    border: 0.1rem white solid;
+    -webkit-text-stroke-width: .05rem;
+    -webkit-text-stroke-color: #09696a;
+}
+
+#journalButton {
+    background-image: url(../src/assets/phone/Diary.svg);
+    background-size: 100% 100%;
+    background-repeat: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2rem;
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+    border: 0.1rem white solid;
+    -webkit-text-stroke-width: .05rem;
+    -webkit-text-stroke-color: #09696a;
 }
 
 #navbar img {

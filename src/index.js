@@ -213,6 +213,7 @@ addEventListener('click', (e) => {
   if (phoneBoxDisplayed === false) {
     if (e.target === document.getElementById("phone")){
       phoneBoxDisplayed = true;
+      document.getElementById('phoneOn').style.display = 'flex'
       phoneMenu.phoneMainMenu()
     }
   }
@@ -224,8 +225,12 @@ addEventListener('click', (e) => {
   if (phoneBoxDisplayed === true) {
     if (e.target === document.getElementById("mapButton")) {
       phoneMenu.phoneMap(locations)
-    }
-  }
+    } else if (e.target === document.getElementById('phoneOn'))
+ {
+   phoneBoxDisplayed = false
+   phoneMenu.closePhone()
+   document.getElementById('phoneOn').style.display = 'none'
+ }  }
 })
 
 // phone menu hover change
@@ -233,16 +238,19 @@ addEventListener('click', (e) => {
 addEventListener('mouseover', (e) => {
   if (phoneBoxDisplayed === true) {
     if (e.target === document.getElementById("Port")){
-      document.getElementById("mapImage").src = 'src/assets/phone/Docks.png'
+      document.getElementById("mapImage").style.backgroundImage = "url(../src/assets/phone/Docks.png)"
     } else if (e.target === document.getElementById("Haberdashery")){
-      document.getElementById("mapImage").src = 'src/assets/phone/Haberdashery.png'
+      document.getElementById("mapImage").style.backgroundImage = "url(../src/assets/phone/Haberdashery.png)"
     } else if (e.target === document.getElementById("Station")){
-      document.getElementById("mapImage").src = 'src/assets/phone/Subway.png'
+      document.getElementById("mapImage").style.backgroundImage = "url(../src/assets/phone/Subway.png)"
     } else if (e.target === document.getElementById("mapImage") || e.target === document.getElementById("mapButtons")){
-      document.getElementById("mapImage").src = 'src/assets/phone/map.png'
+      document.getElementById("mapImage").style.backgroundImage = "url(../src/assets/phone/map.png    )"
     }
   }
 })
+
+
+//crosshairs on clickable terrain
 
 
 

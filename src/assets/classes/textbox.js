@@ -8,7 +8,7 @@ import * as THREE from 'three';
 class Textbox {
 	// what does a textbox have 
 	constructor(name, imgPath, mainText, subTextArr){
-		this.textbox = document.createElement('ul')
+		this.textbox = document.createElement('div')
 		this.textbox.name = name
 		this.textbox.innerText = mainText
 		this.name = name;
