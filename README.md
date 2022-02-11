@@ -1,22 +1,22 @@
-<img src="./src/assets/logo/downAndDandyLogo.png" width="900" height="300">
+<img align='center' src="./src/assets/logo/downAndDandyLogo.png" width="900" height="300">
 
 <a href='https://alvitovitch.github.io/Down-and-Dandy/' target='_blank'>Live Site</a>
 <br>
 
 <h1>Background</h1>
-<img src= "src/assets/readme/Haberdashery.png" height=300>
+<img align="center" src= "src/assets/readme/Haberdashery.png" height=300>
 <br>
 'Down and Dandy' is a JavaScript mystery game where you play as Archibald, the owner of a struggling haberdashery in the downtown metro area.
 You are sure that your rival business across the street is sabotaging  you and you have to do some good old gumshoeing before you confront them.<br><br>
 
 <h2>Phase I: Discovery </h2>
-<img src= "src/assets/readme/chat-two.png" height=300>
+<img align="center" src= "src/assets/readme/chat-two.png" height=300>
 <br>
 During the 'Discovery' phase Archibald follows rumors, collects evidence, and talks to locals to get the scoop on the underhand dealings of his rivals.
 This is achieved through a point/click mechanic for investigating clues shown on your screen and following dialogue trees.<br><br>
 
 <h2>Phase II: Confrontation</h2>
-<img src= "src/assets/readme/chat_one.png" height=300>
+<img align="center" src= "src/assets/readme/chat_one.png" height=300>
 <br>
 During the Confrontation phase Archibald confronts his rivals across the street. This may be done at any time, however depending on the information and 
 evidence you uncover different things will happen!
