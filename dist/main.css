@@ -384,6 +384,17 @@ body {
 }
 
 #phoneBackgroundPort {
+  background-image: url("../src//assets//phone/Docks.png");
+  background-size: 100% 100%;
+  background-repeat: none;
+  height: 80vh;
+  width: 20vw;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+#phoneBackgroundStation {
   background-image: url("../src//assets//phone/Subway.png");
   background-size: 100% 100%;
   background-repeat: none;

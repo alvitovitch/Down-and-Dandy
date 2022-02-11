@@ -1,27 +1,23 @@
 <img src="./src/assets/logo/downAndDandyLogo.png" width="900" height="300">
 
-<h1> Take a look!</h1>
-<div>
-<img src= "src/assets/locations/city_layout.png" height=300>
-<img src= "src/assets/locations/port_layout.png" height=300>
-<img src= "src/assets/locations/jail.png" height=300>
-<br>
-<a href='https://alvitovitch.github.io/Down-and-Dandy/' target='_blank'>Play?</a>
-</div>
+<a href='https://alvitovitch.github.io/Down-and-Dandy/' target='_blank'>Live Site</a>
 <br>
 
 <h1>Background</h1>
-
+<img src= "src/assets/readme/Haberdashery.png" height=300>
+<br>
 'Down and Dandy' is a JavaScript mystery game where you play as Archibald, the owner of a struggling haberdashery in the downtown metro area.
-You are sure that your rival business across the street is sabatoging you and you have to do some good old gumshoeing before you confront them.<br><br>
+You are sure that your rival business across the street is sabotaging  you and you have to do some good old gumshoeing before you confront them.<br><br>
 
 <h2>Phase I: Discovery </h2>
-
+<img src= "src/assets/readme/chat-two.png" height=300>
+<br>
 During the 'Discovery' phase Archibald follows rumors, collects evidence, and talks to locals to get the scoop on the underhand dealings of his rivals.
 This is achieved through a point/click mechanic for investigating clues shown on your screen and following dialogue trees.<br><br>
 
 <h2>Phase II: Confrontation</h2>
-
+<img src= "src/assets/readme/chat_one.png" height=300>
+<br>
 During the Confrontation phase Archibald confronts his rivals across the street. This may be done at any time, however depending on the information and 
 evidence you uncover different things will happen!
 <br><br><br>
@@ -41,35 +37,6 @@ evidence you uncover different things will happen!
 <li>Exciting point and click action</li>
 </ul>
 <br><br>
-<h1>Wireframes</h1>
-<div><h2>Window Layout</h2>
-<img src="./src/assets/layoutIdeas/basicWindowLayout.png">
-For the gaming window Nav links will be included to this project's Github repo and my LinkedIn
-</div>
-<br>
-<br>
-<div><h2>Map Layout</h2>
-<img src="./src/assets/layoutIdeas/basicMap.png">
-For the map I plan to have it as an overlay over the current location. I am having points of interest in represented by dots (for the moment) and clicking on them will take you to that location. The arrow will put the map away, letting you interact with the current location.
-</div>
-<br>
-<br>
-<div><h2>Location Layout</h2>
-<img src="./src/assets/layoutIdeas/basicLocation.png">
-This is the basic location layout. The location will have two main events. Talking to a person or investigating a clue. Both will be point and click interactions.
-</div>
-<br>
-<br>
-<div><h2>Conversation Layout</h2>
-<img src="./src/assets/layoutIdeas/basicConvo.png">
-When interacting with a person a close up of them will be in the foreground while the background is out of focus. The arrow will allow you to fast forward though the dialogue
-<br>
-<br>
-<img src="./src/assets/layoutIdeas/basicChoiceBox.png">
-There will be the option to have the player make responses. Arrow keys/ mouse clicks should work for that.
-</div>
-<br>
-<br>
 <h1>Technologies, Libraries, APIs</h1>
 'Down and Dandy' will be implemented with the following technologies:
 <ul>

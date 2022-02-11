@@ -388,6 +388,8 @@ addEventListener('click', (e) => {
           camera.position.x += 15
           camera.position.y += 10
           camera.lookAt( selectedLocation.startingPos)
+        } else {
+          camera.position.y += 2
         }
       }
     })
@@ -415,7 +417,7 @@ addEventListener('click', (e) => {
         archibald.characterObject.position.copy(selectedLocation.startingPos)
         camera.position.copy(archibald.characterObject.position)
         camera.position.x += 10
-        camera.position.y += 5
+        camera.position.y += 6
         camera.position.z += 0
 
         setTimeout(()=> {
@@ -443,7 +445,7 @@ addEventListener('click', (e) => {
         gary.position.copy(jailcell.startingPos)
         camera.position.copy(jailcell.startingPos)
         camera.position.x += 10
-        camera.position.y += 5
+        camera.position.y += 6
         camera.position.z += 0
         camera.lookAt(jailcell.startingPos)
         document.getElementById('characterTextBox').innerHTML = ''
