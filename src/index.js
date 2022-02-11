@@ -258,13 +258,13 @@ addEventListener('mouseover', (e) => {
       document.getElementById("mapImage").id = 'phoneBackgroundStation'
     } else if (e.target === document.getElementById("phoneBackgroundStation") || e.target === document.getElementById("phoneBackgroundHaberdashery") || e.target === document.getElementById("phoneBackgroundPort") || e.target === document.getElementById('mapButtons')) {
      if (document.getElementById("phoneBackgroundHaberdashery") !== null) {
-      document.getElementById("phoneBackgroundHaberdashery").id = 'phoneBackgroundMap'
+      document.getElementById("phoneBackgroundHaberdashery").id = 'mapImage'
      }
      if (document.getElementById("phoneBackgroundStation") !== null) {
-      document.getElementById("phoneBackgroundStation").id = 'phoneBackgroundMap'
+      document.getElementById("phoneBackgroundStation").id = 'mapImage'
      }
      if (document.getElementById("phoneBackgroundPort") !== null) {
-      document.getElementById("phoneBackgroundPort").id = 'phoneBackgroundMap'
+      document.getElementById("phoneBackgroundPort").id = 'mapImage'
     }
     }
   }
