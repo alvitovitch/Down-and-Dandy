@@ -16,6 +16,10 @@ canvas {
     z-index: -100;
 }
 
+body {
+    overflow: hidden;
+}
+
 #clueText {
     display: flexbox;
     z-index: -10;
