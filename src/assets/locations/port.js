@@ -57,7 +57,7 @@ clue.position.z = -15
 clue.rotation.y = Math.PI/2
 clue.name = "briefcase"
 clue.layers.enable(1)
-const testClue = new Clue(clue, ['A briefcase full of cash?! AND TAX DOCUMENTS?!'])
+const testClue = new Clue(clue, ['A briefcase full of cash?! AND TAX DOCUMENTS?! There is a ticket from a local train-staion inside! Better check it out!'])
 clueArr.push(testClue)
 
 // boxofimported clothes clue
@@ -72,7 +72,7 @@ boxClue.position.z = -20
 boxClue.rotation.y = Math.PI/2
 boxClue.name = "fakeChannel"
 boxClue.layers.enable(1)
-const theBoxClue = new Clue(boxClue, ['A box full of counterfit Channel. It feels like polyester'])
+const theBoxClue = new Clue(boxClue, ['A box full of counterfit Channel. It feels like polyester.'])
 clueArr.push(theBoxClue)
 
 
@@ -83,7 +83,7 @@ const npcArr = []
 const dockWorkerText = []
 const dockworkerTextOne = new Textbox('Shiver me timbers!!!', 'src/assets/emoji/fisherman/fisherman.png','It be a hard night on the ocean! The waves are BEASTS!',  ['What mysteries have you seen on the seas tonight?', 'See anything suspicious on the docks?', 'close'] )
 const dockWorkerTextTwo = new Textbox('What mysteries have you seen on the seas tonight?', 'src/assets/emoji/fisherman/fisherman.png','I saw an lass so fine and fair I thought she be a mermaid!',  ['close'] )
-const dockWorkerTextThree = new Textbox('See anything suspicious on the docks?', 'src/assets/emoji/fisherman/fisherman.png','Some shady red orb was going through a box over yonder.', ['Oh that is interesting!'] )
+const dockWorkerTextThree = new Textbox('See anything suspicious on the docks?', 'src/assets/emoji/fisherman/fisherman.png','Some shady, salty spitoon was going through a box over yonder.', ['Oh that is interesting!'] )
 const dockWorkerTextFour = new Textbox('Oh that is interesting!', 'src/assets/emoji/fisherman/fisherman.png','He left when I shouted at him! The box is over by the ship if you want to check it out!', ['close'] )
 dockWorkerText.push(dockworkerTextOne)
 dockWorkerText.push(dockWorkerTextTwo)

@@ -13,7 +13,7 @@ NPC.prototype.movement = function() {
         let char = this.characterObject
         if (this.destinationArr[0] > char.position.x) {
             char.position.x += 0.1
-          }
+          }a
         if (this.destinationArr[0] < char.position.x) {
             char.position.x -= 0.1
           }

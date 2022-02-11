@@ -53,11 +53,12 @@ camera.lookAt( selectedLocation.startingPos);
 
 const archibald = new Player('./src/assets/characters/malcolm.fbx', 'Archibald', selectedLocation.startingPos)
 // load player
+archibald.addModel(currentScene, .015)
 
-if (archibald.addModel(currentScene, .015)){
-  archibald.loader.load('src/assets/characters/animations/Walking.fbx',(ani) =>{
-    archibald.addAnimation(ani)
-  })}
+// if {
+//   archibald.loader.load('src/assets/characters/animations/Walking.fbx',(ani) =>{
+//     archibald.addAnimation(ani)
+//   })}
 
 // player movement
 let targetX = undefined;
@@ -68,42 +69,51 @@ let playerMovement = false;
 
 function characterMovement(char, camera) {
   if (char !== undefined) {
+    char.characterMixer.clipAction(char.characterObject.animations[2])
     let targetPos = new THREE.Vector3(targetX, targetY, targetZ)
-    char.position.x = Math.round(char.position.x * 10)/10 
-    char.position.z = Math.round(char.position.z * 10)/10 
-    char.lookAt(targetPos)
+    char.characterObject.position.x = Math.round(char.characterObject.position.x * 10)/10 
+    char.characterObject.position.z = Math.round(char.characterObject.position.z * 10)/10 
+    char.characterObject.lookAt(targetPos)
 
-    if (targetX > char.position.x) {
-      char.position.x += 0.1
+    if( Math.abs(targetX - char.characterObject.position.x) < 0.2 && Math.abs(targetZ - char.characterObject.position.z) < 0.2 ) {
+      playerMovement = false
+      char.characterMixer.clipAction(char.characterObject.animations[2]).stop()
+
+    }
+
+    if (targetX > char.characterObject.position.x) {
+      char.characterObject.position.x += 0.1
       camera.position.x += 0.1
 
-      //char.quaternion.y += 1
+      //char.characterObject.quaternion.y += 1
     }
-    if (targetX < char.position.x) {
-      char.position.x -= 0.1
+    if (targetX < char.characterObject.position.x) {
+      char.characterObject.position.x -= 0.1
       camera.position.x -= 0.1
-      //char.qiaternion.y -= 1
+      //char.characterObject.qiaternion.y -= 1
 
 
     }
-    if (targetZ > char.position.z) {
-      char.position.z += 0.1
+    if (targetZ > char.characterObject.position.z) {
+      char.characterObject.position.z += 0.1
       camera.position.z += 0.1
-      //char.qiaternion.x += 1
+      //char.characterObject.qiaternion.x += 1
 
 
     }
-    if (targetZ < char.position.z) {
-      char.position.z -= 0.1
+    if (targetZ < char.characterObject.position.z) {
+      char.characterObject.position.z -= 0.1
       camera.position.z -= 0.1
 
-      //char.qiaternion.x -= 1
+      //char.characterObject.qiaternion.x -= 1
 
     }
   }
-  if (char.position.x === targetX && char.position.z === targetZ) {
+  if (char.characterObject.position.x === targetX && char.characterObject.position.z === targetZ) {
     playerMovement = false
-    archibald.characterObject.visible = true
+    char.characterMixer.clipAction(char.characterObject.animations[2]).stop()
+
+
   }
 }
 
@@ -158,13 +168,16 @@ const animate = function () {
     } else {
       raycaster.layers.set(1)
     }
-    const player = currentScene.getObjectByName('Archibald')
+    const player = archibald
     if (player !== undefined && playerMovement === true){
       //walk = archibald.characterMixer.clipAction(archibald.characterObject.animations[0])
       characterMovement(player, camera);
       archibald.update()
-    } else if (player !== undefined) {
-      camera.lookAt(player.position)
+    } else if (player.characterObject.type === 'Group' && playerMovement === false && player.characterObject.animations[1] !== undefined) {
+      player.characterMixer.clipAction(player.characterObject.animations[1]).play()
+      archibald.update()
+    } else if (player.characterObject.length > 0) {
+      camera.lookAt(player.characterObject.position)
     }
     // add the port if you find the blood
 
@@ -304,11 +317,12 @@ let playerMixer = undefined
 
 addEventListener('click', () => {
   if (playerMovement === true) {
-    if (playerMixer !== archibald.characterMixer)
-    {
-      playerMixer = archibald.characterMixer
-      archibald.addAnimation('./src/assets/characters/animations/Walking.fbx')
-    }
+    // if (playerMixer !== archibald.characterMixer)
+    // {
+    //   playerMixer = archibald.characterMixer
+    //   archibald.addAnimation('./src/assets/characters/animations/Walking.fbx')
+    // }
+    
     if (archibald.characterObject.animations[1] !== undefined){
     archibald.characterMixer.clipAction(archibald.characterObject.animations[2]).play()
     }
@@ -332,10 +346,21 @@ addEventListener('click', () => {
 // phone menue close
 addEventListener('click', (e) => {
   if (phoneBoxDisplayed === true) {
-
+    if (e.target === document.getElementById('Port')) {
+      document.getElementById('loading-background').style.opacity = 1;
+      document.getElementById('loading-background').style.display = 'flex';
+    }
     // loop through the locations and make 
     locations.forEach((location) => {
       if (e.target === document.getElementById(location.scene.name)){
+        document.getElementById('loading-background').style.opacity = 1;
+        document.getElementById('loading-background').style.display = 'flex';
+        setTimeout( () => {
+          document.getElementById('loading-background').style.opacity = 0;
+        }, 3000)
+        setTimeout( () => {
+          document.getElementById('loading-background').style.display = 'none';}
+          , 6000)
         phoneBoxDisplayed = false;
         document.getElementById("phoneOn").innerHTML = ''
         selectedLocation = location
@@ -388,7 +413,8 @@ addEventListener('click', (e) => {
         setTimeout(()=> {
           let textbox = document.getElementById("characterTextBox")
           let jailtextbox = document.createElement('ul')
-          jailtextbox.innerText = "Sadly you didn't have enough clues and were arrested for being a nucense. Your business failed and like went on without you. Eventually even the memory of you faded as you rotted in your ineptitude"
+          jailtextbox.id = 'jail-box'
+          jailtextbox.innerText = "Sadly you didn't have enough clues and were arrested for being a nuisance. Your business failed and life went on without you. Eventually even the memory of you faded as you rotted in your ineptitude."
           let playAgain = document.createElement('button')
           playAgain.id = 'playAgain'
           playAgain.innerText = 'Play again?'
@@ -416,6 +442,7 @@ addEventListener('click', (e) => {
         setTimeout(()=> {
           let textbox = document.getElementById("characterTextBox")
           let jailtextbox = document.createElement('ul')
+          jailtextbox.id = 'jail-box'
           jailtextbox.innerText = "And thus your business was saved! Gary was thrown in jail for being the absolute worst and everyone else was very, very happy!"
           let playAgainLi = document.createElement('li')
           let playAgain = document.createElement('button')
@@ -461,3 +488,9 @@ addEventListener('click', () => {
   }
 })
 
+setTimeout( () => {
+  document.getElementById('loading-background').style.opacity = 0;
+}, 7000)
+setTimeout( () => {
+  document.getElementById('loading-background').style.display = 'none';}
+  , 10000)

@@ -12,7 +12,7 @@ class Phone {
         const journalButton = document.createElement('li')
         journalButton.innerHTML = `<button id="journalButton">Journal</button>`
         this.menu.appendChild(mapButton)
-        this.menu.appendChild(journalButton)
+        // this.menu.appendChild(journalButton)
         this.foundClues = []
         this.unlockedLocations = []
 

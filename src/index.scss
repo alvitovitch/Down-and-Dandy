@@ -39,6 +39,24 @@ ul {
     align-items: flex-end;
 }
 
+#jail-box {
+    background: #f5f5f5db;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+#text-box-options > li > button {
+    padding: 1em;
+    border-radius: 1em;
+    margin-top: 1em;
+}
+
+#play-again {
+    padding: 1em;
+    border-radius: 1em;
+    margin-top: 1em;
+}
+
 #characterTextBox {
     z-index: 100;
     display: flex;
@@ -249,7 +267,7 @@ li {
 }
 
 #navbar img {
-    width: 3%;
+    width: 3em;
     height: auto;
     border-radius: 40%;
     opacity: .5;
@@ -259,13 +277,69 @@ li {
     opacity: 1;
 }
 
+#navbar {
+    position: absolute;
+    z-index: 20;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 #dropdown-text {
     display: none;
     width: 30%;
     background-color: white;
     padding: 1%;
+    border-radius: 1em;
 }
 
+#loading-background {
+    position: absolute;
+    z-index: 100;
+    background-image: url('../src//assets//sprites/dandy-background.png');
+    background-size: 20%;
+    transition: 1s;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    // animation: bkgMove 10s infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+#loading-center {
+    width: 50vw;
+}
+
+#loading-logo { 
+    width: inherit;
+}
+#loading-text {
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    font-weight: bolder;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+#loading-logo img {
+    height: inherit;
+    width: inherit;
+    border-radius: 2em;
+    padding: 0 1em;
+    background: white;
+}
+
+@keyframes bkgMove {
+    
+    50% {background-position-y: 50%;
+            background-position-x: 50%;}
+}
 
 
 #instructions:hover #dropdown-text {

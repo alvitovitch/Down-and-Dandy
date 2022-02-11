@@ -16,7 +16,7 @@ class Character {
         this.name = name
         this.characterObject = []
         this.characterMixer = undefined
-        this.size = .01
+        this.size = .017
         if (posArr[0] !== undefined) {
         this.position = new THREE.Vector3(posArr[0],posArr[1],posArr[2])
         } else {
@@ -53,6 +53,7 @@ Character.prototype.addModel = function(scene, size) {
         char.position.copy(this.position)
         scene.add(char)
         this.addAnimation('src/assets/characters/animations/BreathingIdle.fbx')
+        this.addAnimation('src/assets/characters/animations/Walking.fbx')
         this.characterMixer.clipAction(this.characterObject.animations[0]).play()
     }).bind(this))
     }
