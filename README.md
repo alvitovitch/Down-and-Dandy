@@ -36,6 +36,64 @@ evidence you uncover different things will happen!
 <li>Intructions</li>
 <li>Exciting point and click action</li>
 </ul>
+
+<br>
+
+<h1>Fun Code </h1>
+
+Something I wanted to do was include different text from Gary based on the number of clues you found. To do that I implemented an event listener to check the found clues and switch up Gary's text based on it
+```
+addEventListener('click', () => {
+  if (selectedLocation === haberdashery) {
+    if (archibald.foundClues.length < 3 && selectedLocation === hab) {
+      hab.npcArr[1].messageArr = [garyTextBox]
+    } else if (archibald.foundClues.length > 2 && archibald.foundClues.length < 5) {
+      hab.npcArr[1].messageArr = [garyTextBoxTwo]
+    } else if (archibald.foundClues.length === 5) {
+      hab.npcArr[1].messageArr = [garyTextBoxThree]
+    }
+  }
+})
+```
+
+I also reused code for npcs and the player by implementing a Character class and having the NPC and Player classes inherit from Character
+
+```
+class Character {
+    constructor(characterObjectPath, name, posArr) {
+        this.loader = new FBXLoader();
+        this.characterObjectPath = characterObjectPath
+        this.name = name
+        this.characterObject = []
+        this.characterMixer = undefined
+        this.size = .017
+        if (posArr[0] !== undefined) {
+        this.position = new THREE.Vector3(posArr[0],posArr[1],posArr[2])
+        } else {
+            this.position = posArr
+        }
+        this.actions = []
+    }
+}
+
+class Player extends Character{
+    constructor(characterObjectPath, name, posArr) {
+        super(characterObjectPath, name, posArr)
+        this.foundClues = [];
+        this.unlockedLocations = [];
+    }
+}
+
+class NPC extends Character {
+    constructor(characterObjectPath, name, posArr, destinationArr, messageArr) {
+        super(characterObjectPath, name, posArr)
+        this.messageArr = messageArr
+        this.destinationArr = destinationArr
+    }
+}
+```
+
+
 <br><br>
 <h1>Technologies, Libraries, APIs</h1>
 'Down and Dandy' will be implemented with the following technologies:

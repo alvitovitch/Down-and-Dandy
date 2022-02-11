@@ -22,20 +22,7 @@ class Character {
         } else {
             this.position = posArr
         }
-        //this.position.copy(posArr)
         this.actions = []
-        // this.loader.load(this.characterObjectPath, (char) => {
-        //     debugger
-        //     char.name = this.name
-        //     char.scale
-        //     this.characterMixer = new THREE.AnimationMixer(char)
-        //     this.characterObject.push(char)
-        // })
-
-        
-        //this.characterMixer = new THREE.AnimationMixer(this.characterObject);
-        //debugger
-        
     }
 }
 
