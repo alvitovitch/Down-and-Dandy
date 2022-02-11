@@ -10,7 +10,9 @@
 You are sure that your rival business across the street is sabotaging  you and you have to do some good old gumshoeing before you confront them.<br><br>
 
 <h2>Phase I: Discovery </h2>
-<img align="center" src= "src/assets/readme/chat-two.png" height=300>
+<p align="center" dir='auto'>
+<img src= "src/assets/readme/chat-two.png" height=300>
+</p>
 <br>
 During the 'Discovery' phase Archibald follows rumors, collects evidence, and talks to locals to get the scoop on the underhand dealings of his rivals.
 This is achieved through a point/click mechanic for investigating clues shown on your screen and following dialogue trees.<br><br>
