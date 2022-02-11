@@ -251,13 +251,21 @@ addEventListener('click', (e) => {
 addEventListener('mouseover', (e) => {
   if (phoneBoxDisplayed === true) {
     if (e.target === document.getElementById("Port")){
-      document.getElementById("mapImage").style.backgroundImage = "url('../src/assets/phone/Docks.png')"
+      document.getElementById("mapImage").id = 'phoneBackgroundPort'
     } else if (e.target === document.getElementById("Haberdashery")){
-      document.getElementById("mapImage").style.backgroundImage = "url('../src/assets/phone/Haberdashery.png')"
+      document.getElementById("mapImage").id = 'phoneBackgroundHaberdashery'
     } else if (e.target === document.getElementById("Station")){
-      document.getElementById("mapImage").style.backgroundImage = "url('../src/assets/phone/Subway.png')"
-    } else if (e.target === document.getElementById("mapImage") || e.target === document.getElementById("mapButtons")){
-      document.getElementById("mapImage").style.backgroundImage = "url('../src/assets/phone/map.png')"
+      document.getElementById("mapImage").id = 'phoneBackgroundStation'
+    } else if (e.target === document.getElementById("phoneBackgroundStation") || e.target === document.getElementById("phoneBackgroundHaberdashery") || e.target === document.getElementById("phoneBackgroundPort") || e.target === document.getElementById('mapButtons')) {
+     if (document.getElementById("phoneBackgroundHaberdashery") !== null) {
+      document.getElementById("phoneBackgroundHaberdashery").id = 'phoneBackgroundMap'
+     }
+     if (document.getElementById("phoneBackgroundStation") !== null) {
+      document.getElementById("phoneBackgroundStation").id = 'phoneBackgroundMap'
+     }
+     if (document.getElementById("phoneBackgroundPort") !== null) {
+      document.getElementById("phoneBackgroundPort").id = 'phoneBackgroundMap'
+    }
     }
   }
 })

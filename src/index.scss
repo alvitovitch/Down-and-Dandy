@@ -351,14 +351,38 @@ body {
     border-radius: 25%;
 }
 
-.map {
-
+#phoneBackgroundMap {
+    background-image: url('../src//assets//phone/map.png');
+    background-size: 100% 100%;
+    background-repeat: none;
+    height: 80vh;
+    width: 20vw;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
 }
 
-.haberdashery{
-
+#phoneBackgroundHaberdashery {
+    background-image: url('../src//assets//phone/Haberdashery.png');
+    background-size: 100% 100%;
+    background-repeat: none;
+    height: 80vh;
+    width: 20vw;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
 }
 
-.port{
-
+#phoneBackgroundPort{
+    background-image: url('../src//assets//phone/Subway.png');
+    background-size: 100% 100%;
+    background-repeat: none;
+    height: 80vh;
+    width: 20vw;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
 }

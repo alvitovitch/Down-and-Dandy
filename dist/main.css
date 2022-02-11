@@ -158,7 +158,7 @@ li {
 }
 
 #phoneBackground {
-  background-image: url(../src//assets//phone/iphoneOn.png);
+  background-image: url("../src//assets//phone/iphoneOn.png");
   background-size: 100% 100%;
   background-repeat: none;
   height: 80vh;
@@ -166,7 +166,7 @@ li {
 }
 
 #mapImage {
-  background-image: url(../src//assets//phone/map.png);
+  background-image: url("../src//assets//phone/map.png");
   background-size: 100% 100%;
   background-repeat: none;
   height: 80vh;
@@ -241,7 +241,7 @@ li {
 }
 
 #mapButton {
-  background-image: url(../src//assets//phone/city-map.jpg);
+  background-image: url("../src//assets//phone/city-map.jpg");
   background-size: 100% 100%;
   background-repeat: none;
   color: white;
@@ -258,7 +258,7 @@ li {
 }
 
 #journalButton {
-  background-image: url(../src/assets/phone/Diary.svg);
+  background-image: url("../src/assets/phone/Diary.svg");
   background-size: 100% 100%;
   background-repeat: none;
   color: white;
@@ -357,4 +357,40 @@ li {
 body {
   font-family: "Courier New", Courier, monospace;
   border-radius: 25%;
+}
+
+#phoneBackgroundMap {
+  background-image: url("../src//assets//phone/map.png");
+  background-size: 100% 100%;
+  background-repeat: none;
+  height: 80vh;
+  width: 20vw;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+#phoneBackgroundHaberdashery {
+  background-image: url("../src//assets//phone/Haberdashery.png");
+  background-size: 100% 100%;
+  background-repeat: none;
+  height: 80vh;
+  width: 20vw;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+#phoneBackgroundPort {
+  background-image: url("../src//assets//phone/Subway.png");
+  background-size: 100% 100%;
+  background-repeat: none;
+  height: 80vh;
+  width: 20vw;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
 }
