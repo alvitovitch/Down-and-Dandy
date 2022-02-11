@@ -251,13 +251,13 @@ addEventListener('click', (e) => {
 addEventListener('mouseover', (e) => {
   if (phoneBoxDisplayed === true) {
     if (e.target === document.getElementById("Port")){
-      document.getElementById("mapImage").style.backgroundImage = "url(../src//assets//phone/Docks.png)"
+      document.getElementById("mapImage").style.backgroundImage = "url(../src/assets/phone/Docks.png)"
     } else if (e.target === document.getElementById("Haberdashery")){
-      document.getElementById("mapImage").style.backgroundImage = "url(../src//assets//phone/Haberdashery.png)"
+      document.getElementById("mapImage").style.backgroundImage = "url(../src/assets/phone/Haberdashery.png)"
     } else if (e.target === document.getElementById("Station")){
-      document.getElementById("mapImage").style.backgroundImage = "url(../src//assets//phone/Subway.png)"
+      document.getElementById("mapImage").style.backgroundImage = "url(../src/assets/phone/Subway.png)"
     } else if (e.target === document.getElementById("mapImage") || e.target === document.getElementById("mapButtons")){
-      document.getElementById("mapImage").style.backgroundImage = "url(../src/assets/phone/map.png    )"
+      document.getElementById("mapImage").style.backgroundImage = "url(../src/assets/phone/map.png)"
     }
   }
 })
