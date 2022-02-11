@@ -6,7 +6,7 @@
 <img src= "src/assets/locations/port_layout.png" height=300>
 <img src= "src/assets/locations/jail.png" height=300>
 <br>
-<a href='https://alvitovitch.github.io/jsProject/' target='_blank'>Play?</a>
+<a href='https://alvitovitch.github.io/Down-and-Dandy/' target='_blank'>Play?</a>
 </div>
 <br>
 
