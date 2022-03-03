@@ -308,7 +308,6 @@ addEventListener('click', () => {
         archibald.foundClues.push(clue)
         currentScene.remove(intersects[0]["object"])
 
-        //setTimeout()
         
       }
 
